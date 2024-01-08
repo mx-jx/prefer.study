@@ -1,36 +1,126 @@
 ---
-title: "Title Goes Here"
+title: Preferred medications for opioid agonist therapy and associated factors among people who regularly use opioids in Australia
 author:
-  - Jane Doe:
-      correspondence: "yes"
-      email: janedoe@fosg.org
-      orcid: 0000-0003-1689-0557
-      institute:
-        - fosg
-        - fop
-  - John Q. Doe:
-      institute: fosg
-      orcid: 0000-0003-1689-0558
-  - Peder Ås:
-      institute: fosg
-      orcid: 0000-0003-1689-0559
-  - Juan Pérez:
-      orcid: 0000-0003-1689-0551
-      institute:
-        - name: Acme Corporation
-  - Max Mustermann:
-      orcid: 0000-0003-1689-0552
-institute:
-  - fosg:
-      name: Formatting Open Science Group
-      address: 23 Science Street, Eureka, Mississippi, USA
-  - fop: Federation of Planets
+  - name: MJ Stowe
+    orcid: 0000-0002-0760-5497
+    corresponding: true
+    email: mjstowe@kirby.unsw.edu.au
+    roles:
+      - Investigation
+      - Project administration
+      - Software
+      - Visualization
+    affiliations:
+      - The Kirby Institute, UNSW Syndey, Sydney Australia
+  - name: Anna Conway
+    orcid: 0000-0002-7859-8394
+    corresponding: false
+    roles: []
+    affiliations:
+      - The Kirby Institute, UNSW Syndey, Sydney Australia
+  - name: Frederick Altice
+    orcid: 0000-0002-7859-8394
+    corresponding: false
+    roles: []
+    affiliations:
+      - Yale School of Medicine, Yale University, New Haven, Connecticut, United States
+  - name: Tom Hassett
+    orcid: 0000-0002-7859-8394
+    corresponding: false
+    roles: []
+    affiliations:
+      - Yale School of Medicine, Yale University, New Haven, Connecticut, United States
+  - name: Marianne Byrne
+    orcid: 0000-0002-7859-8394
+    corresponding: false
+    roles: []
+    affiliations:
+      - The National Drug and Alcohol Research Centre, UNSW Syndey, Sydney, Australia
+      - The Kirby Institute, UNSW Syndey, Sydney Australia
+  - name: Samantha Colledge
+    orcid: 0000-0002-7859-8394
+    corresponding: false
+    roles: []
+    affiliations:
+      - The National Drug and Alcohol Research Centre, UNSW Syndey, Sydney, Australia
+  - name: Phillip Read
+    orcid: 0000-0002-7859-8394
+    corresponding: false
+    roles: []
+    affiliations:
+      - Kirketon Road Centre, Sydney, New South Wales, Australia 
+      - Drug and Alcohol Services, Northern Sydney Local Health District, Sydney, New South Wales, Australia
+  - name: Mark Montebello
+    orcid: 0000-0002-7859-8394
+    corresponding: false
+    roles: []
+    affiliations:
+      - The National Drug and Alcohol Research Centre, UNSW Sydney, UNSW, Australia
+      - Drug and Alcohol Services, Northern Sydney Local Health District, Sydney, New South Wales, Australia
+      - University of Sydney, Sydney, New South Wales, Australia
+  - name: Jeremy Hayllar
+    orcid: 0000-0002-7859-8394
+    corresponding: false
+    roles: []
+    affiliations:
+      - Drug Health Service, South West Sydney Local Health District, New South Wales, Australia
+  - name: Sione Crawford
+    orcid: 0000-0002-7859-8394
+    corresponding: false
+    roles: []
+    affiliations:
+      - Harm Reduction Victoria, Victoria, Australia
+  - name: Charles Henderson
+    orcid: 0000-0002-7859-8394
+    corresponding: false
+    roles: []
+    affiliations:
+      - New South Wales Users and AIDS Association (NUAA), Sydney, Australia
+  - name: Michael Farrell
+    orcid: 0000-0002-7859-8394
+    corresponding: false
+    roles: []
+    affiliations:
+      - The National Drug and Alcohol Research Centre, UNSW Sydney, Sydney, Australia
+  - name: Chris Gough
+    orcid: 0000-0002-7859-8394
+    corresponding: false
+    roles: []
+    affiliations:
+      - CAHMA
+  - name: Louisa Degenhardt
+    orcid: 0000-0002-7859-8394
+    corresponding: false
+    roles: []
+    affiliations:
+      - The National Drug and Alcohol Research Centre, UNSW Syndey, Sydney, Australia
+  - name: Amy Peacock
+    orcid: 0000-0002-7859-8394
+    corresponding: false
+    roles: []
+    affiliations:
+      - The National Drug and Alcohol Research Centre, UNSW Syndey, Sydney, Australia
+  - name: Gregory J. Dore
+    orcid: 0000-0002-7859-8394
+    corresponding: false
+    roles: []
+    affiliations:
+      - The Kirby Institute, UNSW Syndey, Sydney Australia
+  - name: Jason Grebely
+    orcid: 0000-0002-7859-8394
+    corresponding: false
+    roles: []
+    affiliations:
+      - The Kirby Institute, UNSW Sydney, Australia
 title-block-published: "Last updated"  
 date: now
 date-format: long
 format: 
+  html: 
+    toc: true
   docx:
     reference-doc: "../templates/template.docx" # Insert path for the DOCX file
+always_allow_html: true
 execute:
   echo: true
   warning: false
@@ -42,14 +132,18 @@ filters:
   - ../templates/scholarly-metadata.lua
   - ../templates/author-info-blocks.lua
   - ../templates/pagebreak.lua
-bibliography: references.bib
-csl: "../templates/journal-of-archaeological-science.csl" # Insert path for the bib-style
+# bibliography: references.bib
+# csl: "../templates/international-journal-of-drug-policy.csl" # Insert path for the bib-style
 abstract: |
-  Text of abstract
+    **Background:** People who use opioids from an unregulated drug supply are increasingly exposed to related adverse social and health outcomes. Opioid agonist therapy (OAT) is effective in mitigating adverse outcomes, with individual preference identified as key to enhancing treatment. We examined OAT preferences and associated factors in a national sample of people who regularly use opioids. **Methods:** In this cross-sectional study, 400 people were enrolled between October 2020-April 2021. Participants completed an interviewer-administered questionnaire with questions on sociodemographic, behavioural, drug use- and treatment-related characteristics. Multivariable logistic regression was used to evaluate factors associated with treatment preferences. **Results:** Among all participants (mean age 45, 42% female), X%  preferred OAT, with X% and X% reporting a preference for methadone and buprenorphine respectively. Among those who reported a preference for OAT, X% (n=X) preferred metahdone, while X% (n=X) preferred buprenorphine. participants who preferred methadone were more likely to have ever received OAT with methadone, and had used heroin (aOR X.XX, 95%CI:X.XX, X.XX) and other pharmaceutical opioids in the past month(aOR X.XX, 95%CI:X.XX, X.XX). Participants who preferred buprenorphine were more likely to have ever received OAT with burpenorphine (aOR X.XX, 95%CI:X.XX, X.XX). Among participants currently on OAT (n=317), X% in receipt of methadone and X% of buprenorphine were prescribed their preferred medication. Participants who preferred methadone were more likely to be receiving OAT with the same medication (aOR X.XX, 95%CI:X.XX, X.XX), had used and heroin (aOR X.XX, 95%CI:X.XX, X.XX) and other pharmaceutical opioids in the prior month (aOR X.XX, 95%CI:X.XX, X.XX). Participants who preferred buprenorphine were more likely to be currently receiving burpenorphine (aOR X.XX, 95%CI:X.XX, X.XX). **Conclusions:** Among people who regularly used opioids, most preferred to receive OAT with methadone and those currently receiving OAT were prescribed their preferred medication. Providers that do not offer a range of OAT and restrict choice of preferred medication risk negatively impacting treatment outcomes.
 keywords: |
-  keyword 1; keyword 2; keyword 3
-highlights: |
-  These are the highlights. 
+  - Opioid agonist therapy
+  - Medications for opioid use disorder
+  - Methadone
+  - Burpenorphine
+key-points: |
+  - From our sample of people who regularly use opioids from around Australia. most preferred to receive opioid agonist therapy with methadone
+  - Current OAT participants (n=317) comprised 78% (n=x) on methadone and 91% (n=x) on buprenorphine, with 78% (n=x) and 91% (n=x) receiving their preferred medication reservoirs 
 ---
 
 <!-- This is the format for text comments that will be ignored during renderings. Do not put R code in these comments because it will not be ignored. -->
@@ -64,9 +158,273 @@ Highlights: `r rmarkdown::metadata$highlights`
 
 # Introduction
 
-Here is a citation [@Marwick2017]
+People who use opioids from the unregulated market are increasingly
+exposed to related social and health harms [@milaney2022;
+@cheetham2022], including fatal and non-fatal opioid-involved overdose
+[@santo2021; @åstrøm2023], incarceration [@gisev2019; @fazel2017],
+stigma [@treloar2022] and structural violence [@lancaster2023]. Use via
+injection is associated is several health risks [@brener2022;
+@colledge2019; @degenhardt2019] such as increased risk of HIV and HCV
+infection [@Grebely2022; @Martinello2017a; @hajarizadeh], skin and soft
+tissue infection [@wheeler2022] and endocarditis [@wurcel2016;
+@see2020]. Opioid agonist therapy (OAT) with methadone and buprenorphine
+is effective in reducing associated harms [@degenhardt2023;
+@Nielsen2016; @Nielsen2022; @Jones2022], with retention associated with
+improved social and health outcomes , and reduced quality-adjusted
+life-years lost compared to no treatment or non-pharmacological
+interventions [@martin2022]. Despite the efficacy of these medications
+[@degenhardt2023], treatment acceptability, satisfaction, and retention
+is sub-optimal, globally. Individual preferences for these medications
+play a pivotal role in determining positive treatment outcomes
+[@joosten2008]. With similar outcomes for a range of measures among
+particular subgroups between medications [@degenhardt2023], the choice
+between methadone and buprenorphine should be informed by consultation
+with each person after consideration of preferences and the relative
+risks and benefits of each medication to the indivudal. While a number
+of studies explore the role of treatment preferences generally
+[@uebelacker2016; @kenney2018], relatively fewer number of studies focus
+specifically on factors associated with preferences for medication types
+and formulations.
 
-# Background
+Preferences around OAT and individual choice are identified as key to
+improving treatment outcomes and reducing potential harms associated
+with use of unregulated opioids [@muthulingam2023]. Preferences are
+comprised of attitudes, beliefs, expectations, values, and processes
+used to evaluate the costs and benefits of treatment options
+[@montori2013], with the decision for one formulation over another being
+largely preference sensitive [@keirns2009]. Understanding treatment
+preference could inform shared decision-making and help to overcome
+barriers to effective, person-centered healthcare and support
+[@maddensatisfaction2008]. However, about how opioid-dependent patients'
+preferences and previous experiences influence treatment decisions.
+Preferences, perceptions and acceptability of medication formulations
+vary widely based on each participant's individual experiences, goals,
+and values [@neale2018; @nealequalitative2023; @nealedepot2019].
+Previous studies exploring preferences for methadone and buprenorphine
+have beenStudies have compared patients' views of methadone with
+buprenorphine [@hillcomparison2015]. However, findings have been
+inconsistent and variable [@whitepatients2007]. Previous studies into
+treatment preferences carried out in the United Kingdom [@neale2018;
+@tompkinsopioid2019], France [@rolland2021], North America
+[@saunders2020; @muthulingam2023; @kaplowitztreatment2022], Iran
+[@amini-rarani2023] and Australia [@larance2020] suggest that
+preferences for OAT is influenced by a range of physical, psychological
+and social factors. Additional studies have explored preferences
+generally, however, understanding of factors that influence and
+contribute to stated preference are limited. Limitations of previous
+studies include limited geographic scope with samples from single
+clinics (e.g.[@bailey2013]) or cities (e.g.[@luty2004]), and relatively
+small samples and lack of power to investigate factors associated with
+OAT preferences (e.g. [@ridge2009]).
+
+In Australia, there are several formulations of buprenorphine currently
+available, including a monobuprenorphine formulation (Subutex) and
+buprenorphine-- naloxone formulations in a tablet or film and
+administered orally or sublingually (Suboxone), and, more recently,
+long-acting injectable formulations that are administered once-weekly or
+once-monthly, depending on the product (Buivdal and Sublocade). Most
+people received methadone (58%), the median age was 44 years. ODT
+medicines were mostly prescribed by a private health practitioner,
+dosing was mainly dispensed in pharmacies, and the primary drug of
+concern for the majority was heroin. In 2021, approximately 47,000
+people were receiving OAT (median age 44; over two-thirds male), with
+most (58%) receiving methadone. The median age was 44 years and
+two-thirds were male. There are variations in OAT provision between
+jurisdictions due to decentralized funding of health services and the
+varied historical contexts across the country [@hall2023]. In some
+jurisdictions, OAT is dispensed exclusively at community pharmacies,
+while others have a mix of community pharmacy and public clinics.
+Community pharmacies offer longer opening hours and more accessible
+locations than public clinics, yet the out-of-pocket dispensing fees at
+pharmacy can make OAT prohibitively expensive [@tran2022; @zahra2022].
+Historically, provision of OAT has been considered complex given its
+strict regulatory oversight and varied interpretation of guidelines
+among OAT prescribers. Despite providers differing in their
+interpretation of guidelines, OAT provision in Australia has been
+criticised for its rigidity in not adapting to the needs of people
+engaged in treatment [@crawford2013]. Many aspects of OAT provision also
+lack flexibility, and are often not person-centered, with limited access
+to unsupervised dosing and restrictive dosing times, which cumulatively
+decrease treatment adhearance [@hall2023]. It is important to understand
+preferences for the available medications to inform person-centered OAT
+provision and enhance treatment outcomes.
+
+Accessibility and diversity of OAT need to be enhanced to ensure that
+all people can receive their preferred OAT. Improved understanding of
+preference and factors associated with a preference for OAT preference
+is needed to inform policy and service provision. information on
+preference for different OAT options has shown to enhance patient
+acceptability, leading to increased OAT treatment uptake, adherence, and
+retention to improve clinical utility and facilitate planning,
+prioritization and investment in national strategies and guidelines.
+Extensive literature on patient participation in medication
+decision-making emphasizes that incorporating patient treatment
+preference leads to higher rates of retention and the desired outcomes
+[@friedrichs2016; @joosten2008]. Providers incorporating client
+preferences into treatment is linked to increased satisfaction, with
+individual choice, with alignment with preferred therapy leading to
+improved outcomes [@fallah2015; @joosten2008]. To better understand
+treatment preferences and develop an evidence-base to inform policy and
+treatment service design and delivery, we examined OAT preferences and
+associated factors among a national sample of people who regularly use
+opioids in Australia.
+
+# Data & Methods {#sec-data-methods}
+
+## Study design and participants {#sec-study-design}
+
+In this cross-sectional study, participants were enrolled from 59 sites
+including drug and alcohol treatment clinics (n=28), needle and syringe
+programmes (n=13), pharmacies and organisations advocating for (n=6) and
+providing support and services to people who use drugs (n=7), There was
+national representation of sites across all states and territories in
+Australia (except Tasmania), including Australian Capital Territory
+(n=3), New South Wales (n=37), the Northern Territory (n=1), Queensland
+(n=9), South Australia (n=6), Victoria (n=2), and Western Australia
+(n=1). Study enrolment took place between October 2020 and April 2021,
+and continued throughout periods of COVID-19-related restrictions. To be
+eligible for this study, participants had to be aged 18 years or older,
+provide voluntary and informed consent, use opioids regularly. In this
+study, regular opioid use was defined as use of any opioid (including
+heroin, methadone, burpenorphine use and other opioids or the
+extramedical use of pharmaceutical opioids) on at least 21 of the past
+28 days. The content within this article is presented following the
+'Strengthening the reporting of observational studies in epidemiology'
+(STROBE) guidelines [@von2007; @Vandenbroucke2007]. A completed
+checklist of the STROBE requirements is available in the
+@sec-supp-material.
+
+## Procedures {#sec-procedures}
+
+Participants were recruited from a range of settings (including drug and
+alcohol treatment services, needle and syringe programmes, organisations
+providing support and services for people who use drugs, community-based
+and -led advocacy organisations, and pharmacies), via snowballing (where
+eligible participants promote the study via their personal networks),
+and word-of-mouth. The study was advertised at services using posters
+and fliers, but service staff were not directly involved in recruitment.
+Participants who were interested in the study contacted the study team
+directly and were screened for eligibility over the telephone.
+
+Interviewers contacted the person over the phone or video conference
+(Microsoft Teams or Zoom) to obtain consent and conduct the interview.
+Interviews were semi-structured were conducted by trained interviewers.
+Participants completed an interviewer-administered questionnaire focused
+on patient preferences for OAT that included information on participant
+demographics, drug use characteristics, and drug treatment. The
+interviews took approximately 30-45 minutes to complete, and
+participants were reimbursed AUD\$40 for their time and out-of-pocket
+expenses.
+
+### Outcomes {#sec-outcomes}
+
+The primary outcome was a preference for opioid agonist therapy with
+methadone, which was assessed by asking the question "*Of all the
+following types of medications used for opioid agonist therapy, if you
+could choose today, which one would you prefer?*" Options included
+methadone, monobuprenorphine (Subutex), buprenorphine-naloxone
+(Suboxone) taken orally as a film or tablet, long acting injectable
+buprenorphine (Buvidal or Sublocade), any treatment (i.e. no preference
+for any medication), and no treatment.
+
+Demographic, behavioural, and clinically significant factors
+hypothesised to be associated with preference to receive OAT with
+methadone were determined a priori, comprising the following: 1) age at
+survey (18 - 35; 36 -- 45; \> 45 years old) ), 2) gender (female; male;
+transgender), 3) education (\< year 10; \> year 10), 4) employment
+(paid; other), 5) homelessness (no; yes), 6) chronic pain (no; yes), 7)
+incarceration history (never, \>6 months ago, \\6 months ago), 8) Drugs
+used and injected in the last 28 days (heroin, non-prescribed methadone,
+non-prescribed buprenorphine, other pharmaceutical opioids,
+methamphetamine, cocaine and benzodiazepines), 9) Frequency of injection
+drug use (\>1 year ago, within 1--12 months ago, within the last month
+less than daily, and daily or more), 10) OAT (history and current), with
+methadone (history and current) and buprenorphine (history and current).
+Among the sub-group of participants currently receiving OAT, factors
+hypothesized to be associated with a preference for OAT with methadone
+included 11) current OAT medication (methadone; buprenorphine;
+buprenorphine-naloxone; long-acting injectable buprenorphine; none), 12)
+Drugs used while on OAT (no, heroin, non-prescribed methadone,
+non-prescribed buprenorphine, other pharmaceutical opioids,
+methamphetamine, cocaine and benzodiazepines); 13) Pay out of pocket for
+oat treatment (no; yes); 14) Amount paid out of pocket for OAT (xx; xx),
+15) Site last prescribed OAT medication was collected (pharmacy; public
+clinic; private clinic; at home; other), 16) Frequency of OAT dose
+collection (daily or several times per week; weekly or less frequently),
+17) Distance traveled to OAT collection site, 18) Time traveled to OAT
+collection site (less than 30 minutes; more than 30 minutes).
+
+## Statistical analysis {#sec-analysis}
+
+The proportion of people who reported preference for methadone and
+factors associated with this preference was assessed. Quantitative
+parameters are presented as the median and interquartile range \[IQR\].
+Categorical parameters are presented as the number and percentage (n;
+%). The association between the response to each variable and the
+binarized category of preference for methadone was explored using
+logistic regression modeling through unadjusted bivariate analysis,
+providing an odds ratio and the 95 % confidence interval (OR \[95%
+CI\]), and comparisons adjusted for age category and gender, providing
+an adjusted OR (aOR) and the 95 % CI. A sample of those who would choose
+treatment and who had a preference for methadone or any buprenorphine
+forumation was selected for analysis (n=352) . Multivariable logistic
+regression was used assess factors associated with preferred medication
+for OAT. Unadjusted and adjusted odds ratios were derived using logistic
+regression and 95% confidence intervals calculated for all variables.
+For the final model, all the explanatory variables significantly
+associated with the outcome in the bivariate models were included in the
+multivariable model, whilst also adjusting for age and gender. The final
+model was assessed through examining which contributed significantly to
+model fit through backwards selection using decreasing values of Akaike
+Information Criterion. The variance inflation factor was used to assess
+collinearity in the final model [@obrien2007]. Individuals with missing
+values were not integrated in the models. A subset of the sample
+comprising of participants currently receiving OAT with methadone and
+buprenorphine (including sublingual-monobuprenorphine,
+buprenorphine-naloxone and long-acting injectable buprenorphine) was
+selected for analysis. There was no formal sample size calculation,
+however, based of similar previous surveys (e.g. [@larance2020;
+@rolland2021]) we aimed to recruit 300 - 400 people.
+
+The analytical approach received input from and was reviewed by people
+who use opioids with lived-experience of injecting drug use and opioid
+agonist therapy with various formulations of methadone and
+buprenorphine. Advice and perspectives were provided on the inclusion of
+explanatory variables and the clinical and practical significance of
+identified factors.
+
+The analysis was undertaken in using `R` version
+`r paste0(version$major, "." ,version$minor)` using the following
+packages: gtsummary v. 1.7.2 [@gtsummary], finalfit v. 1.0.6
+[@finalfit], quarto v. 1.3 [@quarto] and rmarkdown v. 2.25 [@rmarkdown].
+The code for this analysis is available on request from the
+corresponding author. The data supporting the findings of this study are
+available within the article and its Supporting information. The
+analysis was not pre-registered and the results should be considered
+exploratory.
+
+## Study oversight {#sec-oversight}
+
+All participants provided written informed consent before study
+procedures. The study protocol were approved by the Human Research
+Ethics Committees at St Vincent's Hospital, Sydney (HREC Ref:
+HREC/17/SVH/113) and the Aboriginal Health and Medical Research Council
+(HREC Ref: 1279/17). This study was conducted according to the
+Declaration of Helsinki and International Conference on Harmonization
+Good Clinical Practice (ICH/GCP) guidelines.
+
+## Role of the Funding source {#sec-funding}
+
+The study was funded by a research grant from X. The funders had no role
+in the study design, data collection, analysis, interpretation of the
+results, writing or the decision to submit the study for publication.
+JG, AC, LD, and MJS had access to the raw data. The National Drug and
+Alcohol Research Centre and the Kirby Institute, UNSW Sydney
+collaborated to design the study, monitor study conduct, and perform the
+statistical analysis. X, X and X were responsible for the decision to
+submit the study for publication.
+
+## Results {#sec-results}
 
 # Methods
 
