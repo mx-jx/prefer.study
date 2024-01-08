@@ -1,0 +1,10 @@
+^renv$
+^renv\.lock$
+^prefer\.study\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^README\.Rmd$
+^README-.*\.png$
+analysis
+^Dockerfile$
+^render-in-docker\.yaml$
