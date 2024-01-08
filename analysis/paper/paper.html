@@ -28,40 +28,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -94,8 +60,11 @@ div.csl-indent {
 <script src="paper_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="paper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="paper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="paper_files/libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="paper_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
+<link rel="stylesheet" href="~/templates/custom.css">
 </head>
 
 <body>
@@ -106,27 +75,36 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#sec-intro" id="toc-sec-intro" class="nav-link active" data-scroll-target="#sec-intro">Introduction</a></li>
   <li><a href="#sec-data-methods" id="toc-sec-data-methods" class="nav-link" data-scroll-target="#sec-data-methods">Data &amp; Methods</a>
   <ul class="collapse">
   <li><a href="#sec-study-design" id="toc-sec-study-design" class="nav-link" data-scroll-target="#sec-study-design">Study design and participants</a></li>
-  <li><a href="#sec-procedures" id="toc-sec-procedures" class="nav-link" data-scroll-target="#sec-procedures">Procedures</a>
-  <ul class="collapse">
+  <li><a href="#sec-procedures" id="toc-sec-procedures" class="nav-link" data-scroll-target="#sec-procedures">Procedures</a></li>
   <li><a href="#sec-outcomes" id="toc-sec-outcomes" class="nav-link" data-scroll-target="#sec-outcomes">Outcomes</a></li>
-  </ul></li>
   <li><a href="#sec-analysis" id="toc-sec-analysis" class="nav-link" data-scroll-target="#sec-analysis">Statistical analysis</a></li>
   <li><a href="#sec-oversight" id="toc-sec-oversight" class="nav-link" data-scroll-target="#sec-oversight">Study oversight</a></li>
   <li><a href="#sec-funding" id="toc-sec-funding" class="nav-link" data-scroll-target="#sec-funding">Role of the Funding source</a></li>
-  <li><a href="#sec-results" id="toc-sec-results" class="nav-link" data-scroll-target="#sec-results">Results</a></li>
   </ul></li>
-  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
-  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a>
+  <li><a href="#sec-results" id="toc-sec-results" class="nav-link" data-scroll-target="#sec-results">Results</a>
+  <ul class="collapse">
+  <li><a href="#sec-participants" id="toc-sec-participants" class="nav-link" data-scroll-target="#sec-participants">Participant Characteristics</a></li>
+  <li><a href="#sec-preferences" id="toc-sec-preferences" class="nav-link" data-scroll-target="#sec-preferences">Preferences for OAT</a></li>
+  <li><a href="#sec-factors" id="toc-sec-factors" class="nav-link" data-scroll-target="#sec-factors">Factors associated with OAT preference</a></li>
+  </ul></li>
+  <li><a href="#sec-discuss" id="toc-sec-discuss" class="nav-link" data-scroll-target="#sec-discuss">Discussion</a>
+  <ul class="collapse">
+  <li><a href="#sec-limit" id="toc-sec-limit" class="nav-link" data-scroll-target="#sec-limit">Limitations</a></li>
+  </ul></li>
+  <li><a href="#sec-conclusion" id="toc-sec-conclusion" class="nav-link" data-scroll-target="#sec-conclusion">Conclusion</a></li>
+  <li><a href="#sec-refs" id="toc-sec-refs" class="nav-link" data-scroll-target="#sec-refs">References</a>
   <ul class="collapse">
   <li><a href="#colophon" id="toc-colophon" class="nav-link" data-scroll-target="#colophon">Colophon</a></li>
+  </ul></li>
+  <li><a href="#sec-supp-material" id="toc-sec-supp-material" class="nav-link" data-scroll-target="#sec-supp-material">Supplementary Material</a>
+  <ul class="collapse">
+  <li><a href="#table-s1" id="toc-table-s1" class="nav-link" data-scroll-target="#table-s1">Table S1</a></li>
+  <li><a href="#table-s2" id="toc-table-s2" class="nav-link" data-scroll-target="#table-s2">Table S2</a></li>
+  <li><a href="#table-s3" id="toc-table-s3" class="nav-link" data-scroll-target="#table-s3">Table S3</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="paper.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
@@ -333,7 +311,7 @@ div.csl-indent {
 <p>Keywords: - Opioid agonist therapy - Medications for opioid use disorder - Methadone - Burpenorphine</p>
 <p>Highlights:</p>
 <!-- The actual document text starts here: -->
-<section id="introduction" class="level1">
+<section id="sec-intro" class="level1">
 <h1>Introduction</h1>
 <p>People who use opioids from the unregulated market are increasingly exposed to related social and health harms <span class="citation" data-cites="milaney2022 cheetham2022">[@milaney2022; @cheetham2022]</span>, including fatal and non-fatal opioid-involved overdose <span class="citation" data-cites="santo2021 åstrøm2023">[@santo2021; @åstrøm2023]</span>, incarceration <span class="citation" data-cites="gisev2019 fazel2017">[@gisev2019; @fazel2017]</span>, stigma <span class="citation" data-cites="treloar2022">[@treloar2022]</span> and structural violence <span class="citation" data-cites="lancaster2023">[@lancaster2023]</span>. Use via injection is associated is several health risks <span class="citation" data-cites="brener2022 colledge2019 degenhardt2019">[@brener2022; @colledge2019; @degenhardt2019]</span> such as increased risk of HIV and HCV infection <span class="citation" data-cites="Grebely2022 Martinello2017a hajarizadeh">[@Grebely2022; @Martinello2017a; @hajarizadeh]</span>, skin and soft tissue infection <span class="citation" data-cites="wheeler2022">[@wheeler2022]</span> and endocarditis <span class="citation" data-cites="wurcel2016 see2020">[@wurcel2016; @see2020]</span>. Opioid agonist therapy (OAT) with methadone and buprenorphine is effective in reducing associated harms <span class="citation" data-cites="degenhardt2023 Nielsen2016 Nielsen2022 Jones2022">[@degenhardt2023; @Nielsen2016; @Nielsen2022; @Jones2022]</span>, with retention associated with improved social and health outcomes , and reduced quality-adjusted life-years lost compared to no treatment or non-pharmacological interventions <span class="citation" data-cites="martin2022">[@martin2022]</span>. Despite the efficacy of these medications <span class="citation" data-cites="degenhardt2023">[@degenhardt2023]</span>, treatment acceptability, satisfaction, and retention is sub-optimal, globally. Individual preferences for these medications play a pivotal role in determining positive treatment outcomes <span class="citation" data-cites="joosten2008">[@joosten2008]</span>. With similar outcomes for a range of measures among particular subgroups between medications <span class="citation" data-cites="degenhardt2023">[@degenhardt2023]</span>, the choice between methadone and buprenorphine should be informed by consultation with each person after consideration of preferences and the relative risks and benefits of each medication to the indivudal. While a number of studies explore the role of treatment preferences generally <span class="citation" data-cites="uebelacker2016 kenney2018">[@uebelacker2016; @kenney2018]</span>, relatively fewer number of studies focus specifically on factors associated with preferences for medication types and formulations.</p>
 <p>Preferences around OAT and individual choice are identified as key to improving treatment outcomes and reducing potential harms associated with use of unregulated opioids <span class="citation" data-cites="muthulingam2023">[@muthulingam2023]</span>. Preferences are comprised of attitudes, beliefs, expectations, values, and processes used to evaluate the costs and benefits of treatment options <span class="citation" data-cites="montori2013">[@montori2013]</span>, with the decision for one formulation over another being largely preference sensitive <span class="citation" data-cites="keirns2009">[@keirns2009]</span>. Understanding treatment preference could inform shared decision-making and help to overcome barriers to effective, person-centered healthcare and support <span class="citation" data-cites="maddensatisfaction2008">[@maddensatisfaction2008]</span>. However, about how opioid-dependent patients’ preferences and previous experiences influence treatment decisions. Preferences, perceptions and acceptability of medication formulations vary widely based on each participant’s individual experiences, goals, and values <span class="citation" data-cites="neale2018 nealequalitative2023 nealedepot2019">[@neale2018; @nealequalitative2023; @nealedepot2019]</span>. Previous studies exploring preferences for methadone and buprenorphine have beenStudies have compared patients’ views of methadone with buprenorphine <span class="citation" data-cites="hillcomparison2015">[@hillcomparison2015]</span>. However, findings have been inconsistent and variable <span class="citation" data-cites="whitepatients2007">[@whitepatients2007]</span>. Previous studies into treatment preferences carried out in the United Kingdom <span class="citation" data-cites="neale2018 tompkinsopioid2019">[@neale2018; @tompkinsopioid2019]</span>, France <span class="citation" data-cites="rolland2021">[@rolland2021]</span>, North America <span class="citation" data-cites="saunders2020 muthulingam2023 kaplowitztreatment2022">[@saunders2020; @muthulingam2023; @kaplowitztreatment2022]</span>, Iran <span class="citation" data-cites="amini-rarani2023">[@amini-rarani2023]</span> and Australia <span class="citation" data-cites="larance2020">[@larance2020]</span> suggest that preferences for OAT is influenced by a range of physical, psychological and social factors. Additional studies have explored preferences generally, however, understanding of factors that influence and contribute to stated preference are limited. Limitations of previous studies include limited geographic scope with samples from single clinics (e.g.<span class="citation" data-cites="bailey2013">[@bailey2013]</span>) or cities (e.g.<span class="citation" data-cites="luty2004">[@luty2004]</span>), and relatively small samples and lack of power to investigate factors associated with OAT preferences (e.g. <span class="citation" data-cites="ridge2009">[@ridge2009]</span>).</p>
@@ -344,17 +322,17 @@ div.csl-indent {
 <h1>Data &amp; Methods</h1>
 <section id="sec-study-design" class="level2">
 <h2 class="anchored" data-anchor-id="sec-study-design">Study design and participants</h2>
-<p>In this cross-sectional study, participants were enrolled from 59 sites including drug and alcohol treatment clinics (n=28), needle and syringe programmes (n=13), pharmacies and organisations advocating for (n=6) and providing support and services to people who use drugs (n=7), There was national representation of sites across all states and territories in Australia (except Tasmania), including Australian Capital Territory (n=3), New South Wales (n=37), the Northern Territory (n=1), Queensland (n=9), South Australia (n=6), Victoria (n=2), and Western Australia (n=1). Study enrolment took place between October 2020 and April 2021, and continued throughout periods of COVID-19-related restrictions. To be eligible for this study, participants had to be aged 18 years or older, provide voluntary and informed consent, use opioids regularly. In this study, regular opioid use was defined as use of any opioid (including heroin, methadone, burpenorphine use and other opioids or the extramedical use of pharmaceutical opioids) on at least 21 of the past 28 days. The content within this article is presented following the ‘Strengthening the reporting of observational studies in epidemiology’ (STROBE) guidelines <span class="citation" data-cites="von2007 Vandenbroucke2007">[@von2007; @Vandenbroucke2007]</span>. A completed checklist of the STROBE requirements is available in the <strong>?@sec-supp-material</strong>.</p>
+<p>In this cross-sectional study, participants were enrolled from 59 sites including drug and alcohol treatment clinics (n=28), needle and syringe programmes (n=13), pharmacies and organisations advocating for (n=6) and providing support and services to people who use drugs (n=7), There was national representation of sites across all states and territories in Australia (except Tasmania), including Australian Capital Territory (n=3), New South Wales (n=37), the Northern Territory (n=1), Queensland (n=9), South Australia (n=6), Victoria (n=2), and Western Australia (n=1). Study enrolment took place between October 2020 and April 2021, and continued throughout periods of COVID-19-related restrictions. To be eligible for this study, participants had to be aged 18 years or older, provide voluntary and informed consent, use opioids regularly. In this study, regular opioid use was defined as use of any opioid (including heroin, methadone, burpenorphine use and other opioids or the extramedical use of pharmaceutical opioids) on at least 21 of the past 28 days. The content within this article is presented following the ‘Strengthening the reporting of observational studies in epidemiology’ (STROBE) guidelines <span class="citation" data-cites="von2007 Vandenbroucke2007">[@von2007; @Vandenbroucke2007]</span>. A completed checklist of the STROBE requirements is available in the <a href="#sec-supp-material" class="quarto-xref">Section&nbsp;7</a>.</p>
 </section>
 <section id="sec-procedures" class="level2">
 <h2 class="anchored" data-anchor-id="sec-procedures">Procedures</h2>
 <p>Participants were recruited from a range of settings (including drug and alcohol treatment services, needle and syringe programmes, organisations providing support and services for people who use drugs, community-based and -led advocacy organisations, and pharmacies), via snowballing (where eligible participants promote the study via their personal networks), and word-of-mouth. The study was advertised at services using posters and fliers, but service staff were not directly involved in recruitment. Participants who were interested in the study contacted the study team directly and were screened for eligibility over the telephone.</p>
 <p>Interviewers contacted the person over the phone or video conference (Microsoft Teams or Zoom) to obtain consent and conduct the interview. Interviews were semi-structured were conducted by trained interviewers. Participants completed an interviewer-administered questionnaire focused on patient preferences for OAT that included information on participant demographics, drug use characteristics, and drug treatment. The interviews took approximately 30-45 minutes to complete, and participants were reimbursed AUD$40 for their time and out-of-pocket expenses.</p>
-<section id="sec-outcomes" class="level3">
-<h3 class="anchored" data-anchor-id="sec-outcomes">Outcomes</h3>
+</section>
+<section id="sec-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="sec-outcomes">Outcomes</h2>
 <p>The primary outcome was a preference for opioid agonist therapy with methadone, which was assessed by asking the question “<em>Of all the following types of medications used for opioid agonist therapy, if you could choose today, which one would you prefer?</em>” Options included methadone, monobuprenorphine (Subutex), buprenorphine-naloxone (Suboxone) taken orally as a film or tablet, long acting injectable buprenorphine (Buvidal or Sublocade), any treatment (i.e.&nbsp;no preference for any medication), and no treatment.</p>
 <p>Demographic, behavioural, and clinically significant factors hypothesised to be associated with preference to receive OAT with methadone were determined a priori, comprising the following: 1) age at survey (18 - 35; 36 – 45; &gt; 45 years old) ), 2) gender (female; male; transgender), 3) education (&lt; year 10; &gt; year 10), 4) employment (paid; other), 5) homelessness (no; yes), 6) chronic pain (no; yes), 7) incarceration history (never, &gt;6 months ago, \6 months ago), 8) Drugs used and injected in the last 28 days (heroin, non-prescribed methadone, non-prescribed buprenorphine, other pharmaceutical opioids, methamphetamine, cocaine and benzodiazepines), 9) Frequency of injection drug use (&gt;1 year ago, within 1–12 months ago, within the last month less than daily, and daily or more), 10) OAT (history and current), with methadone (history and current) and buprenorphine (history and current). Among the sub-group of participants currently receiving OAT, factors hypothesized to be associated with a preference for OAT with methadone included 11) current OAT medication (methadone; buprenorphine; buprenorphine-naloxone; long-acting injectable buprenorphine; none), 12) Drugs used while on OAT (no, heroin, non-prescribed methadone, non-prescribed buprenorphine, other pharmaceutical opioids, methamphetamine, cocaine and benzodiazepines); 13) Pay out of pocket for oat treatment (no; yes); 14) Amount paid out of pocket for OAT (xx; xx), 15) Site last prescribed OAT medication was collected (pharmacy; public clinic; private clinic; at home; other), 16) Frequency of OAT dose collection (daily or several times per week; weekly or less frequently), 17) Distance traveled to OAT collection site, 18) Time traveled to OAT collection site (less than 30 minutes; more than 30 minutes).</p>
-</section>
 </section>
 <section id="sec-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="sec-analysis">Statistical analysis</h2>
@@ -370,50 +348,807 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="sec-funding">Role of the Funding source</h2>
 <p>The study was funded by a research grant from X. The funders had no role in the study design, data collection, analysis, interpretation of the results, writing or the decision to submit the study for publication. JG, AC, LD, and MJS had access to the raw data. The National Drug and Alcohol Research Centre and the Kirby Institute, UNSW Sydney collaborated to design the study, monitor study conduct, and perform the statistical analysis. X, X and X were responsible for the decision to submit the study for publication.</p>
 </section>
-<section id="sec-results" class="level2">
-<h2 class="anchored" data-anchor-id="sec-results">Results</h2>
 </section>
-</section>
-<section id="methods" class="level1">
-<h1>Methods</h1>
-</section>
-<section id="results" class="level1">
+<section id="sec-results" class="level1">
 <h1>Results</h1>
-<!-- Here's some example analysis code: -->
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note the path that we need to use to access our data files when rendering this document</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">'analysis/data/raw_data/my_csv_file.csv'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="sec-participants" class="level2">
+<h2 class="anchored" data-anchor-id="sec-participants">Participant Characteristics</h2>
+<p>Overall, 400 participants were enrolled (<a href="#fig-profile" class="quarto-xref">Figure&nbsp;1</a>). The median age was 45 years, 41% (n=162) were female, 48% (n=193) incarcerated in the last six months and 42% (n=169) were currently living with chronic pain (Table 1).</p>
+<p>At enrollment, 78% (n=310) had injected drugs in the month prior, with 45% (n=141 of 310) having injected drugs &gt;daily. Most participants were treatment experienced (n = 344; 87%), with 91% (n=X) with most having received methadone (n = 319; 91%) compared to buprenorphine (n = 344; 87%) (<a href="#tbl-s1" class="quarto-xref">Table&nbsp;1</a>). Among those who injected, commonly injected drugs in the prior month included heroin (90%), non-prescribed methadone (13%%), non-prescribed buprenorphine (10%), other non-prescribed pharmaceutical opioids (X%), methamphetamine (X%), cocaine (X%) and benzodiazepines (X%)</p>
+<p>Of the participants currently receiving OAT, 77% (n=243) were prescribed methadone, 15% (n=47) buprenorphine-naloxone (Suboxone), 6% (n=18) long-acting injectable buprenorphine (Buivdal or Sublocade) 3% (n=9), buprenorphine (Subutex) and X% (n=X) were not in treatment. Among those receving treatment, most collected their last dose at pharmacies (n=150; 47%) or public clinics (n=111; 35%), with just over half (n=177; 56%) travelling less than five kilometers (<a href="#tbl-s2" class="quarto-xref">Table&nbsp;2</a>).</p>
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-demo-plot" class="quarto-figure quarto-figure-center anchored" width="4200">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-demo-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="paper_files/figure-html/fig-demo-plot-1.png" class="img-fluid figure-img" width="4200">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Table 1. Demographic and behavioural characteristics of all participants enrolled in this study (n=400)</caption>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Characteristic</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Enrolled<br>
+(n = 400)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Age, Median (IQR)</span></td>
+<td style="text-align: center;">45 (39 - 53)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Age group, n (%)</span></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">&gt;55 years</td>
+<td style="text-align: center;">72 (18%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">18 - 35 years</td>
+<td style="text-align: center;">53 (13%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">36 - 45 years</td>
+<td style="text-align: center;">150 (38%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">46 - 55 years</td>
+<td style="text-align: center;">125 (31%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Formal education, n (%)</span></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Completed less than 10 years school education</td>
+<td style="text-align: center;">206 (52%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Completed more than 10 years school education</td>
+<td style="text-align: center;">194 (49%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Gender, n (%)</span></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Female</td>
+<td style="text-align: center;">162 (41%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Male</td>
+<td style="text-align: center;">237 (59%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Currently employed, n (%)</span></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Other</td>
+<td style="text-align: center;">349 (87%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Paid</td>
+<td style="text-align: center;">51 (13%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Currently homeless, n (%)</span></td>
+<td style="text-align: center;">32 (8.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Ever incarcerated, n (%)</span></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">166 (42%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes &lt; 6 months</td>
+<td style="text-align: center;">193 (48%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes &gt; 6 months</td>
+<td style="text-align: center;">41 (10%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Chronic pain, n (%)</span></td>
+<td style="text-align: center;">169 (42%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Heroin use, n (%)</span></td>
+<td style="text-align: center;">281 (89%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed methadone use, n (%)</span></td>
+<td style="text-align: center;">70 (78%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed buprenorphoine use, n (%)</span></td>
+<td style="text-align: center;">21 (66%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed pharmaceutical opioid use,, n (%)</span></td>
+<td style="text-align: center;">58 (64%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Cocaine use, n (%)</span></td>
+<td style="text-align: center;">35 (52%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Methamphetamine use, n (%)</span></td>
+<td style="text-align: center;">152 (78%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed benzodiazepine use, n (%)</span></td>
+<td style="text-align: center;">193 (87%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Currently receiving OAT, n (%)</span></td>
+<td style="text-align: center;">317 (79%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Ever received OAT with methadone, n (%)</span></td>
+<td style="text-align: center;">348 (87%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Ever received OAT with methadone, n (%)</span></td>
+<td style="text-align: center;">262 (66%)</td>
+</tr>
+</tbody>
+</table>
+
+
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-demo-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: A plot of random numbers
+</div>
+</section>
+<section id="sec-preferences" class="level2">
+<h2 class="anchored" data-anchor-id="sec-preferences">Preferences for OAT</h2>
+<p>Among all participants (n=400), 91% (n=366) would prefer to receive OAT, with X% (n=352) preferring either methadone or any formulation of buprenorphine and 4% (n=14) choosing treatment, but having no preferred medication. Methadone was preferred by 54% (n=216) and buprenorphine by 34% (n=136).Among those who preferred buprenorphine, sublingual buprenorphine-naloxone was preferred by 50% (n=68) and long-acting injectable buprenorphine by 50% (n=68). A summary of sociodemographic characteristics stratified by preference is presented in <a href="#tbl-s1" class="quarto-xref">Table&nbsp;1</a>. Among participants currently receiving OAT (n=313), 95% (n=296) preferred either oral methadone or any formulation of buprenorphine, 2% (n=5) would choose treatment, but had no preferred medications and 4% (n=12) would prefer not to receive treatment. Methadone was preferred by 60% (n=185), oral and sublingual by 18% (n=56) and long-acting injectable buprenorphine by 18% (n=55). A summary of sociodemographic characteristics of people currently receiving OAT stratified by preference is presented in <a href="#tbl-s2" class="quarto-xref">Table&nbsp;2</a>.</p>
+<div id="fig-profile" class="quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-profile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/study_profile01.png" class="img-fluid figure-img">
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-profile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Study profile
 </figcaption>
 </figure>
 </div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Final model including crude odds ratios (cOR) and adjusted odds ratios (aOR)</caption>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th colspan="4" data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Unadjusted model
+</div></th>
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Adjusted model
+</div></th>
+</tr>
+<tr class="odd">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Variable</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Enrolled<br>
+(n = 352)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Methadone<br>
+(n = 216)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Buprenorphine<br>
+(n = 136)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">cOR (95% CI)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">p-value</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">aOR (95% CI)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Age, Median (IQR)</span></td>
+<td style="text-align: center;">45 (40 - 52)</td>
+<td style="text-align: center;">46 (40 - 53)</td>
+<td style="text-align: center;">44 (39 - 50)</td>
+<td style="text-align: center;">1.02 (1.0 - 1.04)</td>
+<td style="text-align: center;">0.130</td>
+<td style="text-align: center;">1.00 (0.98 - 1.03)</td>
+<td style="text-align: center;">0.910</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Age group, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">18 - 35 years</td>
+<td style="text-align: center;">43</td>
+<td style="text-align: center;">22 (51%)</td>
+<td style="text-align: center;">21 (49%)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">36 - 45 years</td>
+<td style="text-align: center;">137</td>
+<td style="text-align: center;">82 (60%)</td>
+<td style="text-align: center;">55 (40%)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">&gt;45 years</td>
+<td style="text-align: center;">172</td>
+<td style="text-align: center;">112 (65%)</td>
+<td style="text-align: center;">60 (35%)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Gender, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Female</td>
+<td style="text-align: center;">142</td>
+<td style="text-align: center;">87 (61%)</td>
+<td style="text-align: center;">55 (39%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Male</td>
+<td style="text-align: center;">209</td>
+<td style="text-align: center;">128 (61%)</td>
+<td style="text-align: center;">81 (39%)</td>
+<td style="text-align: center;">1.00 (0.64 - 1.55)</td>
+<td style="text-align: center;">0.996</td>
+<td style="text-align: center;">1.25 (0.76 - 2.06)</td>
+<td style="text-align: center;">0.372</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Level of education, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Completed less than 10 years school education</td>
+<td style="text-align: center;">188</td>
+<td style="text-align: center;">118 (63%)</td>
+<td style="text-align: center;">70 (37%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Completed more than 10 years school education</td>
+<td style="text-align: center;">164</td>
+<td style="text-align: center;">98 (60%)</td>
+<td style="text-align: center;">66 (40%)</td>
+<td style="text-align: center;">0.88 (0.57 - 1.35)</td>
+<td style="text-align: center;">0.563</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Income, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Other</td>
+<td style="text-align: center;">309</td>
+<td style="text-align: center;">188 (61%)</td>
+<td style="text-align: center;">121 (39%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Paid</td>
+<td style="text-align: center;">43</td>
+<td style="text-align: center;">28 (65%)</td>
+<td style="text-align: center;">15 (35%)</td>
+<td style="text-align: center;">1.20 (0.62 - 2.39)</td>
+<td style="text-align: center;">0.590</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Currently in stale housing, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">15 (75%)</td>
+<td style="text-align: center;">5 (25%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">332</td>
+<td style="text-align: center;">201 (61%)</td>
+<td style="text-align: center;">131 (39%)</td>
+<td style="text-align: center;">0.51 (0.16 - 1.36)</td>
+<td style="text-align: center;">0.205</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Incarceration, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">145</td>
+<td style="text-align: center;">87 (60%)</td>
+<td style="text-align: center;">58 (40%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes &gt; 6 months</td>
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">21 (60%)</td>
+<td style="text-align: center;">14 (40%)</td>
+<td style="text-align: center;">1.00 (0.47 - 2.16)</td>
+<td style="text-align: center;">&gt;0.999</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes &lt; 6 months</td>
+<td style="text-align: center;">172</td>
+<td style="text-align: center;">108 (63%)</td>
+<td style="text-align: center;">64 (37%)</td>
+<td style="text-align: center;">1.13 (0.71 - 1.77)</td>
+<td style="text-align: center;">0.611</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Chronic pain, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">206</td>
+<td style="text-align: center;">123 (60%)</td>
+<td style="text-align: center;">83 (40%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">146</td>
+<td style="text-align: center;">93 (64%)</td>
+<td style="text-align: center;">53 (36%)</td>
+<td style="text-align: center;">1.18 (0.77 - 1.84)</td>
+<td style="text-align: center;">0.449</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Heroin use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">110</td>
+<td style="text-align: center;">57 (52%)</td>
+<td style="text-align: center;">53 (48%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">242</td>
+<td style="text-align: center;">159 (66%)</td>
+<td style="text-align: center;">83 (34%)</td>
+<td style="text-align: center;">1.78 (1.13 - 2.82)</td>
+<td style="text-align: center;">0.014</td>
+<td style="text-align: center;">1.78 (1.06 - 3.00)</td>
+<td style="text-align: center;">0.030</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed methadone use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;">175 (59%)</td>
+<td style="text-align: center;">121 (41%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">56</td>
+<td style="text-align: center;">41 (73%)</td>
+<td style="text-align: center;">15 (27%)</td>
+<td style="text-align: center;">1.89 (1.02 - 3.67)</td>
+<td style="text-align: center;">0.050</td>
+<td style="text-align: center;">1.86 (0.92 - 3.93)</td>
+<td style="text-align: center;">0.092</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed buprenorphine use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">333</td>
+<td style="text-align: center;">209 (63%)</td>
+<td style="text-align: center;">124 (37%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">7 (37%)</td>
+<td style="text-align: center;">12 (63%)</td>
+<td style="text-align: center;">0.35 (0.13 - 0.88)</td>
+<td style="text-align: center;">0.030</td>
+<td style="text-align: center;">0.28 (0.09 - 0.84)</td>
+<td style="text-align: center;">0.025</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Cocaine use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">323</td>
+<td style="text-align: center;">198 (61%)</td>
+<td style="text-align: center;">125 (39%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">29</td>
+<td style="text-align: center;">18 (62%)</td>
+<td style="text-align: center;">11 (38%)</td>
+<td style="text-align: center;">1.03 (0.48 - 2.33)</td>
+<td style="text-align: center;">0.935</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Methamphetamine use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">198</td>
+<td style="text-align: center;">125 (63%)</td>
+<td style="text-align: center;">73 (37%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">154</td>
+<td style="text-align: center;">91 (59%)</td>
+<td style="text-align: center;">63 (41%)</td>
+<td style="text-align: center;">0.84 (0.55 - 1.30)</td>
+<td style="text-align: center;">0.440</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Recent benzodiazepine use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">179</td>
+<td style="text-align: center;">108 (60%)</td>
+<td style="text-align: center;">71 (40%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">173</td>
+<td style="text-align: center;">108 (62%)</td>
+<td style="text-align: center;">65 (38%)</td>
+<td style="text-align: center;">1.09 (0.71 - 1.68)</td>
+<td style="text-align: center;">0.687</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed pharmaceutical opioid use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">295</td>
+<td style="text-align: center;">174 (59%)</td>
+<td style="text-align: center;">121 (41%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">57</td>
+<td style="text-align: center;">42 (74%)</td>
+<td style="text-align: center;">15 (26%)</td>
+<td style="text-align: center;">1.95 (1.05 - 3.77)</td>
+<td style="text-align: center;">0.039</td>
+<td style="text-align: center;">2.23 (1.07 - 4.95)</td>
+<td style="text-align: center;">0.039</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Currently receiving OAT, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">52</td>
+<td style="text-align: center;">31 (60%)</td>
+<td style="text-align: center;">21 (40%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">300</td>
+<td style="text-align: center;">185 (62%)</td>
+<td style="text-align: center;">115 (38%)</td>
+<td style="text-align: center;">1.09 (0.59 - 1.98)</td>
+<td style="text-align: center;">0.779</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Ever received OAT with methadone, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">33</td>
+<td style="text-align: center;">8 (24%)</td>
+<td style="text-align: center;">25 (76%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">319</td>
+<td style="text-align: center;">208 (65%)</td>
+<td style="text-align: center;">111 (35%)</td>
+<td style="text-align: center;">5.86 (2.66 - 14.3)</td>
+<td style="text-align: center;">&lt;0.001</td>
+<td style="text-align: center;">6.54 (2.66 - 17.9)</td>
+<td style="text-align: center;">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Ever received OAT with buprenorphine, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">117</td>
+<td style="text-align: center;">97 (83%)</td>
+<td style="text-align: center;">20 (17%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">235</td>
+<td style="text-align: center;">119 (51%)</td>
+<td style="text-align: center;">116 (49%)</td>
+<td style="text-align: center;">0.21 (0.12 - 0.36)</td>
+<td style="text-align: center;">&lt;0.001</td>
+<td style="text-align: center;">0.19 (0.10 - 0.35)</td>
+<td style="text-align: center;">&lt;0.001</td>
+</tr>
+</tbody>
+</table>
+
+
 </div>
 </div>
-<p><a href="#fig-demo-plot" class="quarto-xref">Figure&nbsp;1</a> shows how we can have a caption and cross-reference for a plot. Note that figure label and cross-references must both be prefixed with <code>fig-</code></p>
-<p>Here is an example of inline code 3.14 in the middle of a sentence.</p>
 </section>
-<section id="discussion" class="level1">
+<section id="sec-factors" class="level2">
+<h2 class="anchored" data-anchor-id="sec-factors">Factors associated with OAT preference</h2>
+<p>Overall, participants who preferred methadone were more likely to have ever received OAT with methadone, and had used heroin (aOR X.XX, 95%CI:X.XX, X.XX) and other pharmaceutical opioids in the month prior (aOR X.XX, 95%CI:X.XX, X.XX) (<a href="#fig-forest" class="quarto-xref">Figure&nbsp;2</a>). Participants who preferred buprenorphine were more likely to have ever received OAT with burpenorphine (aOR X.XX, 95%CI:X.XX, X.XX).</p>
+<div id="fig-forest" class="quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-forest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="%22../figures/forest_plot_all.png%22" class="img-fluid figure-img">
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-forest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Forest plot of sociodemographic and drug use-related factors associations with a preference for methadone
+</figcaption>
+</figure>
+</div>
+<p>Participants who were currently receiving OAT and who preferred methadone were more likely to have ever received OAT with methadone, and had used heroin (aOR X.XX, 95%CI:X.XX, X.XX) and other pharmaceutical opioids in the past month (aOR X.XX, 95%CI:X.XX, X.XX) (<a href="#fig-forest" class="quarto-xref">Figure&nbsp;2</a>). Participants who preferred buprenorphine were more likely to have ever received OAT with burpenorphine (aOR X.XX, 95%CI:X.XX, X.XX).</p>
+<div id="fig-forest_oat" class="quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-forest_oat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="%22../figures/forest_plot_oat.png%22" class="img-fluid figure-img">
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-forest_oat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Forest plot of sociodemographic and drug use-related factors associations with a preference for methadone among participants currently receiving OAT
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-discuss" class="level1">
 <h1>Discussion</h1>
+<p>Both short- and long-acting formulations have been rigorously studied (Mattick et al., 2014; Nielsen et al., 2016; Sordo et al., 2017), the decision for one formulation over another is largely preference sensitive, a choice that depends on patients’ preferences and their individual values (Keirns &amp; Goold, 2009). In this study, we offer additional insight into preferences for OATAlthough previous studies have explored OAT preferences using small samples from single cities or recruitment sites <span class="citation" data-cites="bailey2013 ridge2009 pinto2010">[@bailey2013; @ridge2009; @pinto2010]</span>, within specific populations <span class="citation" data-cites="kaplowitz2022">[@kaplowitz2022]</span> and investigate specific factors <span class="citation" data-cites="muthulingam2023">[@muthulingam2023]</span> this study builds on this previous work by examining sociodemographic, behavioural and clinical factors associated with preferences for OAT in a national sample of people who regularly use opioids. Most preferred OAT, whereas among those who had a stated preference for one type of medication, two thirds preferred methadone, with an equal number of the remaining participants preferring oral and sublingual buprenorphine (i.e.&nbsp;monobuprenorphine and buprenorphine-naloxone) or long-acting injectable buprenorphine, respectively. Those who preferred methadone were significantly more likely to have ever received treatment with methadone, and recently used heroin and non-pharmaceutical opioids. Among participants currently in treatment, almost all were receiving their preferred therapies. Despite limitations on the statistical power to investigate preferences for short-acting versus long-acting injectable buprenorphine, this study provides important insights into the factors associated with preferred OAT and offers guidance in clinical decision making for the management and mitigation of drug-related risks among people who regularly use opioids.</p>
+<p>Most participants preferred OAT. This is consistent with other studies <span class="citation" data-cites="bailey2013 uebelacker2016">[@bailey2013; @uebelacker2016]</span> who found that among people in opioid withdrawal management, 63% - 78% would choose OAT following withdrawal. The 9% (n=34) who had a preference for no treatment in this study is less than other studies, such as Bailey <span class="citation" data-cites="bailey2013">[@bailey2013]</span>, who in a survey of 372 opioid-dependent people undergoing inpatient detox found that 22% (n=82) would choose not to receive OAT. In addition, <span class="citation" data-cites="saunders2020">[@saunders2020]</span>’s qualitative study of 40 people who used opioids that one-third had a preference for not receiving OAT. The choice of whether to choose OAT is based on several individual and structural-level factors. In Australia, treatment programs in the public sector are characterised by daily supervised dosing, out-of-pocket cost and small windows in which doses of daily medication can be dispensed <span class="citation" data-cites="hall2023 komalasari2021">[@hall2023; @komalasari2021]</span>. Those choosing to not receive OAT often list the onerous requirements of daily supervised dosing as too demanding <span class="citation" data-cites="crawford2013">[@crawford2013]</span>, experiences of stigma, discrimination and structural violence associated with treatment <span class="citation" data-cites="treloar2022">[@treloar2022]</span>, perceptions of replacing one drug for another <span class="citation" data-cites="frank2020">[@frank2020]</span>, distrust in the the motives of pharmaceutical companies and prescribers <span class="citation" data-cites="saunders2020">[@saunders2020]</span>, and misalignment with personal pursuits of well-being, bodily autonomy and positive treatment outcomes <span class="citation" data-cites="mayock2021 carlisle2023">[@mayock2021; @carlisle2023]</span> as reasons for not choosing to enroll on or discontinue treatment <span class="citation" data-cites="clay2023">[@clay2023]</span>.</p>
+<p>A larger proportion of participants preferred methadone over formulations of buprenorphine. This finding is consistent with other studies, including <span class="citation" data-cites="pinto2010">[@pinto2010]</span> where among 361 opiod-dependent individuals, 63% (n=227) patients chose methadone and 37% (n=134) buprenorphine. However, in contrast, <span class="citation" data-cites="uebelacker2016">[@uebelacker2016]</span>, in a study of people in opioid withdrawal management, found that more people preferred buprenorphine over methadone following withdrawal, with 18% (n=68) stating a preference for methadone, 28% (n=104) buprenorphine and 32% (n=118) extended-release naltrexone - which is currently not registered for the management of opioid use in Australia. These inconsistent findings have been noted by others <span class="citation" data-cites="neale2018 rolland2021 neale2019">[@neale2018; @rolland2021; @neale2019]</span>. Individual preferences for treatment with these medications are multifaceted and influenced by perceived effectiveness, privacy concerns, autonomy, convenience, previous treatment experiences, and side effect profiles.</p>
+<p>Among those with a preference for buprenorphine, an equal number of participants preferred short-acting buprenorphine (oral or sublingual monobuprenorphine and buprenorphine-naloxone) as long-acting injectable buprenorphine. Consistent with this study, <span class="citation" data-cites="uebelacker2016">[@uebelacker2016]</span>found that among X people, 104 (28%) preferred oral or sublingual buprenorphine and 118 (32%) preferred XR-NTX. A previous study by <span class="citation" data-cites="kenney2018">[@kenney2018]</span> in the United States found that in of X, 55% of people stated they preferred buprenorphine over other formulations and of these, 49% preferred daily oral formulations and 23% preferred a weekly or monthlybuprenorphine. dose of long-acting injectable injection. (Paragraph is incomplete - to be written).</p>
+<p>Participants who had previous experience with receiving methadone were more likely to prefer methadone, consistent with several studies that identify prior treatment experience are a strong predictor of treatment preference <span class="citation" data-cites="yarborough2016 pinto2010 gryczynski2013">[@yarborough2016; @pinto2010; @gryczynski2013]</span>. Findings from Yarborough <span class="citation" data-cites="yarborough2016">[@yarborough2016]</span>’s qualitative study provides insight into this result, with participants describing how negative experiences with methadone (including non-prescribed use) led them to consider buprenorphine. Likewise, patients described how experiences with buprenorphine influenced their decision to choose methadone experience with buprenorphine treatment was related to an increased likelihood of being prescribed buprenorphine. In Ridge <span class="citation" data-cites="ridge2009">[@ridge2009]</span>’s findings, the odds of being prescribed buprenorphine during the current treatment episode were about 12 times greater for those patients who had previous experience of being treated with buprenorphine. In contrast, prior treatment with oral methadone was not related to any increased probability of receiving methadone treatment. Qualitative studies suggest that client preference for buprenorphine and methadone varies, and is influenced by peer attitudes, prior treatment experience and clinic dispensing practices. In a second study analyzing factors related to patient preference for buprenorphine or methadone among 190 opioid-dependent people seeking OAT, the odds of being prescribed buprenorphine were three times greater among those reporting a preference for it; similarly, the odds of receiving methadone were twice as great among those requesting methadone <span class="citation" data-cites="ridge2009">[@ridge2009]</span>.</p>
+<p>Among participants currently receiving OAT, most were receiving their preferred therapy, with X% in receipt of methadone and X% of prescribed buprenorphine having a preference for the same treatment. Limited studies have investigated treatment outcomes associated with receipt of preferred therapy, however, extensive literature on client participation in medication decision making demostrates that incorporating client preference leads to higher rates of retention and related positive outcomes <span class="citation" data-cites="fallah2015 friedrichs2016 gilman2018 gryczynski2013 joosten2008">[@fallah2015; @friedrichs2016; @gilman2018; @gryczynski2013; @joosten2008]</span>. Currently, available formulations in Australia exclude several formulations and modes of devlivery that are available in other countries. For example, injectable opioid agonist therapy (iOAT) with hydromorphone or diamorphine has shown promise as a treatment for those who have not experienced the desired outcomes with traditional therapies treatments (reference). Despite not currently an option in Australia, a clinical trial investigating iOAT with hydromorphone is currently underway. Further, Nielsen <span class="citation" data-cites="nielsen2021">[@nielsen2021]</span> found that in a sample of people who regularly use opioids in Australia, 53% of participants (n = 182) stated that they would have a preferencefor iOAT if available. In addition to the existing evidence-base, further research into medication preferences is needed as the range of available treatments becomes established and up-scaled.</p>
+<section id="sec-limit" class="level2">
+<h2 class="anchored" data-anchor-id="sec-limit">Limitations</h2>
+<p>There are several limitations of the study to consider. Data comprising the study arise from cross sectional survey design and convenience sampling of harm reduction sites and voluntary participation of individuals within those sites, therefore these findings may not be generalizable to all people who use drugs. Study sites did not routinely collect information about numbers examined for eligibility, confirmed eligible and included in the study, and we are unable to report these details. However, the demographic characteristics of the current study’s sample are consistent with those of other large Australian studies of people who are regularly use opioids (i.e.&nbsp;the majority male, typically aged early 40s, with the majority of OAT clients receiving methadone) [e.g. <span class="citation" data-cites="brener2022 larance2020 maddensatisfaction2008">[@brener2022; @larance2020; @maddensatisfaction2008]</span>]. Most of the sample were treatment experienced having ever received treatment with methadone (n=) or buprenorphine (n=x), and therefore, there was limited input from participants who had never previously sought treatment. Despite this, there is still a need to ensure that those currently receiving OAT are prescribed their preferred medication, and to understand preferences of those interersted in OAT to enhance treatment and improve overall satisfaction. In addition, although most participants preferred treatment with a particular medication (n=366), the sample of participants preferring sublingual buprenorphine (n=68) and long-acting injectable bupenorphine (n=68) was relatively small, limiting the statistical power to detect differences and representativeness. A larger and more diverse sample would enhance the study’s reliability and enable more robust analysis. The survey’s self-report nature may introduce bias, as participants’ preferences might not fully align with their actual experiences with these medications.In addition, this study was conducted prior to the widespread implementation of long-acting injectable formulations of buprenorphine and participants were therefore largely unfamiliar to people receiving OAT. The lack of familiarity with these formulations is a potential source of bias as participants were reporting on hypothetical scenarios and anticipated preferences, benefits and disadvantages. Despite these limitations, this study provides important insights into preferred treatment and medications.</p>
 </section>
-<section id="conclusion" class="level1">
+</section>
+<section id="sec-conclusion" class="level1">
 <h1>Conclusion</h1>
-</section>
-<section id="acknowledgements" class="level1">
-<h1>Acknowledgements</h1>
+<p>In conclusion, this study provides valuable insight into opioid agonist therapy preferences among people who regularly use opioids. Methadone was preferred over any available formulation of buprenorphine by most participants, where a similar number of participants preferred oral or sublingual and long-acting injectable formulations of buprenorphine. Most those receiving treatment were prescribed their preferred medication, with previous and current treatment experience the strongest predictor of medication preference. Australian OAT guidelines recommend that client preferences are taken into account in choosing medications. These findings may act as a guide for those discussions that are had on an individual basis. Clinical decision making around treatment options must center individual preference and balance suitability and choice of treatment.</p>
+<div style="page-break-after: always;"></div>
 <!-- The following line inserts a page break  -->
 <div style="page-break-after: always;"></div>
 </section>
-<section id="references" class="level1">
+<section id="sec-refs" class="level1">
 <h1>References</h1>
 <!-- The following line ensures the references appear here for the MS Word or HTML output files, rather than right at the end of the document (this will not work for PDF files):  -->
 <div id="refs" role="list">
@@ -422,84 +1157,2708 @@ Figure&nbsp;1: A plot of random numbers
 <div style="page-break-after: always;"></div>
 <section id="colophon" class="level3">
 <h3 class="anchored" data-anchor-id="colophon">Colophon</h3>
-<p>This report was generated on 2024-01-08 13:43:27.528738 using the following computational environment and dependencies:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># which R packages and versions?</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="st">"devtools"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) devtools<span class="sc">::</span><span class="fu">session_info</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>─ Session info ───────────────────────────────────────────────────────────────
- setting  value
- version  R version 4.3.1 (2023-06-16)
- os       macOS Monterey 12.0.1
- system   aarch64, darwin20
- ui       X11
- language (EN)
- collate  en_US.UTF-8
- ctype    en_US.UTF-8
- tz       Australia/Sydney
- date     2024-01-08
- pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)
-
-─ Packages ───────────────────────────────────────────────────────────────────
- ! package     * version date (UTC) lib source
- P cachem        1.0.8   2023-05-01 [?] CRAN (R 4.3.0)
- P cli           3.6.2   2023-12-11 [?] CRAN (R 4.3.1)
- P devtools      2.4.5   2022-10-11 [?] CRAN (R 4.3.0)
- P digest        0.6.33  2023-07-07 [?] CRAN (R 4.3.0)
- P ellipsis      0.3.2   2021-04-29 [?] CRAN (R 4.3.0)
- P evaluate      0.23    2023-11-01 [?] CRAN (R 4.3.1)
- P fastmap       1.1.1   2023-02-24 [?] CRAN (R 4.3.0)
- P fs            1.6.3   2023-07-20 [?] CRAN (R 4.3.0)
- P glue          1.6.2   2022-02-24 [?] CRAN (R 4.3.0)
- P htmltools     0.5.7   2023-11-03 [?] CRAN (R 4.3.1)
- P htmlwidgets   1.6.4   2023-12-06 [?] CRAN (R 4.3.1)
- P httpuv        1.6.13  2023-12-06 [?] CRAN (R 4.3.1)
- P jsonlite      1.8.8   2023-12-04 [?] CRAN (R 4.3.1)
- P knitr         1.45    2023-10-30 [?] CRAN (R 4.3.1)
- P later         1.3.2   2023-12-06 [?] CRAN (R 4.3.1)
- P lifecycle     1.0.4   2023-11-07 [?] CRAN (R 4.3.1)
- P magrittr      2.0.3   2022-03-30 [?] CRAN (R 4.3.0)
- P memoise       2.0.1   2021-11-26 [?] CRAN (R 4.3.0)
- P mime          0.12    2021-09-28 [?] CRAN (R 4.3.0)
- P miniUI        0.1.1.1 2018-05-18 [?] CRAN (R 4.3.0)
- P pkgbuild      1.4.3   2023-12-10 [?] CRAN (R 4.3.1)
- P pkgload       1.3.3   2023-09-22 [?] CRAN (R 4.3.1)
- P profvis       0.3.8   2023-05-02 [?] CRAN (R 4.3.0)
- P promises      1.2.1   2023-08-10 [?] CRAN (R 4.3.0)
- P purrr         1.0.2   2023-08-10 [?] CRAN (R 4.3.0)
- P R6            2.5.1   2021-08-19 [?] CRAN (R 4.3.0)
- P Rcpp          1.0.11  2023-07-06 [?] CRAN (R 4.3.0)
- P remotes       2.4.2.1 2023-07-18 [?] CRAN (R 4.3.0)
- P rlang         1.1.2   2023-11-04 [?] CRAN (R 4.3.1)
- P rmarkdown     2.25    2023-09-18 [?] CRAN (R 4.3.1)
- P rstudioapi    0.15.0  2023-07-07 [?] CRAN (R 4.3.0)
- P sessioninfo   1.2.2   2021-12-06 [?] CRAN (R 4.3.0)
- P shiny         1.8.0   2023-11-17 [?] CRAN (R 4.3.1)
- P stringi       1.8.3   2023-12-11 [?] CRAN (R 4.3.1)
- P stringr       1.5.1   2023-11-14 [?] CRAN (R 4.3.1)
- P urlchecker    1.0.1   2021-11-30 [?] CRAN (R 4.3.0)
- P usethis       2.2.2   2023-07-06 [?] CRAN (R 4.3.0)
- P vctrs         0.6.5   2023-12-01 [?] CRAN (R 4.3.1)
- P xfun          0.41    2023-11-01 [?] CRAN (R 4.3.1)
- P xtable        1.8-4   2019-04-21 [?] CRAN (R 4.3.0)
- P yaml          2.3.8   2023-12-11 [?] CRAN (R 4.3.1)
-
- [1] /Users/mj/Library/Caches/org.R-project.R/R/renv/library/prefer.study-79abce7e/R-4.3/aarch64-apple-darwin20
- [2] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library
-
- P ── Loaded and on-disk path mismatch.
-
-──────────────────────────────────────────────────────────────────────────────</code></pre>
-</div>
-</div>
+<p>This report was generated on 2024-01-08 15:21:14.614479 using the following computational environment and dependencies:</p>
 <p>The current Git commit details are:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what commit is this file at? </span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="st">"git2r"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>() <span class="sc">&amp;</span> git2r<span class="sc">::</span><span class="fu">in_repository</span>(<span class="at">path =</span> <span class="st">"."</span>)) git2r<span class="sc">::</span><span class="fu">repository</span>(here<span class="sc">::</span><span class="fu">here</span>())  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Local:    master /Users/mj/prefer.study
-Remote:   master @ origin (https://github.com/mx-jx/prefer.study.git)
-Head:     [175ffbc] 2024-01-08: added data files</code></pre>
+</section>
+</section>
+<section id="sec-supp-material" class="level1">
+<h1>Supplementary Material</h1>
+<section id="table-s1" class="level2">
+<h2 class="anchored" data-anchor-id="table-s1">Table S1</h2>
+<div class="cell" data-layout-align="center">
+<div id="tbl-s1" class="cell anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="table quarto-float-caption quarto-float-tbl" id="tbl-s1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Final model including crude odds ratios (cOR) and adjusted odds ratios (aOR)
+</figcaption>
+<div aria-describedby="tbl-s1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table cell table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Characteristic</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Overall<br>
+(n = 400)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Methadone<br>
+(n = 216)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Buprenorphine oral<br>
+(n = 68)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Buprenorphine LAIB<br>
+(n = 68)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Any<br>
+(n = 14)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">None<br>
+(n = 34)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Age, Median (IQR)</span></td>
+<td style="text-align: center;">45 (39 - 53)</td>
+<td style="text-align: center;">46 (40 - 53)</td>
+<td style="text-align: center;">43 (38 - 48)</td>
+<td style="text-align: center;">46 (40 - 52)</td>
+<td style="text-align: center;">39 (34 - 49)</td>
+<td style="text-align: center;">51 (41 - 54)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Age group, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">18 - 35 years</td>
+<td style="text-align: center;">53</td>
+<td style="text-align: center;">22 (42%)</td>
+<td style="text-align: center;">12 (23%)</td>
+<td style="text-align: center;">9 (17%)</td>
+<td style="text-align: center;">4 (7.5%)</td>
+<td style="text-align: center;">6 (11%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">36 - 45 years</td>
+<td style="text-align: center;">150</td>
+<td style="text-align: center;">82 (55%)</td>
+<td style="text-align: center;">31 (21%)</td>
+<td style="text-align: center;">24 (16%)</td>
+<td style="text-align: center;">6 (4.0%)</td>
+<td style="text-align: center;">7 (4.7%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">&gt;45 years</td>
+<td style="text-align: center;">197</td>
+<td style="text-align: center;">112 (57%)</td>
+<td style="text-align: center;">25 (13%)</td>
+<td style="text-align: center;">35 (18%)</td>
+<td style="text-align: center;">4 (2.0%)</td>
+<td style="text-align: center;">21 (11%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Gender, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Male</td>
+<td style="text-align: center;">237</td>
+<td style="text-align: center;">128 (54%)</td>
+<td style="text-align: center;">44 (19%)</td>
+<td style="text-align: center;">37 (16%)</td>
+<td style="text-align: center;">9 (3.8%)</td>
+<td style="text-align: center;">19 (8.0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Female</td>
+<td style="text-align: center;">162</td>
+<td style="text-align: center;">87 (54%)</td>
+<td style="text-align: center;">24 (15%)</td>
+<td style="text-align: center;">31 (19%)</td>
+<td style="text-align: center;">5 (3.1%)</td>
+<td style="text-align: center;">15 (9.3%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Transgender</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1 (100%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Level of education, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Completed less than 10 years school education</td>
+<td style="text-align: center;">206</td>
+<td style="text-align: center;">118 (57%)</td>
+<td style="text-align: center;">31 (15%)</td>
+<td style="text-align: center;">39 (19%)</td>
+<td style="text-align: center;">7 (3.4%)</td>
+<td style="text-align: center;">11 (5.3%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Completed more than 10 years school education</td>
+<td style="text-align: center;">194</td>
+<td style="text-align: center;">98 (51%)</td>
+<td style="text-align: center;">37 (19%)</td>
+<td style="text-align: center;">29 (15%)</td>
+<td style="text-align: center;">7 (3.6%)</td>
+<td style="text-align: center;">23 (12%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Income, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Other</td>
+<td style="text-align: center;">349</td>
+<td style="text-align: center;">188 (54%)</td>
+<td style="text-align: center;">59 (17%)</td>
+<td style="text-align: center;">62 (18%)</td>
+<td style="text-align: center;">13 (3.7%)</td>
+<td style="text-align: center;">27 (7.7%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Paid</td>
+<td style="text-align: center;">51</td>
+<td style="text-align: center;">28 (55%)</td>
+<td style="text-align: center;">9 (18%)</td>
+<td style="text-align: center;">6 (12%)</td>
+<td style="text-align: center;">1 (2.0%)</td>
+<td style="text-align: center;">7 (14%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Homelessness, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">15 (58%)</td>
+<td style="text-align: center;">1 (3.8%)</td>
+<td style="text-align: center;">4 (15%)</td>
+<td style="text-align: center;">2 (7.7%)</td>
+<td style="text-align: center;">4 (15%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">374</td>
+<td style="text-align: center;">201 (54%)</td>
+<td style="text-align: center;">67 (18%)</td>
+<td style="text-align: center;">64 (17%)</td>
+<td style="text-align: center;">12 (3.2%)</td>
+<td style="text-align: center;">30 (8.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Incarceration, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">166</td>
+<td style="text-align: center;">87 (52%)</td>
+<td style="text-align: center;">30 (18%)</td>
+<td style="text-align: center;">28 (17%)</td>
+<td style="text-align: center;">4 (2.4%)</td>
+<td style="text-align: center;">17 (10%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes &gt; 6 months</td>
+<td style="text-align: center;">41</td>
+<td style="text-align: center;">21 (51%)</td>
+<td style="text-align: center;">7 (17%)</td>
+<td style="text-align: center;">7 (17%)</td>
+<td style="text-align: center;">1 (2.4%)</td>
+<td style="text-align: center;">5 (12%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes &lt; 6 months</td>
+<td style="text-align: center;">193</td>
+<td style="text-align: center;">108 (56%)</td>
+<td style="text-align: center;">31 (16%)</td>
+<td style="text-align: center;">33 (17%)</td>
+<td style="text-align: center;">9 (4.7%)</td>
+<td style="text-align: center;">12 (6.2%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Chronic pain, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">231</td>
+<td style="text-align: center;">123 (53%)</td>
+<td style="text-align: center;">48 (21%)</td>
+<td style="text-align: center;">35 (15%)</td>
+<td style="text-align: center;">11 (4.8%)</td>
+<td style="text-align: center;">14 (6.1%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">169</td>
+<td style="text-align: center;">93 (55%)</td>
+<td style="text-align: center;">20 (12%)</td>
+<td style="text-align: center;">33 (20%)</td>
+<td style="text-align: center;">3 (1.8%)</td>
+<td style="text-align: center;">20 (12%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Heroin use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">119</td>
+<td style="text-align: center;">57 (48%)</td>
+<td style="text-align: center;">31 (26%)</td>
+<td style="text-align: center;">22 (18%)</td>
+<td style="text-align: center;">3 (2.5%)</td>
+<td style="text-align: center;">6 (5.0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">281</td>
+<td style="text-align: center;">159 (57%)</td>
+<td style="text-align: center;">37 (13%)</td>
+<td style="text-align: center;">46 (16%)</td>
+<td style="text-align: center;">11 (3.9%)</td>
+<td style="text-align: center;">28 (10.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed methadone use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">330</td>
+<td style="text-align: center;">175 (53%)</td>
+<td style="text-align: center;">62 (19%)</td>
+<td style="text-align: center;">59 (18%)</td>
+<td style="text-align: center;">10 (3.0%)</td>
+<td style="text-align: center;">24 (7.3%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">70</td>
+<td style="text-align: center;">41 (59%)</td>
+<td style="text-align: center;">6 (8.6%)</td>
+<td style="text-align: center;">9 (13%)</td>
+<td style="text-align: center;">4 (5.7%)</td>
+<td style="text-align: center;">10 (14%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed buprenorphine use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">375</td>
+<td style="text-align: center;">209 (56%)</td>
+<td style="text-align: center;">61 (16%)</td>
+<td style="text-align: center;">63 (17%)</td>
+<td style="text-align: center;">12 (3.2%)</td>
+<td style="text-align: center;">30 (8.0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">7 (28%)</td>
+<td style="text-align: center;">7 (28%)</td>
+<td style="text-align: center;">5 (20%)</td>
+<td style="text-align: center;">2 (8.0%)</td>
+<td style="text-align: center;">4 (16%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed pharmaceutical opioid use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">333</td>
+<td style="text-align: center;">174 (52%)</td>
+<td style="text-align: center;">60 (18%)</td>
+<td style="text-align: center;">61 (18%)</td>
+<td style="text-align: center;">10 (3.0%)</td>
+<td style="text-align: center;">28 (8.4%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">67</td>
+<td style="text-align: center;">42 (63%)</td>
+<td style="text-align: center;">8 (12%)</td>
+<td style="text-align: center;">7 (10%)</td>
+<td style="text-align: center;">4 (6.0%)</td>
+<td style="text-align: center;">6 (9.0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Cocaine use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">365</td>
+<td style="text-align: center;">198 (54%)</td>
+<td style="text-align: center;">66 (18%)</td>
+<td style="text-align: center;">59 (16%)</td>
+<td style="text-align: center;">10 (2.7%)</td>
+<td style="text-align: center;">32 (8.8%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">18 (51%)</td>
+<td style="text-align: center;">2 (5.7%)</td>
+<td style="text-align: center;">9 (26%)</td>
+<td style="text-align: center;">4 (11%)</td>
+<td style="text-align: center;">2 (5.7%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Methamphetamine use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">219</td>
+<td style="text-align: center;">125 (57%)</td>
+<td style="text-align: center;">35 (16%)</td>
+<td style="text-align: center;">38 (17%)</td>
+<td style="text-align: center;">4 (1.8%)</td>
+<td style="text-align: center;">17 (7.8%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">181</td>
+<td style="text-align: center;">91 (50%)</td>
+<td style="text-align: center;">33 (18%)</td>
+<td style="text-align: center;">30 (17%)</td>
+<td style="text-align: center;">10 (5.5%)</td>
+<td style="text-align: center;">17 (9.4%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Recent benzodiazepine use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">207</td>
+<td style="text-align: center;">108 (52%)</td>
+<td style="text-align: center;">35 (17%)</td>
+<td style="text-align: center;">36 (17%)</td>
+<td style="text-align: center;">9 (4.3%)</td>
+<td style="text-align: center;">19 (9.2%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">193</td>
+<td style="text-align: center;">108 (56%)</td>
+<td style="text-align: center;">33 (17%)</td>
+<td style="text-align: center;">32 (17%)</td>
+<td style="text-align: center;">5 (2.6%)</td>
+<td style="text-align: center;">15 (7.8%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Drug injecting, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">90</td>
+<td style="text-align: center;">40 (44%)</td>
+<td style="text-align: center;">23 (26%)</td>
+<td style="text-align: center;">19 (21%)</td>
+<td style="text-align: center;">3 (3.3%)</td>
+<td style="text-align: center;">5 (5.6%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">310</td>
+<td style="text-align: center;">176 (57%)</td>
+<td style="text-align: center;">45 (15%)</td>
+<td style="text-align: center;">49 (16%)</td>
+<td style="text-align: center;">11 (3.5%)</td>
+<td style="text-align: center;">29 (9.4%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Drug injecting frequency, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Did not inject</td>
+<td style="text-align: center;">90</td>
+<td style="text-align: center;">40 (44%)</td>
+<td style="text-align: center;">23 (26%)</td>
+<td style="text-align: center;">19 (21%)</td>
+<td style="text-align: center;">3 (3.3%)</td>
+<td style="text-align: center;">5 (5.6%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Weekly or less</td>
+<td style="text-align: center;">64</td>
+<td style="text-align: center;">36 (56%)</td>
+<td style="text-align: center;">10 (16%)</td>
+<td style="text-align: center;">12 (19%)</td>
+<td style="text-align: center;">2 (3.1%)</td>
+<td style="text-align: center;">4 (6.3%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">More than weekly, not daily</td>
+<td style="text-align: center;">105</td>
+<td style="text-align: center;">64 (61%)</td>
+<td style="text-align: center;">15 (14%)</td>
+<td style="text-align: center;">13 (12%)</td>
+<td style="text-align: center;">2 (1.9%)</td>
+<td style="text-align: center;">11 (10%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Once daily</td>
+<td style="text-align: center;">64</td>
+<td style="text-align: center;">40 (63%)</td>
+<td style="text-align: center;">6 (9.4%)</td>
+<td style="text-align: center;">11 (17%)</td>
+<td style="text-align: center;">3 (4.7%)</td>
+<td style="text-align: center;">4 (6.3%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">2 - 3 times a day</td>
+<td style="text-align: center;">54</td>
+<td style="text-align: center;">24 (44%)</td>
+<td style="text-align: center;">9 (17%)</td>
+<td style="text-align: center;">13 (24%)</td>
+<td style="text-align: center;">3 (5.6%)</td>
+<td style="text-align: center;">5 (9.3%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">More than 3 times a day</td>
+<td style="text-align: center;">23</td>
+<td style="text-align: center;">12 (52%)</td>
+<td style="text-align: center;">5 (22%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">1 (4.3%)</td>
+<td style="text-align: center;">5 (22%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Heroin injecting, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">131</td>
+<td style="text-align: center;">62 (47%)</td>
+<td style="text-align: center;">34 (26%)</td>
+<td style="text-align: center;">26 (20%)</td>
+<td style="text-align: center;">3 (2.3%)</td>
+<td style="text-align: center;">6 (4.6%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">269</td>
+<td style="text-align: center;">154 (57%)</td>
+<td style="text-align: center;">34 (13%)</td>
+<td style="text-align: center;">42 (16%)</td>
+<td style="text-align: center;">11 (4.1%)</td>
+<td style="text-align: center;">28 (10%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed methadone injecting, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">359</td>
+<td style="text-align: center;">185 (52%)</td>
+<td style="text-align: center;">65 (18%)</td>
+<td style="text-align: center;">65 (18%)</td>
+<td style="text-align: center;">12 (3.3%)</td>
+<td style="text-align: center;">32 (8.9%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">41</td>
+<td style="text-align: center;">31 (76%)</td>
+<td style="text-align: center;">3 (7.3%)</td>
+<td style="text-align: center;">3 (7.3%)</td>
+<td style="text-align: center;">2 (4.9%)</td>
+<td style="text-align: center;">2 (4.9%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Recent non-prescribed suboxone injecting, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">368</td>
+<td style="text-align: center;">205 (56%)</td>
+<td style="text-align: center;">59 (16%)</td>
+<td style="text-align: center;">63 (17%)</td>
+<td style="text-align: center;">13 (3.5%)</td>
+<td style="text-align: center;">28 (7.6%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">11 (34%)</td>
+<td style="text-align: center;">9 (28%)</td>
+<td style="text-align: center;">5 (16%)</td>
+<td style="text-align: center;">1 (3.1%)</td>
+<td style="text-align: center;">6 (19%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Cocaine injecting, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">374</td>
+<td style="text-align: center;">201 (54%)</td>
+<td style="text-align: center;">67 (18%)</td>
+<td style="text-align: center;">63 (17%)</td>
+<td style="text-align: center;">10 (2.7%)</td>
+<td style="text-align: center;">33 (8.8%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">15 (58%)</td>
+<td style="text-align: center;">1 (3.8%)</td>
+<td style="text-align: center;">5 (19%)</td>
+<td style="text-align: center;">4 (15%)</td>
+<td style="text-align: center;">1 (3.8%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Methamphetamine injecting, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">256</td>
+<td style="text-align: center;">139 (54%)</td>
+<td style="text-align: center;">45 (18%)</td>
+<td style="text-align: center;">45 (18%)</td>
+<td style="text-align: center;">4 (1.6%)</td>
+<td style="text-align: center;">23 (9.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">144</td>
+<td style="text-align: center;">77 (53%)</td>
+<td style="text-align: center;">23 (16%)</td>
+<td style="text-align: center;">23 (16%)</td>
+<td style="text-align: center;">10 (6.9%)</td>
+<td style="text-align: center;">11 (7.6%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Ever received OAT with methadone, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">52</td>
+<td style="text-align: center;">8 (15%)</td>
+<td style="text-align: center;">17 (33%)</td>
+<td style="text-align: center;">8 (15%)</td>
+<td style="text-align: center;">6 (12%)</td>
+<td style="text-align: center;">13 (25%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">348</td>
+<td style="text-align: center;">208 (60%)</td>
+<td style="text-align: center;">51 (15%)</td>
+<td style="text-align: center;">60 (17%)</td>
+<td style="text-align: center;">8 (2.3%)</td>
+<td style="text-align: center;">21 (6.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Ever received OAT with buprenorphine, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">138</td>
+<td style="text-align: center;">97 (70%)</td>
+<td style="text-align: center;">5 (3.6%)</td>
+<td style="text-align: center;">15 (11%)</td>
+<td style="text-align: center;">5 (3.6%)</td>
+<td style="text-align: center;">16 (12%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">262</td>
+<td style="text-align: center;">119 (45%)</td>
+<td style="text-align: center;">63 (24%)</td>
+<td style="text-align: center;">53 (20%)</td>
+<td style="text-align: center;">9 (3.4%)</td>
+<td style="text-align: center;">18 (6.9%)</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="table-s2" class="level2">
+<h2 class="anchored" data-anchor-id="table-s2">Table S2</h2>
+<div class="cell" data-layout-align="center">
+<div id="tbl-s2" class="cell anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="table quarto-float-caption quarto-float-tbl" id="tbl-s2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Final model including crude odds ratios (cOR) and adjusted odds ratios (aOR)
+</figcaption>
+<div aria-describedby="tbl-s2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table cell table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Characteristic</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Overall<br>
+(n = 301)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Methadone<br>
+(n = 185)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Buprenorphine oral<br>
+(n = 56)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Buprenorphine LAIB<br>
+(n = 55)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Any<br>
+(n = 5)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">None<br>
+(n = 0)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Age, Median (IQR)</span></td>
+<td style="text-align: center;">45 (39 - 52)</td>
+<td style="text-align: center;">46 (40 - 54)</td>
+<td style="text-align: center;">43 (37 - 48)</td>
+<td style="text-align: center;">46 (40 - 53)</td>
+<td style="text-align: center;">43 (42 - 53)</td>
+<td style="text-align: center;">NA (NA - NA)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Age group, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">18 - 35 years</td>
+<td style="text-align: center;">36</td>
+<td style="text-align: center;">21 (58%)</td>
+<td style="text-align: center;">10 (28%)</td>
+<td style="text-align: center;">5 (14%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">36 - 45 years</td>
+<td style="text-align: center;">120</td>
+<td style="text-align: center;">70 (58%)</td>
+<td style="text-align: center;">25 (21%)</td>
+<td style="text-align: center;">22 (18%)</td>
+<td style="text-align: center;">3 (2.5%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">&gt;45 years</td>
+<td style="text-align: center;">145</td>
+<td style="text-align: center;">94 (65%)</td>
+<td style="text-align: center;">21 (14%)</td>
+<td style="text-align: center;">28 (19%)</td>
+<td style="text-align: center;">2 (1.4%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Gender, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Male</td>
+<td style="text-align: center;">172</td>
+<td style="text-align: center;">106 (62%)</td>
+<td style="text-align: center;">37 (22%)</td>
+<td style="text-align: center;">26 (15%)</td>
+<td style="text-align: center;">3 (1.7%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Female</td>
+<td style="text-align: center;">128</td>
+<td style="text-align: center;">78 (61%)</td>
+<td style="text-align: center;">19 (15%)</td>
+<td style="text-align: center;">29 (23%)</td>
+<td style="text-align: center;">2 (1.6%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Transgender</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1 (100%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Level of education, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Completed less than 10 years school education</td>
+<td style="text-align: center;">166</td>
+<td style="text-align: center;">102 (61%)</td>
+<td style="text-align: center;">26 (16%)</td>
+<td style="text-align: center;">35 (21%)</td>
+<td style="text-align: center;">3 (1.8%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Completed more than 10 years school education</td>
+<td style="text-align: center;">135</td>
+<td style="text-align: center;">83 (61%)</td>
+<td style="text-align: center;">30 (22%)</td>
+<td style="text-align: center;">20 (15%)</td>
+<td style="text-align: center;">2 (1.5%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Income, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Other</td>
+<td style="text-align: center;">266</td>
+<td style="text-align: center;">161 (61%)</td>
+<td style="text-align: center;">49 (18%)</td>
+<td style="text-align: center;">51 (19%)</td>
+<td style="text-align: center;">5 (1.9%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Paid</td>
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">24 (69%)</td>
+<td style="text-align: center;">7 (20%)</td>
+<td style="text-align: center;">4 (11%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Homelessness, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">10 (67%)</td>
+<td style="text-align: center;">1 (6.7%)</td>
+<td style="text-align: center;">4 (27%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">286</td>
+<td style="text-align: center;">175 (61%)</td>
+<td style="text-align: center;">55 (19%)</td>
+<td style="text-align: center;">51 (18%)</td>
+<td style="text-align: center;">5 (1.7%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Incarceration, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">126</td>
+<td style="text-align: center;">79 (63%)</td>
+<td style="text-align: center;">24 (19%)</td>
+<td style="text-align: center;">21 (17%)</td>
+<td style="text-align: center;">2 (1.6%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes &gt; 6 months</td>
+<td style="text-align: center;">29</td>
+<td style="text-align: center;">16 (55%)</td>
+<td style="text-align: center;">7 (24%)</td>
+<td style="text-align: center;">6 (21%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes &lt; 6 months</td>
+<td style="text-align: center;">146</td>
+<td style="text-align: center;">90 (62%)</td>
+<td style="text-align: center;">25 (17%)</td>
+<td style="text-align: center;">28 (19%)</td>
+<td style="text-align: center;">3 (2.1%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Chronic pain, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">182</td>
+<td style="text-align: center;">110 (60%)</td>
+<td style="text-align: center;">38 (21%)</td>
+<td style="text-align: center;">29 (16%)</td>
+<td style="text-align: center;">5 (2.7%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">119</td>
+<td style="text-align: center;">75 (63%)</td>
+<td style="text-align: center;">18 (15%)</td>
+<td style="text-align: center;">26 (22%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Heroin use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">106</td>
+<td style="text-align: center;">53 (50%)</td>
+<td style="text-align: center;">31 (29%)</td>
+<td style="text-align: center;">20 (19%)</td>
+<td style="text-align: center;">2 (1.9%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">195</td>
+<td style="text-align: center;">132 (68%)</td>
+<td style="text-align: center;">25 (13%)</td>
+<td style="text-align: center;">35 (18%)</td>
+<td style="text-align: center;">3 (1.5%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed methadone use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">264</td>
+<td style="text-align: center;">158 (60%)</td>
+<td style="text-align: center;">53 (20%)</td>
+<td style="text-align: center;">49 (19%)</td>
+<td style="text-align: center;">4 (1.5%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">37</td>
+<td style="text-align: center;">27 (73%)</td>
+<td style="text-align: center;">3 (8.1%)</td>
+<td style="text-align: center;">6 (16%)</td>
+<td style="text-align: center;">1 (2.7%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed buprenorphine use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">295</td>
+<td style="text-align: center;">183 (62%)</td>
+<td style="text-align: center;">53 (18%)</td>
+<td style="text-align: center;">54 (18%)</td>
+<td style="text-align: center;">5 (1.7%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">2 (33%)</td>
+<td style="text-align: center;">3 (50%)</td>
+<td style="text-align: center;">1 (17%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed pharmaceutical opioid use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">266</td>
+<td style="text-align: center;">160 (60%)</td>
+<td style="text-align: center;">51 (19%)</td>
+<td style="text-align: center;">50 (19%)</td>
+<td style="text-align: center;">5 (1.9%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">25 (71%)</td>
+<td style="text-align: center;">5 (14%)</td>
+<td style="text-align: center;">5 (14%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Cocaine use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">280</td>
+<td style="text-align: center;">172 (61%)</td>
+<td style="text-align: center;">55 (20%)</td>
+<td style="text-align: center;">50 (18%)</td>
+<td style="text-align: center;">3 (1.1%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">13 (62%)</td>
+<td style="text-align: center;">1 (4.8%)</td>
+<td style="text-align: center;">5 (24%)</td>
+<td style="text-align: center;">2 (9.5%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Methamphetamine use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">180</td>
+<td style="text-align: center;">115 (64%)</td>
+<td style="text-align: center;">30 (17%)</td>
+<td style="text-align: center;">32 (18%)</td>
+<td style="text-align: center;">3 (1.7%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">121</td>
+<td style="text-align: center;">70 (58%)</td>
+<td style="text-align: center;">26 (21%)</td>
+<td style="text-align: center;">23 (19%)</td>
+<td style="text-align: center;">2 (1.7%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Recent benzodiazepine use, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">158</td>
+<td style="text-align: center;">95 (60%)</td>
+<td style="text-align: center;">27 (17%)</td>
+<td style="text-align: center;">31 (20%)</td>
+<td style="text-align: center;">5 (3.2%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">143</td>
+<td style="text-align: center;">90 (63%)</td>
+<td style="text-align: center;">29 (20%)</td>
+<td style="text-align: center;">24 (17%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Drug injecting, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">79</td>
+<td style="text-align: center;">38 (48%)</td>
+<td style="text-align: center;">22 (28%)</td>
+<td style="text-align: center;">17 (22%)</td>
+<td style="text-align: center;">2 (2.5%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">222</td>
+<td style="text-align: center;">147 (66%)</td>
+<td style="text-align: center;">34 (15%)</td>
+<td style="text-align: center;">38 (17%)</td>
+<td style="text-align: center;">3 (1.4%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Drug injecting frequency, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Did not inject</td>
+<td style="text-align: center;">79</td>
+<td style="text-align: center;">38 (48%)</td>
+<td style="text-align: center;">22 (28%)</td>
+<td style="text-align: center;">17 (22%)</td>
+<td style="text-align: center;">2 (2.5%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Weekly or less</td>
+<td style="text-align: center;">57</td>
+<td style="text-align: center;">36 (63%)</td>
+<td style="text-align: center;">10 (18%)</td>
+<td style="text-align: center;">10 (18%)</td>
+<td style="text-align: center;">1 (1.8%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">More than weekly, not daily</td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">56 (70%)</td>
+<td style="text-align: center;">12 (15%)</td>
+<td style="text-align: center;">11 (14%)</td>
+<td style="text-align: center;">1 (1.3%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Once daily</td>
+<td style="text-align: center;">37</td>
+<td style="text-align: center;">28 (76%)</td>
+<td style="text-align: center;">3 (8.1%)</td>
+<td style="text-align: center;">6 (16%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">2 - 3 times a day</td>
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">18 (51%)</td>
+<td style="text-align: center;">5 (14%)</td>
+<td style="text-align: center;">11 (31%)</td>
+<td style="text-align: center;">1 (2.9%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">More than 3 times a day</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">9 (69%)</td>
+<td style="text-align: center;">4 (31%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Heroin injecting, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">115</td>
+<td style="text-align: center;">57 (50%)</td>
+<td style="text-align: center;">33 (29%)</td>
+<td style="text-align: center;">23 (20%)</td>
+<td style="text-align: center;">2 (1.7%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">186</td>
+<td style="text-align: center;">128 (69%)</td>
+<td style="text-align: center;">23 (12%)</td>
+<td style="text-align: center;">32 (17%)</td>
+<td style="text-align: center;">3 (1.6%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed methadone injecting, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">279</td>
+<td style="text-align: center;">165 (59%)</td>
+<td style="text-align: center;">55 (20%)</td>
+<td style="text-align: center;">54 (19%)</td>
+<td style="text-align: center;">5 (1.8%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">20 (91%)</td>
+<td style="text-align: center;">1 (4.5%)</td>
+<td style="text-align: center;">1 (4.5%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-precsribed buprenorphine injecting, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">290</td>
+<td style="text-align: center;">180 (62%)</td>
+<td style="text-align: center;">51 (18%)</td>
+<td style="text-align: center;">54 (19%)</td>
+<td style="text-align: center;">5 (1.7%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">5 (45%)</td>
+<td style="text-align: center;">5 (45%)</td>
+<td style="text-align: center;">1 (9.1%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed pharmaceutical opioid injecting, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">279</td>
+<td style="text-align: center;">170 (61%)</td>
+<td style="text-align: center;">52 (19%)</td>
+<td style="text-align: center;">52 (19%)</td>
+<td style="text-align: center;">5 (1.8%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">15 (68%)</td>
+<td style="text-align: center;">4 (18%)</td>
+<td style="text-align: center;">3 (14%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Cocaine injecting, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">286</td>
+<td style="text-align: center;">175 (61%)</td>
+<td style="text-align: center;">56 (20%)</td>
+<td style="text-align: center;">52 (18%)</td>
+<td style="text-align: center;">3 (1.0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">10 (67%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">3 (20%)</td>
+<td style="text-align: center;">2 (13%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Methamphetamine injecting, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">208</td>
+<td style="text-align: center;">128 (62%)</td>
+<td style="text-align: center;">39 (19%)</td>
+<td style="text-align: center;">38 (18%)</td>
+<td style="text-align: center;">3 (1.4%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">93</td>
+<td style="text-align: center;">57 (61%)</td>
+<td style="text-align: center;">17 (18%)</td>
+<td style="text-align: center;">17 (18%)</td>
+<td style="text-align: center;">2 (2.2%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Ever received OAT with methadone, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">1 (5.3%)</td>
+<td style="text-align: center;">12 (63%)</td>
+<td style="text-align: center;">6 (32%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">282</td>
+<td style="text-align: center;">184 (65%)</td>
+<td style="text-align: center;">44 (16%)</td>
+<td style="text-align: center;">49 (17%)</td>
+<td style="text-align: center;">5 (1.8%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Ever received OAT with buprenorphine, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">95</td>
+<td style="text-align: center;">79 (83%)</td>
+<td style="text-align: center;">2 (2.1%)</td>
+<td style="text-align: center;">12 (13%)</td>
+<td style="text-align: center;">2 (2.1%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">206</td>
+<td style="text-align: center;">106 (51%)</td>
+<td style="text-align: center;">54 (26%)</td>
+<td style="text-align: center;">43 (21%)</td>
+<td style="text-align: center;">3 (1.5%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Current OAT medication, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Methadone</td>
+<td style="text-align: center;">235</td>
+<td style="text-align: center;">180 (77%)</td>
+<td style="text-align: center;">11 (4.7%)</td>
+<td style="text-align: center;">39 (17%)</td>
+<td style="text-align: center;">5 (2.1%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Suboxone</td>
+<td style="text-align: center;">43</td>
+<td style="text-align: center;">4 (9.3%)</td>
+<td style="text-align: center;">36 (84%)</td>
+<td style="text-align: center;">3 (7.0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Subutex</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">1 (11%)</td>
+<td style="text-align: center;">7 (78%)</td>
+<td style="text-align: center;">1 (11%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Buvidal</td>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">2 (14%)</td>
+<td style="text-align: center;">12 (86%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Drugs used while on OAT, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">57</td>
+<td style="text-align: center;">31 (54%)</td>
+<td style="text-align: center;">11 (19%)</td>
+<td style="text-align: center;">11 (19%)</td>
+<td style="text-align: center;">4 (7.0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Heroin</td>
+<td style="text-align: center;">167</td>
+<td style="text-align: center;">113 (68%)</td>
+<td style="text-align: center;">22 (13%)</td>
+<td style="text-align: center;">31 (19%)</td>
+<td style="text-align: center;">1 (0.6%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Pharmaceutical opioids</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">7 (70%)</td>
+<td style="text-align: center;">2 (20%)</td>
+<td style="text-align: center;">1 (10%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Methamphetamine</td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">11 (42%)</td>
+<td style="text-align: center;">9 (35%)</td>
+<td style="text-align: center;">6 (23%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Benzodiazepines</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">12 (63%)</td>
+<td style="text-align: center;">5 (26%)</td>
+<td style="text-align: center;">2 (11%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Other</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">11 (50%)</td>
+<td style="text-align: center;">7 (32%)</td>
+<td style="text-align: center;">4 (18%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Average no. days OAT dose missed, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">None</td>
+<td style="text-align: center;">170</td>
+<td style="text-align: center;">109 (64%)</td>
+<td style="text-align: center;">26 (15%)</td>
+<td style="text-align: center;">32 (19%)</td>
+<td style="text-align: center;">3 (1.8%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">1 - 5 days</td>
+<td style="text-align: center;">96</td>
+<td style="text-align: center;">55 (57%)</td>
+<td style="text-align: center;">25 (26%)</td>
+<td style="text-align: center;">16 (17%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">&gt; 5 days</td>
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">21 (60%)</td>
+<td style="text-align: center;">5 (14%)</td>
+<td style="text-align: center;">7 (20%)</td>
+<td style="text-align: center;">2 (5.7%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Pay for OAT, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;">109</td>
+<td style="text-align: center;">63 (58%)</td>
+<td style="text-align: center;">16 (15%)</td>
+<td style="text-align: center;">29 (27%)</td>
+<td style="text-align: center;">1 (0.9%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;">192</td>
+<td style="text-align: center;">122 (64%)</td>
+<td style="text-align: center;">40 (21%)</td>
+<td style="text-align: center;">26 (14%)</td>
+<td style="text-align: center;">4 (2.1%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Site last dose collected, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Pharmacy</td>
+<td style="text-align: center;">145</td>
+<td style="text-align: center;">93 (64%)</td>
+<td style="text-align: center;">30 (21%)</td>
+<td style="text-align: center;">18 (12%)</td>
+<td style="text-align: center;">4 (2.8%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Public clinic</td>
+<td style="text-align: center;">110</td>
+<td style="text-align: center;">64 (58%)</td>
+<td style="text-align: center;">15 (14%)</td>
+<td style="text-align: center;">30 (27%)</td>
+<td style="text-align: center;">1 (0.9%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Private clinic</td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">22 (69%)</td>
+<td style="text-align: center;">5 (16%)</td>
+<td style="text-align: center;">5 (16%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">At home</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">4 (44%)</td>
+<td style="text-align: center;">5 (56%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Other</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2 (40%)</td>
+<td style="text-align: center;">1 (20%)</td>
+<td style="text-align: center;">2 (40%)</td>
+<td style="text-align: center;">0 (0%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Frequency of OAT dose collection, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Daily or several times per week</td>
+<td style="text-align: center;">240</td>
+<td style="text-align: center;">163 (68%)</td>
+<td style="text-align: center;">37 (15%)</td>
+<td style="text-align: center;">37 (15%)</td>
+<td style="text-align: center;">3 (1.3%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Weekly or less frequently</td>
+<td style="text-align: center;">61</td>
+<td style="text-align: center;">22 (36%)</td>
+<td style="text-align: center;">19 (31%)</td>
+<td style="text-align: center;">18 (30%)</td>
+<td style="text-align: center;">2 (3.3%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Travel distance to OAT collection site (km), Median (IQR)</span></td>
+<td style="text-align: center;">3 (2 - 8)</td>
+<td style="text-align: center;">3 (2 - 9)</td>
+<td style="text-align: center;">5 (2 - 10)</td>
+<td style="text-align: center;">3 (1 - 5)</td>
+<td style="text-align: center;">2 (2 - 5)</td>
+<td style="text-align: center;">NA (NA - NA)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Travel time to dosing site, n (%)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Less than 30 minutes</td>
+<td style="text-align: center;">214</td>
+<td style="text-align: center;">132 (62%)</td>
+<td style="text-align: center;">37 (17%)</td>
+<td style="text-align: center;">42 (20%)</td>
+<td style="text-align: center;">3 (1.4%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">More than 30 minutes</td>
+<td style="text-align: center;">87</td>
+<td style="text-align: center;">53 (61%)</td>
+<td style="text-align: center;">19 (22%)</td>
+<td style="text-align: center;">13 (15%)</td>
+<td style="text-align: center;">2 (2.3%)</td>
+<td style="text-align: center;">0 (0%)</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="table-s3" class="level2">
+<h2 class="anchored" data-anchor-id="table-s3">Table S3</h2>
+<!-- #### Variable selection -->
+<!-- In univariate regression, variables that return a p-value \< 0.20 are -->
+<!-- purposefully selected for inclusion in the final model. -->
+<!-- The following variables had a p-value \< 0.05 in the univariate -->
+<!-- regression: -->
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Demographic and behavioral characteristics stratified by OAT medication preference and sesults of a multivariable logistic regression with adjusted odds ratios and 95% confidence interval among participants currently receiving OAT</caption>
+<colgroup>
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th colspan="5" data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Unadjusted model
+</div></th>
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Adjusted model
+</div></th>
+</tr>
+<tr class="odd">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Variable</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">N</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Overall<br>
+(n = 296)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Methadone<br>
+(n = 185)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Buprenorphine<br>
+(n = 111)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">cOR (95% CI)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">p-value</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">aOR (95% CI)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Age, Median (IQR)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;">45 (39 - 52)</td>
+<td style="text-align: center;">46 (40 - 54)</td>
+<td style="text-align: center;">44 (39 - 51)</td>
+<td style="text-align: center;">1.01 (0.99 - 1.04)</td>
+<td style="text-align: center;">0.367</td>
+<td style="text-align: center;">1.01 (0.98 - 1.05)</td>
+<td style="text-align: center;">0.431</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Age group, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">18 - 35 years</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">36</td>
+<td style="text-align: center;">21 (58%)</td>
+<td style="text-align: center;">15 (42%)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">36 - 45 years</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">117</td>
+<td style="text-align: center;">70 (60%)</td>
+<td style="text-align: center;">47 (40%)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">&gt;45 years</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">143</td>
+<td style="text-align: center;">94 (66%)</td>
+<td style="text-align: center;">49 (34%)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Gender, n (%)</span></td>
+<td style="text-align: center;">295</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Female</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">126</td>
+<td style="text-align: center;">78 (62%)</td>
+<td style="text-align: center;">48 (38%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Male</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">169</td>
+<td style="text-align: center;">106 (63%)</td>
+<td style="text-align: center;">63 (37%)</td>
+<td style="text-align: center;">1.04 (0.64 - 1.67)</td>
+<td style="text-align: center;">0.886</td>
+<td style="text-align: center;">1.54 (0.82 - 2.90)</td>
+<td style="text-align: center;">0.178</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Level of education, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Completed less than 10 years school education</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">163</td>
+<td style="text-align: center;">102 (63%)</td>
+<td style="text-align: center;">61 (37%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Completed more than 10 years school education</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">133</td>
+<td style="text-align: center;">83 (62%)</td>
+<td style="text-align: center;">50 (38%)</td>
+<td style="text-align: center;">0.99 (0.62 - 1.60)</td>
+<td style="text-align: center;">0.976</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Income, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Other</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">261</td>
+<td style="text-align: center;">161 (62%)</td>
+<td style="text-align: center;">100 (38%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Paid</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">24 (69%)</td>
+<td style="text-align: center;">11 (31%)</td>
+<td style="text-align: center;">1.36 (0.65 - 2.99)</td>
+<td style="text-align: center;">0.431</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Homelessness, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">10 (67%)</td>
+<td style="text-align: center;">5 (33%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">281</td>
+<td style="text-align: center;">175 (62%)</td>
+<td style="text-align: center;">106 (38%)</td>
+<td style="text-align: center;">0.83 (0.25 - 2.39)</td>
+<td style="text-align: center;">0.733</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Incarceration, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">124</td>
+<td style="text-align: center;">79 (64%)</td>
+<td style="text-align: center;">45 (36%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes &gt; 6 months</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">29</td>
+<td style="text-align: center;">16 (55%)</td>
+<td style="text-align: center;">13 (45%)</td>
+<td style="text-align: center;">0.70 (0.31 - 1.61)</td>
+<td style="text-align: center;">0.395</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes &lt; 6 months</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">143</td>
+<td style="text-align: center;">90 (63%)</td>
+<td style="text-align: center;">53 (37%)</td>
+<td style="text-align: center;">0.97 (0.59 - 1.59)</td>
+<td style="text-align: center;">0.896</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Chronic pain, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">177</td>
+<td style="text-align: center;">110 (62%)</td>
+<td style="text-align: center;">67 (38%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">119</td>
+<td style="text-align: center;">75 (63%)</td>
+<td style="text-align: center;">44 (37%)</td>
+<td style="text-align: center;">1.04 (0.64 - 1.68)</td>
+<td style="text-align: center;">0.878</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Heroin use, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">104</td>
+<td style="text-align: center;">53 (51%)</td>
+<td style="text-align: center;">51 (49%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">192</td>
+<td style="text-align: center;">132 (69%)</td>
+<td style="text-align: center;">60 (31%)</td>
+<td style="text-align: center;">2.12 (1.30 - 3.47)</td>
+<td style="text-align: center;">0.003</td>
+<td style="text-align: center;">1.08 (0.54 - 2.09)</td>
+<td style="text-align: center;">0.830</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed methadone use, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">260</td>
+<td style="text-align: center;">158 (61%)</td>
+<td style="text-align: center;">102 (39%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">36</td>
+<td style="text-align: center;">27 (75%)</td>
+<td style="text-align: center;">9 (25%)</td>
+<td style="text-align: center;">1.94 (0.91 - 4.52)</td>
+<td style="text-align: center;">0.103</td>
+<td style="text-align: center;">1.12 (0.46 - 3.05)</td>
+<td style="text-align: center;">0.819</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed buprenorphine use, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">290</td>
+<td style="text-align: center;">183 (63%)</td>
+<td style="text-align: center;">107 (37%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">2 (33%)</td>
+<td style="text-align: center;">4 (67%)</td>
+<td style="text-align: center;">0.29 (0.04 - 1.52)</td>
+<td style="text-align: center;">0.160</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Non-prescribed pharmaceutical opioid use, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">261</td>
+<td style="text-align: center;">160 (61%)</td>
+<td style="text-align: center;">101 (39%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">25 (71%)</td>
+<td style="text-align: center;">10 (29%)</td>
+<td style="text-align: center;">1.58 (0.75 - 3.57)</td>
+<td style="text-align: center;">0.248</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Cocaine use, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">277</td>
+<td style="text-align: center;">172 (62%)</td>
+<td style="text-align: center;">105 (38%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">13 (68%)</td>
+<td style="text-align: center;">6 (32%)</td>
+<td style="text-align: center;">1.32 (0.51 - 3.86)</td>
+<td style="text-align: center;">0.583</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Methamphetamine use, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">177</td>
+<td style="text-align: center;">115 (65%)</td>
+<td style="text-align: center;">62 (35%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">119</td>
+<td style="text-align: center;">70 (59%)</td>
+<td style="text-align: center;">49 (41%)</td>
+<td style="text-align: center;">0.77 (0.48 - 1.24)</td>
+<td style="text-align: center;">0.284</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Recent benzodiazepine use, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">153</td>
+<td style="text-align: center;">95 (62%)</td>
+<td style="text-align: center;">58 (38%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">143</td>
+<td style="text-align: center;">90 (63%)</td>
+<td style="text-align: center;">53 (37%)</td>
+<td style="text-align: center;">1.04 (0.65 - 1.66)</td>
+<td style="text-align: center;">0.881</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Ever received OAT with methadone, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">1 (5%)</td>
+<td style="text-align: center;">18 (95%)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">277</td>
+<td style="text-align: center;">184 (66%)</td>
+<td style="text-align: center;">93 (34%)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Ever received OAT with buprenorphine, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">93</td>
+<td style="text-align: center;">79 (85%)</td>
+<td style="text-align: center;">14 (15%)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">203</td>
+<td style="text-align: center;">106 (52%)</td>
+<td style="text-align: center;">97 (48%)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Current OAT medication, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Methadone</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">230</td>
+<td style="text-align: center;">180 (78%)</td>
+<td style="text-align: center;">50 (22%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Buprenorphine</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">66</td>
+<td style="text-align: center;">5 (8%)</td>
+<td style="text-align: center;">61 (92%)</td>
+<td style="text-align: center;">0.02 (0.01 - 0.05)</td>
+<td style="text-align: center;">&lt;0.001</td>
+<td style="text-align: center;">0.02 (0.01 - 0.06)</td>
+<td style="text-align: center;">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Drugs used while on OAT, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">53</td>
+<td style="text-align: center;">31 (58%)</td>
+<td style="text-align: center;">22 (42%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Heroin</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">166</td>
+<td style="text-align: center;">113 (68%)</td>
+<td style="text-align: center;">53 (32%)</td>
+<td style="text-align: center;">1.51 (0.80 - 2.85)</td>
+<td style="text-align: center;">0.202</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Pharmaceutical opioids</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">7 (70%)</td>
+<td style="text-align: center;">3 (30%)</td>
+<td style="text-align: center;">1.66 (0.41 - 8.34)</td>
+<td style="text-align: center;">0.498</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Methamphetamine</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">11 (42%)</td>
+<td style="text-align: center;">15 (58%)</td>
+<td style="text-align: center;">0.52 (0.20 - 1.34)</td>
+<td style="text-align: center;">0.178</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Benzodiazepines</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">12 (63%)</td>
+<td style="text-align: center;">7 (37%)</td>
+<td style="text-align: center;">1.22 (0.42 - 3.73)</td>
+<td style="text-align: center;">0.722</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Other</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">11 (50%)</td>
+<td style="text-align: center;">11 (50%)</td>
+<td style="text-align: center;">0.71 (0.26 - 1.94)</td>
+<td style="text-align: center;">0.501</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Pay for OAT, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">No</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">108</td>
+<td style="text-align: center;">63 (58%)</td>
+<td style="text-align: center;">45 (42%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Yes</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">188</td>
+<td style="text-align: center;">122 (65%)</td>
+<td style="text-align: center;">66 (35%)</td>
+<td style="text-align: center;">1.32 (0.81 - 2.15)</td>
+<td style="text-align: center;">0.262</td>
+<td style="text-align: center;">1.24 (0.38 - 4.03)</td>
+<td style="text-align: center;">0.725</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Site last dose collected, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Pharmacy</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">141</td>
+<td style="text-align: center;">93 (66%)</td>
+<td style="text-align: center;">48 (34%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Public clinic</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">109</td>
+<td style="text-align: center;">64 (59%)</td>
+<td style="text-align: center;">45 (41%)</td>
+<td style="text-align: center;">0.73 (0.44 - 1.23)</td>
+<td style="text-align: center;">0.241</td>
+<td style="text-align: center;">0.88 (0.26 - 3.03)</td>
+<td style="text-align: center;">0.843</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Private clinic</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">22 (69%)</td>
+<td style="text-align: center;">10 (31%)</td>
+<td style="text-align: center;">1.14 (0.51 - 2.68)</td>
+<td style="text-align: center;">0.763</td>
+<td style="text-align: center;">0.96 (0.36 - 2.75)</td>
+<td style="text-align: center;">0.930</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">At home</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">4 (44%)</td>
+<td style="text-align: center;">5 (56%)</td>
+<td style="text-align: center;">0.41 (0.10 - 1.63)</td>
+<td style="text-align: center;">0.202</td>
+<td style="text-align: center;">1.93 (0.20 - 18.5)</td>
+<td style="text-align: center;">0.572</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Other</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2 (40%)</td>
+<td style="text-align: center;">3 (60%)</td>
+<td style="text-align: center;">0.34 (0.04 - 2.14)</td>
+<td style="text-align: center;">0.251</td>
+<td style="text-align: center;">0.21 (0.02 - 2.05)</td>
+<td style="text-align: center;">0.159</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Frequency of OAT dose collection, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Daily or several times per week</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">237</td>
+<td style="text-align: center;">163 (69%)</td>
+<td style="text-align: center;">74 (31%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Weekly or less frequently</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">59</td>
+<td style="text-align: center;">22 (37%)</td>
+<td style="text-align: center;">37 (63%)</td>
+<td style="text-align: center;">0.27 (0.15 - 0.49)</td>
+<td style="text-align: center;">&lt;0.001</td>
+<td style="text-align: center;">0.43 (0.17 - 1.08)</td>
+<td style="text-align: center;">0.067</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Travel distance to OAT collection site (km), Median (IQR)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;">3 (2 - 8)</td>
+<td style="text-align: center;">3 (2 - 9)</td>
+<td style="text-align: center;">3 (2 - 8)</td>
+<td style="text-align: center;">1.00 (0.98 - 1.02)</td>
+<td style="text-align: center;">0.646</td>
+<td style="text-align: center;">1.01 (0.98 - 1.04)</td>
+<td style="text-align: center;">0.536</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style=" font-weight: bold;    ">Travel time to dosing site, n (%)</span></td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Less than 30 minutes</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">211</td>
+<td style="text-align: center;">132 (63%)</td>
+<td style="text-align: center;">79 (37%)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">More than 30 minutes</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">85</td>
+<td style="text-align: center;">53 (62%)</td>
+<td style="text-align: center;">32 (38%)</td>
+<td style="text-align: center;">0.99 (0.59 - 1.68)</td>
+<td style="text-align: center;">0.974</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+
+
 </div>
 </div>
 </section>

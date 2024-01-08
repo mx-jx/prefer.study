@@ -134,6 +134,7 @@ filters:
   - ../templates/pagebreak.lua
 # bibliography: references.bib
 # csl: "../templates/international-journal-of-drug-policy.csl" # Insert path for the bib-style
+css: "~/templates/custom.css"
 abstract: |
     **Background:** People who use opioids from an unregulated drug supply are increasingly exposed to related adverse social and health outcomes. Opioid agonist therapy (OAT) is effective in mitigating adverse outcomes, with individual preference identified as key to enhancing treatment. We examined OAT preferences and associated factors in a national sample of people who regularly use opioids. **Methods:** In this cross-sectional study, 400 people were enrolled between October 2020-April 2021. Participants completed an interviewer-administered questionnaire with questions on sociodemographic, behavioural, drug use- and treatment-related characteristics. Multivariable logistic regression was used to evaluate factors associated with treatment preferences. **Results:** Among all participants (mean age 45, 42% female), X%  preferred OAT, with X% and X% reporting a preference for methadone and buprenorphine respectively. Among those who reported a preference for OAT, X% (n=X) preferred metahdone, while X% (n=X) preferred buprenorphine. participants who preferred methadone were more likely to have ever received OAT with methadone, and had used heroin (aOR X.XX, 95%CI:X.XX, X.XX) and other pharmaceutical opioids in the past month(aOR X.XX, 95%CI:X.XX, X.XX). Participants who preferred buprenorphine were more likely to have ever received OAT with burpenorphine (aOR X.XX, 95%CI:X.XX, X.XX). Among participants currently on OAT (n=317), X% in receipt of methadone and X% of buprenorphine were prescribed their preferred medication. Participants who preferred methadone were more likely to be receiving OAT with the same medication (aOR X.XX, 95%CI:X.XX, X.XX), had used and heroin (aOR X.XX, 95%CI:X.XX, X.XX) and other pharmaceutical opioids in the prior month (aOR X.XX, 95%CI:X.XX, X.XX). Participants who preferred buprenorphine were more likely to be currently receiving burpenorphine (aOR X.XX, 95%CI:X.XX, X.XX). **Conclusions:** Among people who regularly used opioids, most preferred to receive OAT with methadone and those currently receiving OAT were prescribed their preferred medication. Providers that do not offer a range of OAT and restrict choice of preferred medication risk negatively impacting treatment outcomes.
 keywords: |
@@ -156,7 +157,7 @@ Highlights: `r rmarkdown::metadata$highlights`
 
 <!-- The actual document text starts here: -->
 
-# Introduction
+# Introduction {#sec-intro}
 
 People who use opioids from the unregulated market are increasingly
 exposed to related social and health harms [@milaney2022;
@@ -316,7 +317,7 @@ interviews took approximately 30-45 minutes to complete, and
 participants were reimbursed AUD\$40 for their time and out-of-pocket
 expenses.
 
-### Outcomes {#sec-outcomes}
+## Outcomes {#sec-outcomes}
 
 The primary outcome was a preference for opioid agonist therapy with
 methadone, which was assessed by asking the question "*Of all the
@@ -424,48 +425,635 @@ collaborated to design the study, monitor study conduct, and perform the
 statistical analysis. X, X and X were responsible for the decision to
 submit the study for publication.
 
-## Results {#sec-results}
+# Results {#sec-results}
 
-# Methods
+```{r, include = FALSE}
+knitr::opts_chunk$set(echo=FALSE, include = FALSE, fig.align = "center")
 
-# Results
+```
 
-<!-- Here's some example analysis code: -->
+```{r, echo = FALSE}
+# Load the packages required for the analysis. If packages haven't been installed yet, use install.packages() followed by the library() function.
+# 
+# Another way to load packages is through the pacman package using the p_load() function.
 
-```{r}
-#| label: get-data
-#| eval: false
-# Note the path that we need to use to access our data files when rendering this document
-my_data <- read.csv(here::here('analysis/data/raw_data/my_csv_file.csv'))
+pacman::p_load(
+   pacman, 
+   ggplot2,    # plotting and graphing results
+   rlang,      # read in excel files
+   forcats,    # read in excel files
+   broom,      # tidy code
+   readxl,     # read in excel files
+   pacman,     # loading and reading in packages
+   rio,        # importing data  
+   here,       # relative file pathways  
+   janitor,    # data cleaning and tables
+   lubridate,  # working with dates
+   matchmaker, # dictionary-based cleaning
+   epikit,     # age_categories() function
+   tidyverse,  # data management and visualization
+   gtsummary,  # logistic regression and plotting results
+   gt,         # for gtsummary 
+   flextable,  # table creation and manipulating
+   car,        # data management and visualization
+   readstata13,# read in Stata files
+   finalfit,   # logistic regression and plotting results
+   survminer,  # forest plots
+   easystats, 
+   BiocManager, 
+   survival, 
+   forestplot, 
+   rticles,     # templates for scientific journal articles in RMarkdown
+   jtools, 
+   corrplot, 
+   # bstfun, 
+   # ggforestplot, 
+   codebookr,
+   codebook,
+   sjlabelled, 
+   likert, 
+   kableExtra, 
+   haven,
+   here,
+   flexdashboard, # dashboard versions of R Markdown reports
+   plotly, # interactive plots
+   shiny, 
+   webshot, 
+   webshot2, 
+   grateful, 
+   spelling
+   )
+
+# install.packages("webshot")
+# webshot::install_phantomjs(force = TRUE)
+
+```
+
+```{r, message=FALSE}
+  load(here::here("analysis/data/derived_data", "prefer_tables_working.rda"))
+```
+
+```{r, message=FALSE}
+load(
+  here::here("analysis/data/derived_data", "prefer_tables_working.rda"))
+```
+
+```{r, message=FALSE}
+load(
+  here::here("analysis/data/derived_data", "prefer_logistic_working.rda"))
+```
+
+```{r, message=FALSE}
+load(
+  here::here("analysis/data/derived_data", "prefer_subset_working.rda"))
+```
+
+```{r, message=FALSE}
+load(
+  here::here("analysis/data/derived_data", "prefer_working.rda"))
 ```
 
 ```{r}
-#| label: fig-demo-plot
-#| fig-cap: "A plot of random numbers"
-plot(rnorm(10))
+p <- p %>%
+mutate(prefer.factor = fct_relevel(prefer.factor,"Methadone", "Buprenorphine"))
 ```
 
-@fig-demo-plot shows how we can have a caption and cross-reference for a plot. Note that figure label and cross-references must both be prefixed with `fig-`
+## Participant Characteristics {#sec-participants}
+
+Overall, 400 participants were enrolled (@fig-profile). The median age
+was 45 years, 41% (n=162) were female, 48% (n=193) incarcerated in the
+last six months and 42% (n=169) were currently living with chronic pain
+(Table 1).
+
+At enrollment, 78% (n=310) had injected drugs in the month prior, with
+45% (n=141 of 310) having injected drugs \>daily. Most participants were
+treatment experienced (n = 344; 87%), with 91% (n=X) with most having
+received methadone (n = 319; 91%) compared to buprenorphine (n = 344;
+87%) (@tbl-s1). Among those who injected, commonly injected drugs in the
+prior month included heroin (90%), non-prescribed methadone (13%%),
+non-prescribed buprenorphine (10%), other non-prescribed pharmaceutical
+opioids (X%), methamphetamine (X%), cocaine (X%) and benzodiazepines
+(X%)
+
+Of the participants currently receiving OAT, 77% (n=243) were prescribed
+methadone, 15% (n=47) buprenorphine-naloxone (Suboxone), 6% (n=18)
+long-acting injectable buprenorphine (Buivdal or Sublocade) 3% (n=9),
+buprenorphine (Subutex) and X% (n=X) were not in treatment. Among those
+receving treatment, most collected their last dose at pharmacies (n=150;
+47%) or public clinics (n=111; 35%), with just over half (n=177; 56%)
+travelling less than five kilometers (@tbl-s2).
+
+```{r, echo=FALSE, include = TRUE, eval=TRUE}
+
+#| label: tbl-participants
+
+p.relevel <- p %>%
+mutate(agegroup = case_when(
+    # criteria            # new value if TRUE
+    age < 36              ~ "18 - 35 years",
+    age >= 36 & age < 46  ~ "36 - 45 years",
+    age >= 46   ~ ">45 years"
+    )%>%
+         fct_relevel("18 - 35 years",
+                      "36 - 45 years",
+                      ">45 years" )%>%
+          ff_label("Age group"))
+
+tbl.pts.subset <-  
+p.relevel %>% 
+  tbl_summary(include = c(age, age.group, edu.factor, gender.mf, income.yn,
+                          homeless.factor, prison.yn, chronicpain.yn, heroin.month, nonmethadone.month,
+                           nonsuboxone.month, 
+                          otheropi.month, 
+                          cocaine.month, meth.month, benzo.month, oat.yn, methadoneever.yn, bupeever.yn 
+                          ),
+              label = list(age ~ "Age",
+                           age.group ~ "Age group",
+                           edu.factor ~ "Formal education",
+                           gender.mf ~ "Gender",
+                           prison.yn ~ "Ever incarcerated", 
+                           homeless.factor ~ "Currently homeless",
+                           income.yn ~ "Currently employed",
+                           chronicpain.yn ~ "Chronic pain",
+                           heroin.month ~ "Heroin use",
+                           nonmethadone.month ~ "Non-prescribed methadone use", 
+                           nonsuboxone.month ~ "Non-prescribed buprenorphoine use",
+                          
+                           otheropi.month ~ "Non-prescribed pharmaceutical opioid use,", 
+                           cocaine.month ~ "Cocaine use", 
+                           meth.month ~ "Methamphetamine use", 
+                           benzo.month ~ "Non-prescribed benzodiazepine use",
+                           oat.yn ~ "Currently receiving OAT", 
+                           methadoneever.yn ~ "Ever received OAT with methadone",
+                           bupeever.yn ~ "Ever received OAT with methadone"
+                          ),missing = "no",
+              statistic = all_continuous() ~ ("{median} ({p25} - {p75})")) %>%
+  add_stat_label()%>%
+  modify_footnote(update = everything() ~ NA, abbreviation = FALSE) %>%
+  modify_header(
+    stat_0 = "**Enrolled** \n **(n = {N})**",
+    )%>%
+ bold_labels()
+
+
+tbl.pts.subset.kable <- tbl.pts.subset %>% 
+   gtsummary::as_kable_extra(
+    format = "html",
+    booktabs = TRUE,
+    longtable = TRUE,
+    linesep = "",
+    caption="Table 1. Demographic and behavioural characteristics of all participants enrolled in this study (n=400)")%>%
+  kableExtra::kable_styling(
+      position = "left",
+      latex_options = c("striped", "repeat_header"),
+      stripe_color = "gray!15"
+    )
+
+tbl.pts.subset.kable
+
+```
+
+## Preferences for OAT {#sec-preferences}
+
+Among all participants (n=400), 91% (n=366) would prefer to receive OAT,
+with X% (n=352) preferring either methadone or any formulation of
+buprenorphine and 4% (n=14) choosing treatment, but having no preferred
+medication. Methadone was preferred by 54% (n=216) and buprenorphine by
+34% (n=136).Among those who preferred buprenorphine, sublingual
+buprenorphine-naloxone was preferred by 50% (n=68) and long-acting
+injectable buprenorphine by 50% (n=68). A summary of sociodemographic
+characteristics stratified by preference is presented in @tbl-s1. Among
+participants currently receiving OAT (n=313), 95% (n=296) preferred
+either oral methadone or any formulation of buprenorphine, 2% (n=5)
+would choose treatment, but had no preferred medications and 4% (n=12)
+would prefer not to receive treatment. Methadone was preferred by 60%
+(n=185), oral and sublingual by 18% (n=56) and long-acting injectable
+buprenorphine by 18% (n=55). A summary of sociodemographic
+characteristics of people currently receiving OAT stratified by
+preference is presented in @tbl-s2.
+
+![Study profile](figures/study_profile01.png){#fig-profile}
+
+```{r, include = FALSE, echo=F, message=FALSE, eval=TRUE}
+p <- p %>%
+  mutate(prefer.factor = fct_relevel(prefer.factor, "Methadone", "Buprenorphine"))
+
+stratified.model <-  
+  p %>% 
+  tbl_summary(by = prefer.factor, 
+              include = c(age, agegroup, 
+                          gender.mf, edu.factor,
+                          income.factor.yn, homeless.factor.yn,         
+                          prison.factor, chronicpain.factor.yn,
+                          heroin.month.factor,  
+                          nonmethadone.month.factor,
+                          nonbupe.month.factor, 
+                          cocaine.month.factor, meth.month.factor, 
+                          benzo.month.factor,otheropi.month.factor,
+                          oat.yn.f, methadoneever.yn, bupeever.factor
+              ),
+              label = c(age ~ "Age",
+                        agegroup ~ "Age group",
+                        gender.mf ~ "Gender",
+                        homeless.factor.yn ~ "Currently in stale housing",
+                        otheropi.month.factor ~ "Non-prescribed pharmaceutical opioid use",
+                        methadoneever.yn ~ "Ever received OAT with methadone",
+                           bupeever.factor ~ "Ever received OAT with buprenorphine"
+                          ),
+              type = all_categorical()~"categorical",
+              missing = "no",
+              percent = "row",
+              statistic = all_continuous() ~ ("{median} ({p25} - {p75})")) %>%
+  add_stat_label()%>%
+  add_overall(statistic = list(all_continuous()  ~ "{median} ({p25} - {p75})",
+                               all_categorical() ~ "{n}")) %>% 
+  modify_footnote(update = everything() ~ NA, abbreviation = FALSE) %>%
+  modify_header(
+    stat_0 = '**Enrolled** \n **(n = {n})**',
+    stat_1 = '**Methadone** \n **(n = {n})**',
+    stat_2 = '**Buprenorphine** \n **(n = {n})**'
+  ) %>% 
+  bold_labels()
+ 
+
+stratified.model.kable <- stratified.model %>% 
+   gtsummary::as_kable_extra(
+    format = "html",
+    booktabs = TRUE,
+    longtable = TRUE,
+    linesep = "",
+    caption="Demographic and behavioural characteristics of all participants stratified by preference for methadone or buprenorphine (n=352)")%>%
+  kableExtra::kable_styling(
+      position = "left",
+      latex_options = c("striped", "repeat_header"),
+      stripe_color = "gray!15"
+    )
+
+stratified.model.kable
+
+```
+
+```{r, include = F, echo=F, message=FALSE, eval=TRUE}
+p <- p %>%
+mutate(prefer.factor = fct_relevel(prefer.factor, "Buprenorphine", "Methadone"))
+```
+
+```{r, include = F, echo=F, message=FALSE, eval=TRUE}
+subset_cor <-
+  p %>%
+  dplyr::select(age, gender.mf,edu.factor, income.factor.yn, homeless.factor.yn,  
+                prison.factor, chronicpain.factor.yn, heroin.month.factor, 
+                nonmethadone.month.factor,
+                nonbupe.month.factor, otheropi.month.factor, 
+                cocaine.month.factor, meth.month.factor, benzo.month.factor, oat.yn.f, methadoneever.yn, bupeever.factor, prefer.factor) %>%
+  tbl_uvregression(
+    method = glm,
+    y = prefer.factor, 
+    label = list(age ~ "Age",
+                 gender.mf ~ "Gender",
+                 otheropi.month.factor ~ "Non-prescribed pharmaceutical opioid use",
+                 homeless.factor.yn ~ "Currently in stale housing",
+                 methadoneever.yn ~ "Ever received OAT with methadone",
+                 bupeever.factor ~ "Ever received OAT with buprenorphine"),
+    method.args = list(family = binomial),
+    exponentiate = TRUE,
+    hide_n = TRUE,
+    pvalue_fun = function(x) style_pvalue(x, digits = 3)
+  ) %>%
+  modify_header(
+    label = '**Variable**',
+    estimate = '**cOR**',
+    ci = '**95% CI**',
+    p.value = '**p-value**'
+  ) %>%
+  modify_footnote(update = everything() ~ NA, abbreviation = TRUE) %>%
+  modify_table_styling(
+    column = estimate,
+    rows = !is.na(estimate),
+    cols_merge_pattern = "{estimate} ({conf.low} - {conf.high})"
+  ) %>%
+  modify_header(estimate ~ "**cOR (95% CI)**") %>%
+  modify_table_styling(label = '**Enrolled** \n **(n = {n})**') %>%
+  modify_column_hide(c(ci)) %>% 
+  bold_labels()
+
+subset_cor.kable <- subset_cor %>%
+   gtsummary::as_kable_extra(
+    format = "html",
+    booktabs = TRUE,
+    longtable = TRUE,
+    linesep = "",
+    caption="Results of a univariate logistic regression with crude odds ratios and 95% confidence intervals")%>%
+  kableExtra::kable_styling(
+      position = "left",
+      latex_options = c("striped", "repeat_header"),
+      stripe_color = "gray!15"
+    )
+
+subset_cor.kable
+
+```
+
+```{r, include = F, echo=F, message=FALSE, eval=TRUE}
+subset_mod_final <- glm(prefer.factor ~ age + gender.mf +
+heroin.month.factor + nonmethadone.month.factor + nonbupe.month.factor +
+otheropi.month.factor + methadoneever.yn + bupeever.factor, data =
+p, family = binomial)
+
+
+model.final <- tbl_regression(subset_mod_final, exponentiate = TRUE,  
+                              label = 
+                                list(age ~ "Age",
+                                    gender.mf ~ "Gender",
+                                    otheropi.month.factor ~ "Non-prescribed pharmaceutical opioid use",
+                                    
+                                    methadoneever.yn ~ "Ever received OAT with methadone",
+                  bupeever.factor ~ "Ever received OAT with buprenorphine"
+                  ),
+pvalue_fun = function(x) style_pvalue(x, digits = 3))%>%
+# pvalue_fun = ~style_sigfig(., digits = 4)                              )%>%
+  modify_header(
+    label = '**Variable**',
+    estimate = '**aOR**',
+    ci = '**95% CI**',
+    p.value = '**p-value**'
+  ) %>%
+  modify_footnote(update = everything() ~ NA, abbreviation = TRUE) %>%
+  modify_table_styling(
+    column = estimate,
+    rows = !is.na(estimate),
+    cols_merge_pattern = "{estimate} ({conf.low} - {conf.high})"
+  ) %>%
+  modify_header(estimate ~ "**aOR (95% CI)**") %>%
+  modify_column_hide(c(ci)) %>% 
+  bold_labels() %>%
+  modify_footnote(everything() ~ NA, abbreviation = TRUE)
+
+kable.final <- model.final %>% 
+   gtsummary::as_kable_extra(
+    format = "html",
+    booktabs = TRUE,
+    longtable = TRUE,
+    linesep = "",
+    caption="Results of a multivariable logistic regression with adjusted odds ratios and 95% confidence intervals")%>%
+  kableExtra::kable_styling(
+      position = "left",
+      latex_options = c("striped", "repeat_header"),
+      stripe_color = "gray!15"
+    )
+
+kable.final
+
+```
+
+```{r, echo=FALSE, include=TRUE}
+table_merged <-
+  tbl_merge(
+    tbls = list(stratified.model, subset_cor, model.final),
+    tab_spanner = c("** **", "**Unadjusted model**", "**Adjusted model**")) %>%
+  modify_header(label = "**Variable**") %>% # update the column header
+  modify_footnote(everything() ~ NA)
+
+table_merged.kable <- table_merged %>%
+   gtsummary::as_kable_extra(
+    format = "html",
+    booktabs = TRUE,
+    longtable = TRUE,
+    linesep = "", 
+    caption="Final model including crude odds ratios (cOR) and adjusted odds ratios (aOR)")%>%
+  kableExtra::kable_styling(
+      position = "left",
+      latex_options = c("striped", "repeat_header"),
+      stripe_color = "gray!15"
+    )
+#     scroll_box(
+#   height = "50%",
+#   # width = "100%",
+#   box_css = "border: 1px solid #ddd; padding: 5px; ",
+#   extra_css = NULL,
+#   fixed_thead = TRUE
+# )
+
+table_merged.kable
+
+```
 
 ```{r}
-#| label: demo-inline-code
-#| echo: false
-x <- round(pi, 2)
+table_merged.kable
 ```
 
-Here is an example of inline code `r x` in the middle of a sentence.
+## Factors associated with OAT preference {#sec-factors}
 
-# Discussion
+Overall, participants who preferred methadone were more likely to have
+ever received OAT with methadone, and had used heroin (aOR X.XX,
+95%CI:X.XX, X.XX) and other pharmaceutical opioids in the month prior
+(aOR X.XX, 95%CI:X.XX, X.XX) (@fig-forest). Participants who preferred
+buprenorphine were more likely to have ever received OAT with
+burpenorphine (aOR X.XX, 95%CI:X.XX, X.XX).
 
-# Conclusion
+![Forest plot of sociodemographic and drug use-related factors associations with a preference for methadone]("../figures/forest_plot_all.png"){#fig-forest}
 
-# Acknowledgements
+Participants who were currently receiving OAT and who preferred
+methadone were more likely to have ever received OAT with methadone, and
+had used heroin (aOR X.XX, 95%CI:X.XX, X.XX) and other pharmaceutical
+opioids in the past month (aOR X.XX, 95%CI:X.XX, X.XX) (@fig-forest).
+Participants who preferred buprenorphine were more likely to have ever
+received OAT with burpenorphine (aOR X.XX, 95%CI:X.XX, X.XX).
+
+![Forest plot of sociodemographic and drug use-related factors associations with a preference for methadone among participants currently receiving OAT]("../figures/forest_plot_oat.png"){#fig-forest_oat}
+
+# Discussion {#sec-discuss}
+
+Both short- and long-acting formulations have been rigorously studied
+(Mattick et al., 2014; Nielsen et al., 2016; Sordo et al., 2017), the
+decision for one formulation over another is largely preference
+sensitive, a choice that depends on patients' preferences and their
+individual values (Keirns & Goold, 2009). In this study, we offer
+additional insight into preferences for OATAlthough previous studies
+have explored OAT preferences using small samples from single cities or
+recruitment sites [@bailey2013; @ridge2009; @pinto2010], within specific
+populations [@kaplowitz2022] and investigate specific factors
+[@muthulingam2023] this study builds on this previous work by examining
+sociodemographic, behavioural and clinical factors associated with
+preferences for OAT in a national sample of people who regularly use
+opioids. Most preferred OAT, whereas among those who had a stated
+preference for one type of medication, two thirds preferred methadone,
+with an equal number of the remaining participants preferring oral and
+sublingual buprenorphine (i.e. monobuprenorphine and
+buprenorphine-naloxone) or long-acting injectable buprenorphine,
+respectively. Those who preferred methadone were significantly more
+likely to have ever received treatment with methadone, and recently used
+heroin and non-pharmaceutical opioids. Among participants currently in
+treatment, almost all were receiving their preferred therapies. Despite
+limitations on the statistical power to investigate preferences for
+short-acting versus long-acting injectable buprenorphine, this study
+provides important insights into the factors associated with preferred
+OAT and offers guidance in clinical decision making for the management
+and mitigation of drug-related risks among people who regularly use
+opioids.
+
+Most participants preferred OAT. This is consistent with other studies
+[@bailey2013; @uebelacker2016] who found that among people in opioid
+withdrawal management, 63% - 78% would choose OAT following withdrawal.
+The 9% (n=34) who had a preference for no treatment in this study is
+less than other studies, such as Bailey [@bailey2013], who in a survey
+of 372 opioid-dependent people undergoing inpatient detox found that 22%
+(n=82) would choose not to receive OAT. In addition, [@saunders2020]'s
+qualitative study of 40 people who used opioids that one-third had a
+preference for not receiving OAT. The choice of whether to choose OAT is
+based on several individual and structural-level factors. In Australia,
+treatment programs in the public sector are characterised by daily
+supervised dosing, out-of-pocket cost and small windows in which doses
+of daily medication can be dispensed [@hall2023; @komalasari2021]. Those
+choosing to not receive OAT often list the onerous requirements of daily
+supervised dosing as too demanding [@crawford2013], experiences of
+stigma, discrimination and structural violence associated with treatment
+[@treloar2022], perceptions of replacing one drug for another
+[@frank2020], distrust in the the motives of pharmaceutical companies
+and prescribers [@saunders2020], and misalignment with personal pursuits
+of well-being, bodily autonomy and positive treatment outcomes
+[@mayock2021; @carlisle2023] as reasons for not choosing to enroll on or
+discontinue treatment [@clay2023].
+
+A larger proportion of participants preferred methadone over
+formulations of buprenorphine. This finding is consistent with other
+studies, including [@pinto2010] where among 361 opiod-dependent
+individuals, 63% (n=227) patients chose methadone and 37% (n=134)
+buprenorphine. However, in contrast, [@uebelacker2016], in a study of
+people in opioid withdrawal management, found that more people preferred
+buprenorphine over methadone following withdrawal, with 18% (n=68)
+stating a preference for methadone, 28% (n=104) buprenorphine and 32%
+(n=118) extended-release naltrexone - which is currently not registered
+for the management of opioid use in Australia. These inconsistent
+findings have been noted by others [@neale2018; @rolland2021;
+@neale2019]. Individual preferences for treatment with these medications
+are multifaceted and influenced by perceived effectiveness, privacy
+concerns, autonomy, convenience, previous treatment experiences, and
+side effect profiles.
+
+Among those with a preference for buprenorphine, an equal number of
+participants preferred short-acting buprenorphine (oral or sublingual
+monobuprenorphine and buprenorphine-naloxone) as long-acting injectable
+buprenorphine. Consistent with this study, [@uebelacker2016]found that
+among X people, 104 (28%) preferred oral or sublingual buprenorphine and
+118 (32%) preferred XR-NTX. A previous study by [@kenney2018] in the
+United States found that in of X, 55% of people stated they preferred
+buprenorphine over other formulations and of these, 49% preferred daily
+oral formulations and 23% preferred a weekly or monthlybuprenorphine.
+dose of long-acting injectable injection. (Paragraph is incomplete - to
+be written).
+
+Participants who had previous experience with receiving methadone were
+more likely to prefer methadone, consistent with several studies that
+identify prior treatment experience are a strong predictor of treatment
+preference [@yarborough2016; @pinto2010; @gryczynski2013]. Findings from
+Yarborough [@yarborough2016]'s qualitative study provides insight into
+this result, with participants describing how negative experiences with
+methadone (including non-prescribed use) led them to consider
+buprenorphine. Likewise, patients described how experiences with
+buprenorphine influenced their decision to choose methadone experience
+with buprenorphine treatment was related to an increased likelihood of
+being prescribed buprenorphine. In Ridge [@ridge2009]'s findings, the
+odds of being prescribed buprenorphine during the current treatment
+episode were about 12 times greater for those patients who had previous
+experience of being treated with buprenorphine. In contrast, prior
+treatment with oral methadone was not related to any increased
+probability of receiving methadone treatment. Qualitative studies
+suggest that client preference for buprenorphine and methadone varies,
+and is influenced by peer attitudes, prior treatment experience and
+clinic dispensing practices. In a second study analyzing factors related
+to patient preference for buprenorphine or methadone among 190
+opioid-dependent people seeking OAT, the odds of being prescribed
+buprenorphine were three times greater among those reporting a
+preference for it; similarly, the odds of receiving methadone were twice
+as great among those requesting methadone [@ridge2009].
+
+Among participants currently receiving OAT, most were receiving their
+preferred therapy, with X% in receipt of methadone and X% of prescribed
+buprenorphine having a preference for the same treatment. Limited
+studies have investigated treatment outcomes associated with receipt of
+preferred therapy, however, extensive literature on client participation
+in medication decision making demostrates that incorporating client
+preference leads to higher rates of retention and related positive
+outcomes [@fallah2015; @friedrichs2016; @gilman2018; @gryczynski2013;
+@joosten2008]. Currently, available formulations in Australia exclude
+several formulations and modes of devlivery that are available in other
+countries. For example, injectable opioid agonist therapy (iOAT) with
+hydromorphone or diamorphine has shown promise as a treatment for those
+who have not experienced the desired outcomes with traditional therapies
+treatments (reference). Despite not currently an option in Australia, a
+clinical trial investigating iOAT with hydromorphone is currently
+underway. Further, Nielsen [@nielsen2021] found that in a sample of
+people who regularly use opioids in Australia, 53% of participants (n =
+182) stated that they would have a preferencefor iOAT if available. In
+addition to the existing evidence-base, further research into medication
+preferences is needed as the range of available treatments becomes
+established and up-scaled.
+
+## Limitations {#sec-limit}
+
+There are several limitations of the study to consider. Data comprising
+the study arise from cross sectional survey design and convenience
+sampling of harm reduction sites and voluntary participation of
+individuals within those sites, therefore these findings may not be
+generalizable to all people who use drugs. Study sites did not routinely
+collect information about numbers examined for eligibility, confirmed
+eligible and included in the study, and we are unable to report these
+details. However, the demographic characteristics of the current study's
+sample are consistent with those of other large Australian studies of
+people who are regularly use opioids (i.e. the majority male, typically
+aged early 40s, with the majority of OAT clients receiving methadone)
+\[e.g. [@brener2022; @larance2020; @maddensatisfaction2008]\]. Most of
+the sample were treatment experienced having ever received treatment
+with methadone (n=) or buprenorphine (n=x), and therefore, there was
+limited input from participants who had never previously sought
+treatment. Despite this, there is still a need to ensure that those
+currently receiving OAT are prescribed their preferred medication, and
+to understand preferences of those interersted in OAT to enhance
+treatment and improve overall satisfaction. In addition, although most
+participants preferred treatment with a particular medication (n=366),
+the sample of participants preferring sublingual buprenorphine (n=68)
+and long-acting injectable bupenorphine (n=68) was relatively small,
+limiting the statistical power to detect differences and
+representativeness. A larger and more diverse sample would enhance the
+study's reliability and enable more robust analysis. The survey's
+self-report nature may introduce bias, as participants' preferences
+might not fully align with their actual experiences with these
+medications.In addition, this study was conducted prior to the
+widespread implementation of long-acting injectable formulations of
+buprenorphine and participants were therefore largely unfamiliar to
+people receiving OAT. The lack of familiarity with these formulations is
+a potential source of bias as participants were reporting on
+hypothetical scenarios and anticipated preferences, benefits and
+disadvantages. Despite these limitations, this study provides important
+insights into preferred treatment and medications.
+
+# Conclusion {#sec-conclusion}
+
+In conclusion, this study provides valuable insight into opioid agonist
+therapy preferences among people who regularly use opioids. Methadone
+was preferred over any available formulation of buprenorphine by most
+participants, where a similar number of participants preferred oral or
+sublingual and long-acting injectable formulations of buprenorphine.
+Most those receiving treatment were prescribed their preferred
+medication, with previous and current treatment experience the strongest
+predictor of medication preference. Australian OAT guidelines recommend
+that client preferences are taken into account in choosing medications.
+These findings may act as a guide for those discussions that are had on
+an individual basis. Clinical decision making around treatment options
+must center individual preference and balance suitability and choice of
+treatment.
+
+\pagebreak
+
 
 <!-- The following line inserts a page break  -->
 
 \newpage
 
-# References
+# References {#sec-refs}
+
+\singlespacing
 
 <!-- The following line ensures the references appear here for the MS Word or HTML output files, rather than right at the end of the document (this will not work for PDF files):  -->
 
@@ -492,3 +1080,600 @@ The current Git commit details are:
 # what commit is this file at? 
 if ("git2r" %in% installed.packages() & git2r::in_repository(path = ".")) git2r::repository(here::here())  
 ```
+
+
+# Supplementary Material {#sec-supp-material}
+
+## Table S1
+
+```{r}
+
+pts_subset_stratified <-  
+  p %>% 
+  tbl_summary(by = oatpref.all, include = c(age,agegroup, genderall.factor, edu.factor, 
+                                              
+                                              income.factor.yn, homeless.factor.yn,         
+                                              prison.factor, chronicpain.factor.yn, 
+                                              heroin.month.factor,  
+                                              nonmethadone.month.factor,
+                                              nonbupe.month.factor,  
+                                              otheropi.month.factor, 
+                                              cocaine.month.factor, 
+                                              meth.month.factor, benzo.month.factor,
+                                              anyinject.yn.f,
+                                              injfreq.factor, injectingheroin.month.f,
+                                              injectingnonmethadone.month.f, 
+                                              injectingnonsuboxone.month.f,
+                                              injectjngcocaine.month.f,
+                                              injectingmeth.month.f,
+                                              methadoneever.yn, bupeever.factor
+                                              ),
+  # type = all_categorical() ~ "categorical",
+  label = 
+    list(age ~ "Age",
+         agegroup ~ "Age group",
+         # usedrugs.oat ~ "Drugs used while on OAT",
+         methadoneever.yn ~ "Ever received OAT with methadone", 
+         bupeever.factor ~ "Ever received OAT with buprenorphine",
+         injectingheroin.month.f ~ "Heroin injecting",
+         injectingnonmethadone.month.f ~ "Non-prescribed methadone injecting",
+         otheropi.month.factor ~ "Non-prescribed pharmaceutical opioid use",
+         injectjngcocaine.month.f ~ "Cocaine injecting",
+         injectingmeth.month.f ~ "Methamphetamine injecting"
+         ), 
+         # currentmed ~ "Current OAT medication"),
+  type = all_categorical()~"categorical",
+  missing = "no",
+  percent = "row",
+  statistic =(all_continuous()  ~ "{median} ({p25} - {p75})"))%>%
+  add_stat_label()%>%
+  add_overall(statistic = list(all_continuous()  ~ "{median} ({p25} - {p75})",
+                               all_categorical() ~ "{n}")) %>% 
+  modify_footnote(update = everything() ~ NA, abbreviation = FALSE) %>%
+  modify_header(
+    stat_0 = '**Overall** \n **(n = {n})**',
+    stat_1 = '**Methadone** \n **(n = {n})**',
+    stat_2 = '**Buprenorphine oral** \n **(n = {n})**', 
+    stat_3 = '**Buprenorphine LAIB** \n **(n = {n})**', 
+    stat_4 = '**Any** \n **(n = {n})**', 
+    stat_5 = '**None** \n **(n = {n})**'
+  ) %>%
+  bold_labels()
+
+pts_subset_stratified.kable  <- pts_subset_stratified  %>%
+   gtsummary::as_kable_extra(
+    format = "html",
+    booktabs = TRUE,
+    longtable = TRUE,
+    linesep = "", 
+    caption="Final model including crude odds ratios (cOR) and adjusted odds ratios (aOR)")%>%
+  kableExtra::kable_styling(
+      position = "left",
+      latex_options = c("striped", "repeat_header"),
+      stripe_color = "gray!15"
+    )
+#     scroll_box(
+#   height = "100%",
+#   width = "100%",
+#   box_css = "border: 1px solid #ddd; padding: 5px; ",
+#   extra_css = NULL,
+#   fixed_thead = TRUE
+# )
+
+pts_subset_stratified.kable 
+
+```
+
+```{r, echo = FALSE, include = TRUE}
+#| label: tbl-s1
+
+pts_subset_stratified.kable
+```
+
+## Table S2
+
+```{r}
+# oat <- p %>%
+#   filter(oat.yn.f == "Yes")%>% # By filtering for oat.yn.f = "yes" we are selecting on those participants currently receiving OAT
+#   dplyr::select(age, agegroup, edu.factor ,genderall.factor, gender.mf,
+#                 income.factor.yn, homeless.factor.yn, homeless.factor,        
+#                 prison.factor, chronicpain.factor.yn, prefer.factor,
+#                 heroin.month.factor, prescribedmethadone.month.f, 
+#                 nonmethadone.month.factor, prescribedsuboxone.month.f,
+#                 nonbupe.month.factor, prescribedsuboxone.month.f, otheropi.month.factor, 
+#                 cocaine.month.factor, meth.month.factor, benzo.month.factor, 
+#                 anyinject.yn.f,otheropi1month,
+#                 injfreq.factor, injectingheroin.month.f,
+#                 injectingnonmethadone.month.f, 
+#                 injectingprescribedmethadone.month.f,
+#                 injectingprescribedsuboxone.month.f, 
+#                 injectingnonsuboxone.month.f, injectjngcocaine.month.f,
+#                 injectingmeth.month.f, injectingbenzo.month.f, methadoneever.yn, 
+#                 bupeever.factor, oatcurrentmed.f, usedrugs.oat, paytx.yn.f, 
+#                 paytx.factor.month,doselocation.factor, dose.km.factor, 
+#                 timedose.factor, oatpref.all, kmdose, dosesite.sep1.factor, 
+#                 clinic.attend.factor, lastdosesite, missd.month, missdose.factor, currentmed)
+```
+
+```{r}
+
+pts_oatfull_stratified <-  
+    p %>%
+  filter(lastdosesite != "Not prescribed")%>%
+   filter(prefertreat.yn == "Prefers treatment")%>%
+  # filter(prefer.factor == "Methadone" | prefer.factor == "Buprenorphine")%>%
+  # filter(pref_oat == "Methadone" | prefer.factor == "Buprenorphine")%>%
+  filter(oat.yn.f == "Yes")%>%
+  tbl_summary(by = oatpref.all, include = c(age,agegroup, genderall.factor, edu.factor, 
+                                              
+                                              income.factor.yn, homeless.factor.yn,         
+                                              prison.factor, chronicpain.factor.yn, 
+                                              heroin.month.factor,  
+                                              nonmethadone.month.factor,
+                                              nonbupe.month.factor,  
+                                              otheropi.month.factor, 
+                                              cocaine.month.factor, 
+                                              meth.month.factor, benzo.month.factor,
+                                              anyinject.yn.f,
+                                              injfreq.factor, injectingheroin.month.f,
+                                              injectingnonmethadone.month.f, 
+                                              injectingnonsuboxone.month.f,
+                                            injectingnonopi.month,
+                                              injectjngcocaine.month.f,
+                                              injectingmeth.month.f,
+                                              methadoneever.yn, bupeever.factor,
+                                              oatcurrentmed.f, usedrugs.oat, missdose.factor, paytx.yn.f, 
+                                              lastdosesite,clinic.attend.factor,  
+                                              kmdose, timedose.factor, oatpref.all),
+  # type = all_categorical() ~ "categorical",
+  label = 
+    list(age ~ "Age",
+         agegroup ~ "Age group",
+         usedrugs.oat ~ "Drugs used while on OAT",
+         methadoneever.yn ~ "Ever received OAT with methadone", 
+         bupeever.factor ~ "Ever received OAT with buprenorphine",
+         timedose.factor ~ "Travel time to dosing site",
+         clinic.attend.factor ~ "Frequency of OAT dose collection",
+         kmdose ~ "Travel distance to OAT collection site (km)", 
+         injectingheroin.month.f ~ "Heroin injecting",
+         injectingnonmethadone.month.f ~ "Non-prescribed methadone injecting",
+         otheropi.month.factor ~ "Non-prescribed pharmaceutical opioid use",
+         injectjngcocaine.month.f ~ "Cocaine injecting",
+         injectingmeth.month.f ~ "Methamphetamine injecting",
+         injectingnonopi.month ~ "Non-prescribed pharmaceutical opioid injecting",
+         injectingnonsuboxone.month.f ~ "Non-precsribed buprenorphine injecting",
+         lastdosesite ~ "Site last dose collected"), 
+         # currentmed ~ "Current OAT medication"),
+  type = all_categorical()~"categorical",
+  missing = "no",
+  percent = "row",
+  statistic =(all_continuous()  ~ "{median} ({p25} - {p75})"))%>%
+  add_stat_label()%>%
+  add_overall(statistic = list(all_continuous()  ~ "{median} ({p25} - {p75})",
+                               all_categorical() ~ "{n}")) %>% 
+  modify_footnote(update = everything() ~ NA, abbreviation = FALSE) %>%
+  modify_header(
+    stat_0 = '**Overall** \n **(n = {n})**',
+    stat_1 = '**Methadone** \n **(n = {n})**',
+    stat_2 = '**Buprenorphine oral** \n **(n = {n})**', 
+    stat_3 = '**Buprenorphine LAIB** \n **(n = {n})**', 
+    stat_4 = '**Any** \n **(n = {n})**', 
+    stat_5 = '**None** \n **(n = {n})**'
+  ) %>%
+  bold_labels()%>%
+  remove_row_type(variable = oatcurrentmed.f, 
+                  type = "level", level_value = "None")%>%
+  remove_row_type(variable = clinic.attend.factor, 
+                  type = "level", level_value = "0")%>%
+  remove_row_type(variable = lastdosesite, 
+                  type = "level", level_value = "Not prescribed")
+
+pts_oatfull_stratified.kable  <- pts_oatfull_stratified  %>%
+   gtsummary::as_kable_extra(
+    format = "html",
+    booktabs = TRUE,
+    longtable = TRUE,
+    linesep = "", 
+    caption="Final model including crude odds ratios (cOR) and adjusted odds ratios (aOR)")%>%
+  kableExtra::kable_styling(
+      position = "left",
+      latex_options = c("striped", "repeat_header"),
+      stripe_color = "gray!15"
+    )
+
+```
+
+```{r, echo = FALSE, include = TRUE}
+#| label: tbl-s2
+
+pts_oatfull_stratified.kable
+```
+
+## Table S3
+
+```{r, message=F}
+p <- p %>%
+mutate(prefer.factor = fct_relevel(prefer.factor,"Methadone", "Buprenorphine"))
+
+pts_oat_stratified <-  
+  p %>%
+  filter(lastdosesite != "Not prescribed")%>%
+  filter(prefertreat.yn == "Prefers treatment")%>%
+  filter(prefer.factor == "Methadone" | prefer.factor == "Buprenorphine")%>%
+  filter(pref_oat == "Methadone" | prefer.factor == "Buprenorphine")%>%
+  filter(oat.yn.f == "Yes")%>%
+  tbl_summary(by = prefer.factor, include = c(age, agegroup, 
+                                              gender.mf, edu.factor,
+                                              income.factor.yn, homeless.factor.yn,         
+                                              prison.factor, chronicpain.factor.yn,
+                                              heroin.month.factor,  
+                                              nonmethadone.month.factor,
+                                              nonbupe.month.factor, 
+                                              otheropi.month.factor, 
+                                              cocaine.month.factor, meth.month.factor, 
+                                              benzo.month.factor,
+                                              methadoneever.yn, bupeever.factor,
+                                              currentmed,
+                                              
+                                              usedrugs.oat, paytx.yn.f, 
+                                              lastdosesite,clinic.attend.factor,  
+                                               kmdose, timedose.factor,
+                                              prefer.factor 
+  ),
+  # type = all_categorical() ~ "categorical",
+  label = 
+    list(age ~ "Age",
+         agegroup ~ "Age group",
+         gender.mf ~ "Gender",
+         usedrugs.oat ~ "Drugs used while on OAT",
+         methadoneever.yn ~ "Ever received OAT with methadone", 
+         bupeever.factor ~ "Ever received OAT with buprenorphine",
+         timedose.factor ~ "Travel time to dosing site",
+         clinic.attend.factor ~ "Frequency of OAT dose collection",
+         kmdose ~ "Travel distance to OAT collection site (km)", 
+         lastdosesite ~ "Site last dose collected",
+         otheropi.month.factor ~ "Non-prescribed pharmaceutical opioid use",
+         currentmed ~ "Current OAT medication"), 
+         # current_methadone ~ "Currently receiving OAT with methadone", 
+         # current_buprenorphine ~ "Currently receiving OAT with buprenorphine"),
+  type = all_categorical()~"categorical",
+  missing = "no",
+  percent = "row",
+  statistic =(all_continuous()  ~ "{median} ({p25} - {p75})"),
+  digits = list(all_categorical() ~ c(0)))%>%
+  add_stat_label()%>%
+  add_overall(statistic = list(all_continuous()  ~ "{median} ({p25} - {p75})",
+                               all_categorical() ~ "{n}")) %>% 
+  modify_footnote(update = everything() ~ NA, abbreviation = FALSE) %>%
+  add_n()%>%
+  modify_header(
+    stat_0 = '**Overall** \n **(n = {n})**',
+    stat_1 = '**Methadone** \n **(n = {n})**',
+    stat_2 = '**Buprenorphine** \n **(n = {n})**'
+  ) %>%
+  bold_labels()%>%
+  # remove_row_type(variable = oatcurrentmed.f, 
+  #                 type = "level", level_value = "None")%>%
+  remove_row_type(variable = clinic.attend.factor, 
+                type = "level", level_value = "0")%>%
+  remove_row_type(variable = lastdosesite, 
+                  type = "level", level_value = "Not prescribed")
+```
+
+```{r include = FALSE}
+pts_oat_stratified.kable <- pts_oat_stratified %>% 
+   gtsummary::as_kable_extra(
+    format = "html",
+    booktabs = TRUE,
+    longtable = TRUE,
+    linesep = "", 
+    caption="Demographic and behavioural characteristics of people currently receiving OAT stratified by preference for methadone or buprenorphine")%>%
+  kableExtra::kable_styling(
+      position = "left",
+      latex_options = c("striped", "repeat_header"),
+      stripe_color = "gray!15"
+    )
+```
+
+```{r echo=FALSE, include = F}
+pts_oat_stratified.kable
+```
+
+```{r}
+
+p <- p %>%
+  mutate(prefer.factor = fct_relevel(prefer.factor, "Buprenorphine", "Methadone"))
+```
+
+```{r}
+
+ oat_cor <-
+   p %>%
+  filter(lastdosesite != "Not prescribed")%>%
+  filter(prefertreat.yn == "Prefers treatment")%>%
+  filter(prefer.factor == "Methadone" | prefer.factor == "Buprenorphine")%>%
+  filter(pref_oat == "Methadone" | prefer.factor == "Buprenorphine")%>%
+  filter(oat.yn.f == "Yes")%>%
+  dplyr::select(age, gender.mf, nonmethadone.month.factor, 
+                nonbupe.month.factor,heroin.month.factor,
+                methadoneever.yn, bupeever.factor, 
+                currentmed,lastdosesite,
+                usedrugs.oat, paytx.yn.f,
+                clinic.attend.factor, kmdose,
+                timedose.factor, prefer.factor) %>%
+  tbl_uvregression(
+    method = glm,
+    y = prefer.factor, 
+    label = list(age ~ "Age",
+         # agegroup ~ "Age group",
+         gender.mf ~ "Gender",
+         usedrugs.oat ~ "Drugs used while on OAT",
+         methadoneever.yn ~ "Ever received OAT with methadone", 
+         bupeever.factor ~ "Ever received OAT with buprenorphine",
+         timedose.factor ~ "Travel time to dosing site",
+         clinic.attend.factor ~ "Frequency of OAT dose collection",
+         kmdose ~ "Travel distance to OAT collection site (km)", 
+         lastdosesite ~ "Site last dose collected", 
+         currentmed ~ "Current OAT medication"),
+                 # current_methadone ~ "Currently receiving OAT with methadone", 
+                 # current_buprenorphine ~ "Currently receiving OAT with buprenorphine"),
+    method.args = list(family = binomial),
+    exponentiate = TRUE,
+    hide_n = TRUE,
+    pvalue_fun = function(x) style_pvalue(x, digits = 3)
+  ) %>%
+   modify_header(
+     label = "**Variable**",
+     estimate = '**cOR**',
+     ci = '**95% CI**',
+     p.value = '**p-value**'
+   ) %>%
+   modify_footnote(update = everything() ~ NA, abbreviation = TRUE) %>%
+   modify_table_styling(
+     column = estimate,
+     rows = !is.na(estimate),
+     cols_merge_pattern = "{estimate} ({conf.low} - {conf.high})"
+   ) %>%
+   modify_header(estimate = "**cOR (95% CI)**", 
+                 all_stat_cols() ~ "**{level}**, N = {n} ({style_percent(p)}%)") %>%
+   modify_column_hide(c(ci)) %>% 
+   # bold_p()%>% # bold p-values under a given threshold (default 0.05)
+   #bold_p(t = 0.10, q = TRUE) %>% # now bold q-values under the threshold of 0.10
+   bold_labels()%>%
+  remove_row_type(variable = clinic.attend.factor, 
+                type = "level", level_value = "0")%>%
+  remove_row_type(variable = lastdosesite, 
+                  type = "level", level_value = "Not prescribed")
+  
+```
+
+```{r include=TRUE, echo=FALSE}
+
+oat_cor.kable <- oat_cor %>% 
+   gtsummary::as_kable_extra(
+    format = "html",
+    booktabs = TRUE,
+    longtable = TRUE,
+    linesep = "", 
+    caption="Results of a univariate logistic regression with crude odds ratios and 95% confidence interval")%>%
+  kableExtra::kable_styling(
+      position = "left",
+      latex_options = c("striped", "repeat_header"),
+      stripe_color = "gray!15"
+    )
+
+```
+
+```{r echo=FALSE, include = FALSE}
+oat_cor.kable
+```
+
+```{r}
+p <- p %>%
+  mutate(prefer.factor = fct_relevel(prefer.factor, "Buprenorphine", "Methadone"))
+
+
+oatcurrent_cor <-
+  p %>%
+  filter(lastdosesite != "Not prescribed")%>%
+  filter(prefertreat.yn == "Prefers treatment")%>%
+  filter(prefer.factor == "Methadone" | prefer.factor == "Buprenorphine")%>%
+  filter(pref_oat == "Methadone" | prefer.factor == "Buprenorphine")%>%
+  filter(oat.yn.f == "Yes")%>%
+  dplyr::select(age, gender.mf,edu.factor, income.factor.yn, homeless.factor.yn,  
+                prison.factor, chronicpain.factor.yn, heroin.month.factor, 
+                nonmethadone.month.factor,
+                nonbupe.month.factor, otheropi.month.factor, 
+                cocaine.month.factor, meth.month.factor, benzo.month.factor,
+                currentmed,
+                usedrugs.oat, paytx.yn.f,
+                clinic.attend.factor, kmdose,
+                timedose.factor, prefer.factor, lastdosesite) %>%
+  tbl_uvregression(
+    method = glm,
+    y = prefer.factor, 
+    label = list(age ~ "Age",
+                 gender.mf ~ "Gender",
+                 otheropi.month.factor ~ "Non-prescribed pharmaceutical opioid use",
+                 usedrugs.oat ~ "Drugs used while on OAT",
+                 # methadoneever.yn ~ "Ever received OAT with methadone",
+                 # bupeever.factor ~ "Ever received OAT with buprenorphine", 
+                 # gender.mf ~ "Gender", 
+                 clinic.attend.factor ~ "Frequency of OAT dose collection", 
+                 kmdose ~ "Travel distance to OAT collection site (km)", 
+                 timedose.factor ~ "Travel time to dosing site",
+                 lastdosesite ~ "Site last dose collected",
+                 currentmed ~ "Current OAT medication"),
+    method.args = list(family = binomial),
+    exponentiate = TRUE,
+    hide_n = TRUE,
+    pvalue_fun = function(x) style_pvalue(x, digits = 3)
+  ) %>%
+  modify_header(
+    label = "**Variable**",
+    estimate = '**cOR**',
+    ci = '**95% CI**',
+    p.value = '**p-value**'
+  ) %>%
+  modify_footnote(update = everything() ~ NA, abbreviation = TRUE) %>%
+  modify_table_styling(
+    column = estimate,
+    rows = !is.na(estimate),
+    cols_merge_pattern = "{estimate} ({conf.low} - {conf.high})"
+  ) %>%
+  modify_header(estimate = "**cOR (95% CI)**", 
+                all_stat_cols() ~ "**{level}**, N = {n} ({style_percent(p)}%)") %>%
+  modify_column_hide(c(ci)) %>% 
+  # add_n()%>%
+  # bold_p()%>% # bold p-values under a given threshold (default 0.05)
+  #bold_p(t = 0.10, q = TRUE) %>% # now bold q-values under the threshold of 0.10
+  bold_labels()%>%
+  remove_row_type(variable = clinic.attend.factor, 
+                type = "level", level_value = "0")%>%
+  remove_row_type(variable = lastdosesite, 
+                  type = "level", level_value = "Not prescribed")%>%
+ modify_table_styling(label = "**Overall (n = {n})**")
+ 
+ oatcurrent_cor
+```
+
+<!-- #### Variable selection -->
+
+<!-- In univariate regression, variables that return a p-value \< 0.20 are -->
+
+<!-- purposefully selected for inclusion in the final model. -->
+
+<!-- The following variables had a p-value \< 0.05 in the univariate -->
+
+<!-- regression: -->
+
+```{r}
+# aOR_var_oat <- p %>%
+# 
+#   dplyr::select(age, gender.mf,  homeless.factor.yn, heroin.month.factor,
+#                 nonmethadone.month.factor,
+#                  currentmed,paytx.yn.f, lastdosesite,
+#                 doselocation.factor, clinic.attend, timedose.factor)
+```
+
+```{r}
+# aOR_var_oat <- map_df(aOR_variables_var, function(x) attributes(x)$label) %>% 
+#   gather(key = Code, value = Label)
+```
+
+```{r echo = FALSE, include = TRUE}
+## View the codebook
+# library(kableExtra)
+# aOR_var_oat %>%
+#       kable(caption="Codebook of variables selected for the unadjusted odds ratios from a multivariable logistic regression among participants currently receiving OAT", col.names = c("Variable", "Description"),  booktabs = TRUE) %>%
+#   kable_styling(bootstrap_options = "striped", row_label_position = c(2, 5),  full_width = TRUE, position = "center", fixed_thead = list(enabled = T, background = "anycolor")) 
+```
+
+```{r}
+oat_model_final <- glm(prefer.factor ~ age + gender.mf + heroin.month.factor +  nonmethadone.month.factor + currentmed + paytx.yn.f + lastdosesite+  
+                         kmdose + clinic.attend.factor
+                       , data=p, family=binomial)
+
+```
+
+```{r, message=F, warning=F}
+oat_mod_final <- tbl_regression(oat_model_final, exponentiate = TRUE,  
+                                label = 
+                                  list(age ~ "Age",
+        
+         gender.mf ~ "Gender",
+         # usedrugs.oat ~ "Drugs used while on OAT",
+         # methadoneever.yn ~ "Ever received OAT with methadone", 
+         # bupeever.factor ~ "Ever received OAT with buprenorphine",
+         # timedose.factor ~ "Travel time to dosing site",
+         clinic.attend.factor ~ "Frequency of OAT dose collection",
+         kmdose ~ "Travel distance to OAT collection site (km)", 
+         lastdosesite ~ "Site last dose collected", 
+         currentmed ~ "Current OAT medication"),
+                                add_estimate_to_reference_rows = FALSE,
+                                # show_single_row = c(age, gender.mf, heroin.month.factor),
+                                pvalue_fun = function(x) style_pvalue(x, digits = 3))%>%
+  # pvalue_fun = ~style_sigfig(., digits = 4)                              )%>%
+  modify_header(
+    label = '**Variable**',
+    estimate = '**aOR**',
+    ci = '**95% CI**',
+    p.value = '**p-value**'
+  ) %>%
+  modify_footnote(update = everything() ~ NA, abbreviation = TRUE) %>%
+  modify_table_styling(
+    column = estimate,
+    rows = !is.na(estimate),
+    cols_merge_pattern = "{estimate} ({conf.low} - {conf.high})"
+  ) %>%
+  modify_header(estimate ~ "**aOR (95% CI)**") %>%
+  modify_column_hide(c(ci)) %>% 
+  bold_labels() %>%
+  modify_footnote(everything() ~ NA, abbreviation = TRUE)%>%
+   remove_row_type(variable = clinic.attend.factor, 
+                type = "level", level_value = "0")%>%
+  remove_row_type(variable = lastdosesite, 
+                  type = "level", level_value = "Not prescribed")
+
+
+p <- p%>% 
+  filter(clinic.attend.factor != "0")%>%
+  filter(lastdosesite != "Not prescribed")
+  
+```
+
+```{r include = FALSE, message=F}
+oat_mod_final.kable <- oat_mod_final%>% 
+   gtsummary::as_kable_extra(
+    format = "html",
+    booktabs = TRUE,
+    longtable = TRUE,
+    linesep = "", 
+    caption="Results of a multivariable logistic regression with adjusted odds ratios and 95% confidence interval among participants currently receiving OAT")%>%
+  kableExtra::kable_styling(
+      position = "left",
+      latex_options = c("striped", "repeat_header"),
+      stripe_color = "gray!15"
+    )
+```
+
+```{r echo = FALSE, include=FALSE}
+oat_mod_final.kable
+```
+
+```{r}
+table_merged_oat <-
+  tbl_merge(
+    tbls = list(pts_oat_stratified, oatcurrent_cor,oat_mod_final),
+    tab_spanner = c("** **", "**Unadjusted model**", "**Adjusted model**")) %>%
+  modify_header(label = "**Variable**") %>% # update the column header
+  modify_footnote(everything() ~ NA)
+
+```
+
+```{r echo=FALSE, include=F}
+table_merged_oat.kable <- table_merged_oat %>% 
+   gtsummary::as_kable_extra(
+    format = "html",
+    booktabs = TRUE,
+    longtable = TRUE,
+    linesep = "", 
+    caption="Demographic and behavioral characteristics stratified by OAT medication preference and sesults of a multivariable logistic regression with adjusted odds ratios and 95% confidence interval among participants currently receiving OAT")%>%
+  kableExtra::kable_styling(
+      position = "left",
+      latex_options = c("striped", "repeat_header"),
+      stripe_color = "gray!15"
+    )
+#       scroll_box(
+#   height = "100%",
+#   width = "100%",
+#   box_css = "border: 1px solid #ddd; padding: 5px; ",
+#   extra_css = NULL,
+#   fixed_thead = TRUE
+# )
+```
+
+```{r echo = FALSE, include = TRUE}
+table_merged_oat.kable
+```
+
