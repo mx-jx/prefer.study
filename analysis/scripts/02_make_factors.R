@@ -1,6 +1,53 @@
-# Making factors for the South African drug market dataset
+# Prefer project
+## Create factors
 
-# Load Packages
+
+load(
+  here::here("data_processed", "prefer_working.rda")
+    )
+
+library(rlang)
+library(finalfit)
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(rlang)
+library(broom)
+library(tidyverse)
+library(readxl)
+library(purrr)
+library(pacman)
+library(skimr)
+library(haven)
+library(RStata)
+library(freqtables)
+library(forcats)
+library(lmtest)
+library(survival)
+library(survminer)
+library(epiR)
+library(Epi)
+library(broom)
+library(broom.mixed)
+library(janitor)
+library(psych)
+library(epiDisplay)
+library(gmodels)
+library(finalfit)
+library(jsmodule)
+library(tableone)
+library(effsize)
+library(dynpred)
+library(mod)
+library(car)
+library(gtsummary)
+library(gt)
+library(officer)
+library(sjlabelled)
+library(codebook)
+library(codebookr)
+library(likert)
 
 pacman::p_load(
   ggplot2 ,    # plotting and graphing results
@@ -9,411 +56,405 @@ pacman::p_load(
   broom,      # tidy code
   readxl,     # read in excel files
   pacman,     # loading and reading in packages
-  rio,        # importing data
-  here,       # relative file pathways
+  rio,        # importing data  
+  here,       # relative file pathways  
   janitor,    # data cleaning and tables
   lubridate,  # working with dates
   matchmaker, # dictionary-based cleaning
   epikit,     # age_categories() function
   tidyverse,  # data management and visualization
   gtsummary,  # logistic regression and plotting results
-  gt,         # for gtsummary
+  gt,         # for gtsummary 
   flextable,  # table creation and manipulating
   car,        # data management and visualization
   readstata13,# read in Stata files
   finalfit,   # logistic regression and plotting results
   survminer,  # forest plots
-  easystats,
-  BiocManager,
-  survival,
-  forestplot,
+  easystats, 
+  BiocManager, 
+  survival, 
+  forestplot, 
   rticles,     # templates for scientific journal articles in RMarkdown
-  jtools,
-  corrplot,
+  jtools, 
+  corrplot, 
+  bstfun, 
+  ggforestplot, 
+  codebookr,
   codebook,
-  sjlabelled,
-  likert,
-  kableExtra,
-  haven,
-  here,
-  flexdashboard, # dashboard versions of R Markdown reports
-  plotly, # interactive plots
-  shiny,
-  webshot,
-  webshot2,
-  grateful
+  sjlabelled, 
+  likert, 
+  kableExtra, 
+  haven
 )
 
-# load data
-#
-load(
-here::here("data_processed", "drug_market_working.rda"))
 
-load(
-here::here("data_processed", "drug_market_data.rda"))
-
-# shape <- read_sf(dsn = "C:/Users/mjstowe/OneDrive - UNSW/Desktop/R", layer = "Primary_Health_Networks")
-#
-# ethos.loc <- read.csv("~/GitHub/ethos/raw_data/ethos_locations.csv")
-
-# cleaning the data
-#
-drugs  <- drugs  %>%
-  janitor::clean_names()
-
-# Make factors
-
-yrs_working <- as.numeric(drugs$x9_years_working)
+theme_set(theme_bw())
 
 
-drug_market <- drugs %>%
+# Select variables that will be used from the dataset
 
+prefer <- prefer %>%
+  dplyr::select(age, age.group, edu.yr10, gender,income, accom, prefer.mb, 
+                gender.all, gender.mf, hccard, prison, chronicpain.yn,
+                income.yn, hccard.yn, accom.type, accom.yn, homeless,
+                homeless.factor, prison.yn, chronicpain.yn, prefer.mb,
+                oat_pref, oat_pref_cat, oat_pref_only, pref_oat,
+                prefertreat.yn, heroin.month, prescribedmethadone.month, 
+                nonmethadone.month, prescribedsuboxone.month, 
+                nonsuboxone.month, bupe1month, otheropi.month, 
+                cocaine.month, meth.month, benzo.month, anyinject.yn,
+                injectingfreq.month, injectingheroin.month,
+                injectingnonmethadone.month, injecting_methadonemonth,
+                injectingnonsuboxone.month,injecting_bupemonth,
+                injectingnonopi.month, injectingcocaine.month,
+                injectingmeth.month, injectingbenzo.month, oat.yn,
+                currentoat_treat, oatcurrentmed, dosing.point, 
+                clinic.attend, drugsoat, heroinoat, opioidsoat, methoat, 
+                benzooat, missd.month, misseddose, dose.km, kmdosingsite,
+                timetodose,paytx.month, paytx.yn, oatever.yn, 
+                methadoneever.yn, bupeever.yn, doselocation.group, oat.yn,
+                q0ost, injfreq, ldoseloc, usedrugs.oat, drgstx_1, drgstx_2,
+                drgstx_3, drgstx_4, drgstx_5, drgstx_6
+                ) 
+                
+
+prefer %>% glimpse()
+
+prefer %>% ff_glimpse()
+
+# Recode variables
+
+prefer <- prefer %>%
   mutate(
-    # City/sampling site
-    city.factor = factor(city) %>%
-      fct_recode("Cape Town" = "cpt",
-                 "Durban" = "dbn",
-                 "Pitermaritzberg" = "pmb",
-                 "Port Elizabeth" = "pe",
-                 "Bloemfontein" = "blm",
-                 "Pretoria" = "pta",
-                 "Johannesburg" = "jhb",
-                 "Mbombela" = "mbo",
-                 "Polokwane" = "plk") %>%
-      ff_label("City")%>%
-      fct_relevel("Cape Town",
-                  "Durban",
-                  "Pretoria",
-                  "Johannesburg",
-                  "Port Elizabeth",
-                  "Pitermaritzberg",
-                  "Bloemfontein",
-                  "Mbombela",
-                  "Polokwane"),
+    # recoding level of education
+    edu.factor = factor(edu.yr10) %>% 
+      fct_recode("Completed ≥ 10 years school education" = 
+                   "Completed ≥ 10 years school education",
+                 "Completed < 10 years school education" =
+                   "Completed < 10 years school education") %>% 
+      ff_label("Level of education"), 
+    
+    # gender 
+    genderall.factor = factor(gender) %>%
+      fct_recode("Male" = "1",
+                 "Female"  = "2", 
+                 "Transgender" = "4") %>% 
+      ff_label("Gender"),
+    
+    #recoding income
+    income.factor.yn = factor(income) %>%
+      fct_recode("Paid" = "2",
+                 "Other"  = "1") %>% 
+      ff_label("Income"),
 
-    # Gender
-    gender.factor = factor(gender) %>%
-      fct_recode("Female"="2",
-                 "Male"="1",
-                 "Transgender"="3") %>%
-      ff_label("Gender") %>%
-      fct_relevel("Female",
-                  "Male",
-                  "Transgender"),
-
-    # Sellers level code
-    # sellers_code = factor(sellers_level_code) %>%
-    #   fct_recode()
-
-    # Primary drug sold
-    primary_drug = factor(primary_drug_sold)%>%
-      fct_recode("Heroin" = "1",
-                 "Crack cocaine" = "2",
-                 "Powder cocaine" = "3",
-                 "Methamphetamine" = "4") %>%
-      ff_label("Primary drug sold") %>%
-      fct_relevel("Heroin",
-                  "Crack cocaine",
-                  "Powder cocaine",
-                  "Methamphetamine"),
-
-    # Secondary drug sold
-    secondary_drug = factor(secondary_drug_sold)%>%
-      fct_recode("Only sold 1 drug" = "0",
-                 "Heroin" = "1",
-                 "Crack cocaine" = "2",
-                 "Powder cocaine" = "3",
-                 "Methamphetamine" = "4") %>%
-      ff_label("Primary drug sold") %>%
-      fct_relevel("Only sold 1 drug",
-                  "Heroin",
-                  "Crack cocaine",
-                  "Powder cocaine",
-                  "Methamphetamine"),
-
-    # Sell heroin
-    sell_heroin = case_when(
-      primary_drug_sold == 1 ~ "Yes",
-      secondary_drug_sold == 1 ~ "Yes",
-      is.na(TRUE)   ~ NA_character_,
-      TRUE       ~ "No") %>%
-      ff_label("Sell heroin") %>%
-    fct_relevel("No",
-                "Yes"),
-
-    # Sell crack cocaine
-    sell_crack_coke = case_when(
-      primary_drug_sold == 2 ~ "Yes",
-      secondary_drug_sold == 2 ~ "Yes",
-      is.na(TRUE)   ~ NA_character_,
-      TRUE       ~ "No") %>%
-      ff_label("Sell crack cocaine") %>%
-    fct_relevel("No",
-                "Yes"),
-
-    # Sell powder cocaine
-    sell_powder_coke = case_when(
-      primary_drug_sold == 3 ~ "Yes",
-      secondary_drug_sold == 3 ~ "Yes",
-      is.na(TRUE)   ~ NA_character_,
-      TRUE       ~ "No") %>%
-      ff_label("Sell powder cocaine") %>%
-    fct_relevel("No",
-                "Yes"),
-
-    # Sell cocaine
-    sell_cocaine = case_when(
-      primary_drug_sold == 3 ~ "Yes",
-      secondary_drug_sold == 3 ~ "Yes",
-      primary_drug_sold == 2 ~ "Yes",
-      secondary_drug_sold == 2 ~ "Yes",
-      is.na(TRUE)   ~ NA_character_,
-      TRUE       ~ "No") %>%
-      ff_label("Sell cocaine") %>%
-    fct_relevel("No",
-                "Yes"),
-
-    # Sell methamphetamine
-    sell_meth = case_when(
-      primary_drug_sold == 4 ~ "Yes",
-      secondary_drug_sold == 4 ~ "Yes",
-      is.na(TRUE)   ~ NA_character_,
-      TRUE       ~ "No") %>%
-      ff_label("Sell methamphetamine") %>%
+    #recoding healthcare card
+    hccard.factor.yn = factor(hccard) %>%
+      fct_recode("Yes" = "1",
+                 "No"  = "2") %>% 
+      ff_label("Healthcare card"),
+    
+    #recoding accomodation
+    homeless.factor.yn = factor(accom) %>%
+      fct_recode("Yes" = "1",
+                 "Yes"  = "2",
+                 "Yes"  = "3",
+                 "Yes"  = "4",
+                 "Yes"  = "5",
+                 "Yes"  = "6",
+                 "Yes"  = "7",
+                 "Yes"  = "8",
+                 "Yes"  = "9",
+                 "No"  = "10",
+                 "Yes"  = "11") %>% 
+      ff_label("Homelessness") %>%
+      fct_relevel("Yes", "No"),
+    
+    #recoding incarceration
+    prison.factor = factor(prison) %>%
+      fct_recode("No" = "1",
+                 "Yes > 6 months"  = "2",
+                 "Yes < 6 months"  = "3") %>% 
+      ff_label("Incarceration") %>%
+      fct_relevel("No",
+                  "Yes > 6 months",
+                  "Yes < 6 months"), 
+    
+    #recoding and releveling chronicpain
+    chronicpain.factor.yn = factor(chronicpain.yn) %>%
+      ff_label("Chronic pain") %>%
+      fct_relevel("Yes",
+                  "No"), 
+    
+    #recoding and releveling OAT preference
+    prefer.factor = factor(prefer.mb) %>%
+      ff_label("OAT preference") %>%
+      fct_relevel("Buprenorphine",
+                  "Methadone"), 
+    
+    oat.pref.all = factor(q0ost) %>%
+      fct_recode(
+        "Methadone or biodone syrup" = "1",
+        "Buprenorphine oral" = "2",
+        "Buprenorphine long acting injectable" = "3",
+        "any - no preference" = "4",
+        "none - no medication" = "5",
+        "none - no appropriate medication" = "6",
+        "none - not interested in treatment" = "7")%>%
+      ff_label("OAT preference all"),
+    
+    # #recoding and releveling OAT preference collapsed
+    # prefer.collapsed.factor = factor(oat_pref_cat) %>%
+    #   ff_label("OAT preference collapsed") %>%
+    #   fct_relevel("Methadone",
+    #               "Buprenorphine",
+    #               "Any",
+    #               "None"),
+    # 
+    # past month heroin use
+    heroin.month.f = factor(heroin.month) %>%
+      ff_label("Recent heroin use") %>%
       fct_relevel("No",
                   "Yes"),
-
-    # Sells multiple substances
-    sell_polydrug = case_when(
-      is.na(primary_drug_sold) == FALSE & secondary_drug_sold != 0 ~ "Yes",
-      is.na(TRUE)   ~ NA_character_,
-      TRUE       ~ "No") %>%
-      ff_label("Sell >1 drug type") %>%
+    
+    # past month non-prescribed methadone use
+    nonmethadone.month.f = factor(nonmethadone.month) %>%
+      ff_label("Recent non-prescribed methadone use") %>%
       fct_relevel("No",
                   "Yes"),
-
-    # Stock heroin COVID-19
-      stock_heroin_c19 = factor(x3_stock_heroin_covid) %>%
-      fct_recode("No change"="0",
-                 "Increased"="1") %>%
-      ff_label("Impact of COVID-19 on heroin stock")%>%
-      fct_relevel("No change",
-                  "Increased"),
-
-    # Stock cocaine COVID-19
-    stock_cocaine_c19 = factor(x3_stock_cocaine_covid) %>%
-      fct_recode("No change"="0",
-                 "Increased"="1",
-                 "Decreased"="2") %>%
-      ff_label("Impact of COVID-19 on cocaine stock")%>%
-      fct_relevel("No change",
-                  "Increased",
-                  "Decreased"),
-
-    # Stock methamphetamine COVID-19
-    stock_meth_c19 = factor(x3_stock_meth_covid) %>%
-      fct_recode("No change"="0",
-                 "Increased"="1") %>%
-      ff_label("Impact of COVID-19 on methamphetamine stock")%>%
-      fct_relevel("No change",
-                  "Increased"),
-
-    # Sales heroin COVID-19
-    sales_heroin_c19 = factor(x5_heroin_sales_covid) %>%
-      fct_recode("No change"="0",
-                 "Increased"="1",
-                 "Decreased"="2")%>%
-      ff_label("Impact of COVID-19 on heroin sales")%>%
-      fct_relevel("Decreased",
-                  "Increased",
-                  "No change"),
-
-    # Sales cocaine COVID-19
-    sales_coke_c19 = factor(x5_cocaine_sales_covid) %>%
-      fct_recode("No change"="0",
-                 "Increased"="1",
-                 "Decreased"="2")%>%
-      ff_label("Impact of COVID-19 on cocaine sales")%>%
-      fct_relevel("Decreased",
-                  "Increased",
-                  "No change"),
-
-    # Sales methamphetamine COVID-19
-    sales_meth_c19 = factor(x5_meth_sales) %>%
-      fct_recode("No change"="0",
-                 "Increased"="1",
-                 "Decreased"="2")%>%
-      ff_label("Impact of COVID-19 on methamphetamine sales")%>%
-      fct_relevel("Decreased",
-                  "Increased",
-                  "No change"),
-    # Sell to sellers
-    sell_sellers = factor(x6_sell_to_sellers)%>%
-      fct_recode("No"="0",
-                 "Yes"="1")%>%
-      ff_label("Sell to sellers") %>%
+    
+    # past month prescribed methadone use
+    prescribedmethadone.month.f = factor(prescribedmethadone.month) %>%
+      ff_label("Recent prescribed methadone use") %>%
       fct_relevel("No",
                   "Yes"),
-    # Sell to sellers only
-    sell_seller_only = case_when(
-      x6_sell_to_sellers == 1 & x7_sell_to_users == 0 ~ "Yes",
-      is.na(TRUE)   ~ NA_character_,
-      TRUE       ~ "No") %>%
-      ff_label("Sell to sellers only") %>%
+    
+    # past month non-prescribed suboxone use
+    nonsuboxone.month.f = factor(nonsuboxone.month) %>%
+      ff_label("Recent non-prescribed use") %>%
       fct_relevel("No",
                   "Yes"),
-    # Grams of heroin sold to sellers per week
-    heroin_sellers_g = as_numeric(x4_g_heroin_sold_weekly_gms)%>%
-      ff_label("Heroin sold to sellers (g/wk)"),
-    # Grams of cocaine sold to sellers per week
-    coke_sellers_g = as_numeric(x4_g_cocaine_sold_weekly_gms)%>%
-      ff_label("Cocaine sold to sellers (g/wk)"),
-    # Grams of methamphetamine sold to sellers per week
-    meth_sellers_g = as_numeric(x4_g_meth_sold_weekly_gms)%>%
-      ff_label("Methamphetamine sold to sellers (g/wk)"),
-
-    # No. of sellers heroin is sold to
-    heroin_sellers = as_numeric(x6a_herion)%>%
-      ff_label("No. of sellers heroin sold to"),
-
-    # No. of sellers cocaine is sold to
-    cocaine_sellers = as_numeric(x6a_cocaine)%>%
-      ff_label("No. of sellers cocaine sold to"),
-
-    # No. of sellers methamphetamine is sold to
-    meth_sellers = as_numeric(x6a_meth)%>%
-      ff_label("No. of sellers meth sold to"),
-
-    # Grams of heroin sold to sellers per week
-    heroin_seller_g = as_numeric(x6b_herion_g)%>%
-      ff_label("Quantity of heroin sold to sellers (grams)"),
-
-    # Grams of cocaine sold to sellers per week
-    cocaine_seller_g = as_numeric(x6b_cocaine_g)%>%
-      ff_label("Quantity of cocaine sold to sellers (grams)"),
-
-    # Grams of methamphetamine is sold to
-    meth_seller_g = as_numeric(x6b_meth_grams)%>%
-      ff_label("Quantity of meth sold to sellers (grams)"),
-
-    # Units of heroin sold to sellers per week
-    heroin_seller_unit = as_numeric(x6b_herion_units)%>%
-    ff_label("Quantity of heroin sold to sellers (units)"),
-
-    # Units of cocaine sold to sellers per week
-    cocaine_seller_unit = as_numeric(x6b_cocaine_units)%>%
-    ff_label("Quantity of cocaine sold to sellers (units)"),
-
-    # Units of methamphetamine sold to sellers per week
-    meth_seller_unit = as_numeric(x6b_meth_units)%>%
-      ff_label("Quantity of meth sold to sellers (units)"),
-
-    # Sell to users
-    sell_users = factor(x7_sell_to_users)%>%
-      fct_recode("No"="0",
-                 "Yes"="1")%>%
-      ff_label("Sell to consumers") %>%
+    
+    # past month prescribed suboxone use
+    prescribedsuboxone.month.f = factor(prescribedsuboxone.month) %>%
+      ff_label("Recent prescribed suboxone use") %>%
+      fct_relevel("No",
+                  "Yes"), 
+    
+    # past month cocaine use
+    cocaine.month.f = factor(cocaine.month) %>%
+      ff_label("Recent cocaine use") %>%
       fct_relevel("No",
                   "Yes"),
-
-    # No. of consumers heroin is sold to
-    heroin_users = as_numeric(x7a_herion)%>%
-      ff_label("No. of consumers heroin sold to"),
-
-    # No. of consumers cocaine is sold to
-    cocaine_users = as_numeric(x7a_cocaine)%>%
-      ff_label("No. of consumers cocaine sold to"),
-
-    # No. of consumers methamphetamine is sold to
-    meth_users = as_numeric(x7a_meth)%>%
-      ff_label("No. of consumers meth sold to"),
-
-    # Grams of heroin sold to consumers per week
-    heroin_user_g = as_numeric(x7b_herion_g)%>%
-      ff_label("Quantity of heroin sold to sellers (grams)"),
-
-    # Grams of cocaine sold to consumers per week
-    cocaine_user_g = as_numeric(x7b_cocaine_g)%>%
-      ff_label("Quantity of cocaine sold to sellers (grams)"),
-
-    # Grams of methamphetamine sold to consumers per week
-    meth_user_g = as_numeric(x7b_meth_g)%>%
-      ff_label("Quantity of meth sold to sellers (grams)"),
-
-    # Units of heroin sold to consumers per week
-    heroin_user_unit = as_numeric(x7b_herion_units)%>%
-      ff_label("Quantity of heroin sold to sellers (grams)"),
-
-    # Units of cocaine sold to consumers per week
-    cocaine_user_unit = as_numeric(x7b_cocaine_units)%>%
-      ff_label("Quantity of cocaine sold to sellers (grams)"),
-
-    # Units of methamphetamine sold to consumers per week
-    meth_user_unit = as_numeric(x7b_meth_units)%>%
-      ff_label("Quantity of meth sold to sellers (grams)"),
-
-    # Years working
-
-    yrs_working = as_numeric(x9_years_working) %>%
-       ff_label("Years working"),
-
-    # No. of selllers on same level known by participant``
-
-    seller_same_level = as_numeric(x10_number_sellers_same_level)%>%
-      ff_label("No. of known sellers on same market level"),
-
-    # Can connect interviewer with other sellers
-    link.yn = factor(x11_can_link) %>%
-      fct_recode("No"="0",
-                 "Yes"="1")%>%
-      ff_label("Able to connect to other sellers?") %>%
+    
+    # past month methamphetamine use
+    meth.month.f = factor(meth.month) %>%
+      ff_label("Recent methamphetamine use") %>%
       fct_relevel("No",
-                  "Yes"))
+                  "Yes"),
+    
+    # past month benzodiazepine use
+    benzo.month.f = factor(benzo.month) %>%
+      ff_label("Recent benzodiazepine use") %>%
+      fct_relevel("No",
+                  "Yes"),
+    
+    # Current OAT medication prescribed
+    oatcurrentmed.f = factor(oatcurrentmed)%>%
+      ff_label("Current OAT medication") %>%
+    fct_relevel("Methadone",
+                "Suboxone",
+                "Subutex",
+                "Buvidal", 
+                "None"),
+    
+    # Current OAT [yes/no]
+    oat.yn.f = factor(oat.yn)%>%
+      ff_label("Currently receiving OAT") %>%
+      fct_relevel("No", 
+                  "Yes"),
+    
+    # Injecting drug use
+    anyinject.yn.f = factor(anyinject.yn)%>%
+      ff_label("Drug injecting") %>%
+      fct_relevel("No", 
+                  "Yes"),
+    
+    # Injecting drug use frequency
+    injfreq.factor = factor(injfreq)%>%
+      fct_recode(
+        "Did not inject" = "1",
+        "Weekly or less" = "2",
+        "More than weekly, not daily" = "3",
+        "Once daily" = "4",
+        "2 - 3 times a day" = "5",
+        "More than 3 times a day" = "6")%>%
+      ff_label("Drug injecting frequency"),
+    
+    # Injecting drug use frequency collapsed
+    injfreq.collapsed.f = factor(injfreq)%>%
+      fct_recode(
+        "None" = "1",
+        "< Daily" = "2",
+        "< Daily" = "3",
+        ">= Daily" = "4",
+        ">= Daily" = "5",
+        ">= Daily" = "6")%>%
+      ff_label("Drug injecting frequency grouped"),
+    
+    # past month heroin injecting
+    injectingheroin.month.f = factor(injectingheroin.month) %>%
+      ff_label("Recent heroin injecting") %>%
+      fct_relevel("No",
+                  "Yes"),  
+    
 
+    # past month non-prescribed methadone injecting
+    injectingnonmethadone.month.f = factor(injectingnonmethadone.month) %>%
+      ff_label("Recent non-prescribed methadone injecting") %>%
+      fct_relevel("No",
+                  "Yes"),
+    
+    # past month prescribed methadone injecting
+    injectingprescribedmethadone.month.f = factor(injecting_methadonemonth) %>%
+      ff_label("Recent prescribed methadone injecting") %>%
+      fct_relevel("No",
+                  "Yes"),
+    
+    # past month non-prescribed suboxone injecting
+    injectingnonsuboxone.month.f = factor(injectingnonsuboxone.month) %>%
+      ff_label("Recent non-prescribed suboxone injecting") %>%
+      fct_relevel("No",
+                  "Yes"),
+    
+    # past month prescribed suboxone injecting
+    injectingprescribedsuboxone.month.f = factor(injecting_bupemonth) %>%
+      ff_label("Recent prescribed suboxone injecting") %>%
+      fct_relevel("No",
+                  "Yes"), 
+    
+    # past month cocaine injecting
+    injectjngcocaine.month.f = factor(injectingcocaine.month) %>%
+      ff_label("Recent cocaine injecting") %>%
+      fct_relevel("No",
+                  "Yes"),
+    
+    # past month methamphetamine injecting
+    injectingmeth.month.f = factor(injectingmeth.month) %>%
+      ff_label("Recent methamphetamine injecting") %>%
+      fct_relevel("No",
+                  "Yes"),
+    
+    # past month benzodiazepine use
+    injectingbenzo.month.f = factor(injectingbenzo.month) %>%
+      ff_label("Recent benzodiazepine injecting") %>%
+      fct_relevel("No",
+                  "Yes")
+
+    # OAT dose collection site
+    
+    doselocation.factor = factor(ldoseloc)%>%
+      fct_recode(
+        "Public clinic" = "1",
+        "Private clinic" = "2",
+        "Other" = "3",
+        "Pharmacy" = "4",
+        "Other" = "5",
+        "Other" = "6", 
+        "Other" = "6")%>%
+      ff_label("OAT dosing site")%>%
+      fct_relevel("Pharmacy", 
+                  "Public clinic", 
+                  "Private clinic", 
+                  "Other"),
+    
+    
+        # Injecting drug use frequency
+    injfreq.factor = factor(injfreq)%>%
+      fct_recode(
+        "Did not inject" = "1",
+        "Weekly or less" = "2",
+        "More than weekly, not daily" = "3",
+        "Once daily" = "4",
+        "2 - 3 times a day" = "5",
+        "More than 3 times a day" = "6")%>%
+      ff_label("Drug injecting frequency"),
+    
+    # OAT ever
+    oatever.factor = factor(oatever.yn) %>%
+      ff_label("Ever received OAT") %>%
+      fct_relevel("No",
+                  "Yes"), 
+    
+    # Methadone ever
+    mwthadoneever.factor = factor(methadoneever.yn) %>%
+      ff_label("Ever received methadone") %>%
+      fct_relevel("No",
+                  "Yes"), 
+    
+    
+    # Buprenorphine ever
+    bupeever.factor = factor(bupeever.yn) %>%
+      ff_label("Ever received buprenorphine") %>%
+      fct_relevel("No",
+                  "Yes"),
+    
+    # Pay for OAT
+    paytx.yn.f = factor(paytx.yn) %>%
+      ff_label("Pay for OAT") %>%
+      fct_relevel("No",
+                  "Yes"),
+    
+    # Average cost
+    paytx.factor.month = factor(paytx.month)%>%
+      fct_relevel(
+        "1 - 99 AUD",
+        "100 - 149 AUD",
+        "150 - 399 AUD")%>%
+      ff_label("Average monthly OAT cost"),
+    
+
+# Average time taken to travel to dosing site
+
+timedose.factor = factor(timetodose)%>%
+  fct_relevel(
+    "< 15 minutes",
+    "15 - < 30 minutes",
+    "30 minutes - < 2 hoursMore than 5 days")%>%
+  ff_label("Average time to dosing site"),
+
+# Average no. of days when a dose was missed
+
+dose.km.factor = factor(dose.km)%>%
+  fct_relevel(
+    "Less than 5 km",
+    "5 - 9 km",
+    "More than 5 days")%>%
+  ff_label("Average distance to dosing site"))
+    
+# Recode the variable drug use while on OAT
+
+    prefer <- prefer %>% 
+      mutate(usedrugs.oat = case_when(
+        drgstx_1 == 1  ~ "No",
+        drgstx_2 == 1  ~ "Heroin",
+        drgstx_3 == 1  ~ "Pharmaceutical opioids",
+        drgstx_4 == 1  ~ "Methamphetamine",
+        drgstx_5 == 1  ~ "Benzodiazepines",
+        drgstx_6 == 1  ~ "Other"
+      ))
+
+# Relevel the variable 
+    
+    prefer <- prefer %>% 
+      mutate(usedrugs.oat = fct_relevel(usedrugs.oat,
+                                        "No",
+                                        "Heroin",
+                                        "Pharmaceutical opioids",
+                                        "Methamphetamine",
+                                        "Benzodiazepines",
+                                        "Other"))
 
 # Save
-save(drug_market, file =
-       here::here("data_processed", "drug_market_factors.rda")
+save(prefer, file = 
+       here::here("data_processed", "prefer_working.rda")
 )
-
-
-ff_glimpse(drug_market)
-
-dfSummary(drug_market)
-ff_glimpse(drug_market)
-
-glimpse(drug_market)
-
-
-
-
-summary(drug_market$heroin_sellers_g
-        , na.rm=TRUE)
-
-summary(drug_market$x9_years_working
-        , na.rm=TRUE)
-
-
-
-
-drug_market <- as_numeric(drug_market$x9_years_working)
-
-drug_market <- drug_market %>%
-  rename(x9_years_working= (years_working))
-
-summary(drug_market$meth_sellers_g
-        , na.rm=TRUE)
-
-summary(drug_market$meth_sellers
-        , na.rm=TRUE)
-
-summary(drug_market$coke_sellers_g
-        , na.rm=TRUE)
-
-summary(drug_market$cocaine_sellers
-        , na.rm=TRUE)
-
-tabyl(drug_market$sell_polydrug
-        , na.rm=TRUE)
-
-mean(drug_market$yrs_working, na.rm=TRUE)

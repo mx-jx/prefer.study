@@ -1,34 +1,35 @@
-# South African Drug Market Study
-#
+# PREFER project
 ## Data pull
 
 # Get data
 
- # install.packages("readstata13")
+# install.packages("readr")
 
 library(here)
 library(readr)
 library(readstata13)
 
 
-
- # drugs <- readr::read_csv(
- #  here::here("raw_data", "drugseller.csv"))
-
- drugs <- readr::read_delim(
-  here::here("raw_data", "drugseller.csv"), delim=";")
-
-
-drugseller <- read_delim("raw_data/drugseller.csv", delim=";")
-
-spec(drugs)
-
-glimpse(drugseller)
-
-# Save
-save(drugs, drugseller, file =
-       here::here("data_processed", "drug_market_data.rda")
+ethos <- read_dta(
+  here::here("raw_data", "enrollment survey POC merged_final.dta")
 )
+
+wave_2 <- read_dta(
+  here::here("raw_data", "Wave II complete.dta")
+)
+
+wave_complete <- read_dta(
+  here::here("raw_data", "W1 W2 complete.dta")
+)
+
+# ethos<- read_dta("enrollment survey POC merged_final.dta")
+
+spec(ethos)
 
 
 # Other basic reccoding or renaming functions here
+
+# Save
+save(ethos, wave_2, wave_complete, file = 
+       here::here("data_processed", "ethos_working.rda")
+)
